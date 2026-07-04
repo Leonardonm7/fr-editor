@@ -1,4 +1,5 @@
 import { formatNoteDate } from "@/features/note/utils/note";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Card, Divider, Icon, Text, useTheme } from "react-native-paper";
 
@@ -24,6 +25,8 @@ export function NoteSummaryCard({
   workoutName,
 }: NoteSummaryCardProps) {
   const theme = useTheme();
+  const { language, t } = useTranslation();
+  const locale = language === "en" ? "en-US" : "pt-BR";
 
   return (
     <Card
@@ -42,7 +45,7 @@ export function NoteSummaryCard({
               variant="labelSmall"
               style={{ color: theme.colors.onSurfaceVariant }}
             >
-              Treino
+              {t("workout")}
             </Text>
             <Text variant="titleSmall">{workoutName}</Text>
           </View>
@@ -58,7 +61,7 @@ export function NoteSummaryCard({
               variant="labelSmall"
               style={{ color: theme.colors.onSurfaceVariant }}
             >
-              Exercícios
+              {t("exercises")}
             </Text>
             <Text variant="titleSmall">{totalExercises}</Text>
           </View>
@@ -78,7 +81,7 @@ export function NoteSummaryCard({
               variant="labelSmall"
               style={{ color: theme.colors.onSurfaceVariant }}
             >
-              Dias
+              {t("days")}
             </Text>
             <Text variant="titleSmall">{daysWithExercisesCount}</Text>
           </View>
@@ -95,7 +98,7 @@ export function NoteSummaryCard({
               variant="bodySmall"
               style={{ color: theme.colors.onSurfaceVariant }}
             >
-              Volume total: {totalVolume.toLocaleString("pt-BR")}kg
+              {t("totalVolume", { value: totalVolume.toLocaleString(locale) })}
             </Text>
           </View>
         )}
@@ -111,7 +114,7 @@ export function NoteSummaryCard({
               variant="bodySmall"
               style={{ color: theme.colors.onSurfaceVariant }}
             >
-              {linkedBlockCount} bloco(s) conectado(s)
+              {t("connectedBlocksCount", { count: linkedBlockCount })}
             </Text>
           </View>
         )}
@@ -127,7 +130,9 @@ export function NoteSummaryCard({
               variant="bodySmall"
               style={{ color: theme.colors.onSurfaceVariant }}
             >
-              {exercisesWithDescriptionCount} exercício(s) com observações
+              {t("exercisesWithNotesCount", {
+                count: exercisesWithDescriptionCount,
+              })}
             </Text>
           </View>
         )}
@@ -146,9 +151,11 @@ export function NoteSummaryCard({
                 variant="labelSmall"
                 style={{ color: theme.colors.onSurfaceVariant }}
               >
-                Criado em
+                {t("createdAt")}
               </Text>
-              <Text variant="bodyMedium">{formatNoteDate(createdAt)}</Text>
+              <Text variant="bodyMedium">
+                {formatNoteDate(createdAt, locale)}
+              </Text>
             </View>
           </View>
           <View style={styles.dateItem}>
@@ -162,9 +169,11 @@ export function NoteSummaryCard({
                 variant="labelSmall"
                 style={{ color: theme.colors.onSurfaceVariant }}
               >
-                Última atualização
+                {t("lastUpdate")}
               </Text>
-              <Text variant="bodyMedium">{formatNoteDate(updatedAt)}</Text>
+              <Text variant="bodyMedium">
+                {formatNoteDate(updatedAt, locale)}
+              </Text>
             </View>
           </View>
         </View>

@@ -1,12 +1,12 @@
 import {
   connectionColors,
   connectionGroups,
-  dayAbbrev,
   days,
   type ExerciseForm,
   type IndexedExercise,
 } from "@/features/note/utils/note";
 import { type NoteEditColors } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Icon, Text, TouchableRipple } from "react-native-paper";
 
@@ -45,6 +45,7 @@ export function NoteWorkoutLinkControls({
   onToggleDayPicker,
   onToggleLinkPicker,
 }: NoteWorkoutLinkControlsProps) {
+  const { dayShort, t } = useTranslation();
   const exerciseDay = exercise.day || activeDay;
 
   return (
@@ -73,7 +74,7 @@ export function NoteWorkoutLinkControls({
                 { color: linkOpen ? accentColor : colors.muted },
               ]}
             >
-              {group ? `Bloco ${group}` : "Vincular"}
+              {group ? `${t("block")} ${group}` : t("link")}
             </Text>
             <Icon
               source={linkOpen ? "chevron-up" : "chevron-down"}
@@ -106,7 +107,7 @@ export function NoteWorkoutLinkControls({
                 { color: dayPickerOpen ? colors.ink : colors.muted },
               ]}
             >
-              Mover
+              {t("move")}
             </Text>
             <Icon
               source={dayPickerOpen ? "chevron-up" : "chevron-down"}
@@ -125,7 +126,7 @@ export function NoteWorkoutLinkControls({
           ]}
         >
           <Text style={[styles.linkPickerLabel, { color: colors.muted }]}>
-            Selecione um bloco para executar junto:
+            {t("selectBlockToLink")}
           </Text>
           <View style={styles.linkPickerRow}>
             <TouchableRipple
@@ -148,7 +149,7 @@ export function NoteWorkoutLinkControls({
                   { color: !group ? "#FFFFFF" : colors.muted },
                 ]}
               >
-                Sem vínculo
+                {t("noLink")}
               </Text>
             </TouchableRipple>
 
@@ -181,15 +182,14 @@ export function NoteWorkoutLinkControls({
                       { color: isActive ? "#101318" : color },
                     ]}
                   >
-                    Bloco {connectionGroup}
+                    {t("block")} {connectionGroup}
                   </Text>
                 </TouchableRipple>
               );
             })}
           </View>
           <Text style={[styles.linkHint, { color: colors.muted }]}>
-            Exercícios do mesmo bloco são executados juntos (biset, triset,
-            etc.)
+            {t("linkedBlockHint")}
           </Text>
         </View>
       )}
@@ -202,7 +202,7 @@ export function NoteWorkoutLinkControls({
           ]}
         >
           <Text style={[styles.dayPickerLabel, { color: colors.muted }]}>
-            Mover somente este exercício para:
+            {t("moveOnlyExerciseTo")}
           </Text>
           <ScrollView
             horizontal
@@ -233,7 +233,7 @@ export function NoteWorkoutLinkControls({
                   >
                     <View style={styles.exerciseDayInner}>
                       <Text style={[styles.exerciseDayText, { color: colors.ink }]}>
-                        {dayAbbrev[day]}
+                        {dayShort(day)}
                       </Text>
                       <Text
                         style={[
@@ -241,7 +241,7 @@ export function NoteWorkoutLinkControls({
                           { color: colors.muted },
                         ]}
                       >
-                        {count} ex.
+                        {count} {t("exercise")}
                       </Text>
                     </View>
                   </TouchableRipple>

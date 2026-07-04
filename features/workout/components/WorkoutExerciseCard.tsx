@@ -67,7 +67,7 @@ export function WorkoutExerciseCard({
   restTime,
 }: WorkoutExerciseCardProps) {
   const theme = useTheme();
-  const { language, t } = useTranslation();
+  const { language, methodologyName, t } = useTranslation();
   const colors = useMemo(() => getWorkoutCardColors(theme), [theme]);
   const [exercisePreview, setExercisePreview] =
     useState<ExercisePreview | null>(null);
@@ -107,7 +107,7 @@ export function WorkoutExerciseCard({
     exercises: displayExercises,
     fallbackName: t("customExercise"),
     groupKey,
-    methodology,
+    methodology: methodologyName(methodology),
   });
   const subtitle = getWorkoutCardSubtitle(
     displayExercises,

@@ -39,7 +39,7 @@ const getCardColors = (theme: MD3Theme) => ({
 
 export function ExerciseViewCard({ exercise, order }: ExerciseViewCardProps) {
   const theme = useTheme();
-  const { language, t } = useTranslation();
+  const { language, methodologyName, t } = useTranslation();
   const colors = useMemo(() => getCardColors(theme), [theme]);
   const [exercisePreview, setExercisePreview] =
     useState<ExercisePreview | null>(null);
@@ -161,7 +161,7 @@ export function ExerciseViewCard({ exercise, order }: ExerciseViewCardProps) {
                   ]}
                 >
                   <Text style={[styles.methodologyText, { color: colors.ink }]}>
-                    {exercise.methodology}
+                    {methodologyName(exercise.methodology)}
                   </Text>
                 </View>
               )}

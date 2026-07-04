@@ -1,5 +1,6 @@
 import { methodologies } from "@/features/note/utils/note";
 import { type NoteEditColors } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Text, TouchableRipple } from "react-native-paper";
 
@@ -14,6 +15,8 @@ export function NoteWorkoutMethodologyPicker({
   currentMethodology,
   onChangeMethodology,
 }: NoteWorkoutMethodologyPickerProps) {
+  const { methodologyName, t } = useTranslation();
+
   return (
     <View
       style={[
@@ -24,7 +27,7 @@ export function NoteWorkoutMethodologyPicker({
       <View style={styles.sectionLabelRow}>
         <View style={[styles.sectionAccent, { backgroundColor: colors.accent }]} />
         <Text style={[styles.sectionLabel, { color: colors.muted }]}>
-          METODOLOGIA
+          {t("methodology")}
         </Text>
       </View>
 
@@ -54,13 +57,15 @@ export function NoteWorkoutMethodologyPicker({
               { color: !currentMethodology ? "#FFFFFF" : colors.muted },
             ]}
           >
-            Sem método
+            {t("noMethod")}
           </Text>
         </TouchableRipple>
 
         {methodologies.map((methodology) => {
           const isActive =
-            currentMethodology.toLowerCase() === methodology.toLowerCase();
+            currentMethodology.toLowerCase() === methodology.toLowerCase() ||
+            methodologyName(currentMethodology).toLowerCase() ===
+              methodologyName(methodology).toLowerCase();
 
           return (
             <TouchableRipple
@@ -81,7 +86,7 @@ export function NoteWorkoutMethodologyPicker({
                   { color: isActive ? "#FFFFFF" : colors.ink },
                 ]}
               >
-                {methodology}
+                {methodologyName(methodology)}
               </Text>
             </TouchableRipple>
           );

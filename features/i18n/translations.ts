@@ -45,6 +45,37 @@ const ptDayAbbrev: Record<string, string> = {
   Terça: "TER",
 };
 
+const methodologyLabels: Record<AppLanguagePreference, Record<string, string>> = {
+  "pt-BR": {
+    "bi-set": "Biset",
+    biset: "Biset",
+    "drop set": "Drop-set",
+    "drop-set": "Drop-set",
+    "fst-7": "FST-7",
+    pirâmide: "Pirâmide",
+    pyramid: "Pirâmide",
+    "rest-pause": "Rest-pause",
+    "super-set": "Super-set",
+    superset: "Super-set",
+    "tri-set": "Triset",
+    triset: "Triset",
+  },
+  en: {
+    "bi-set": "Bi-set",
+    biset: "Bi-set",
+    "drop set": "Drop set",
+    "drop-set": "Drop set",
+    "fst-7": "FST-7",
+    pirâmide: "Pyramid",
+    pyramid: "Pyramid",
+    "rest-pause": "Rest-pause",
+    "super-set": "Superset",
+    superset: "Superset",
+    "tri-set": "Tri-set",
+    triset: "Tri-set",
+  },
+};
+
 export const translations = {
   "pt-BR": {
     activeDay: "Dia ativo",
@@ -82,7 +113,9 @@ export const translations = {
     exercises: "Exercícios",
     createForMe: "Criar para mim",
     createWorkout: "Criar treino",
+    createdAt: "Criado em",
     dayExercises: "EXERCÍCIOS DO DIA",
+    days: "Dias",
     descriptionOptional: "Descrição / observações (opcional)",
     description: "Descrição",
     descriptionPlaceholder:
@@ -90,6 +123,7 @@ export const translations = {
     descriptionShortPlaceholder:
       "Observações, ajuste de execução, drop, pausa...",
     duplicate: "Duplicar",
+    connectedBlocksCount: ({ count }) => `${count} bloco(s) conectado(s)`,
     exercisesCount: ({ count }) => `${count} exercício(s)`,
     firstWorkoutHint: "Crie o primeiro treino.",
     fontSize: "Tamanho da fonte",
@@ -97,6 +131,7 @@ export const translations = {
     finished: "Finalizado",
     hide: "Ocultar",
     howTo: "Como fazer",
+    lastUpdate: "Última atualização",
     import: "Importar",
     importBackup: "Importar backup",
     importJson: "Importar por JSON",
@@ -105,7 +140,10 @@ export const translations = {
     importSuccess: ({ count }) => `${count} treino(s) importado(s).`,
     language: "Idioma",
     levelsCount: ({ count }) => `${count} níveis`,
+    link: "Vincular",
     linked: "Vinculado",
+    linkedBlockHint:
+      "Exercícios do mesmo bloco são executados juntos (biset, triset, etc.)",
     noExercisesThisDay: "Nenhum exercício neste dia",
     nextSeries: "Próxima série",
     noResults: "Nenhum resultado",
@@ -129,8 +167,12 @@ export const translations = {
     restSound: "Som do descanso",
     load: "Carga",
     methodologyOptional: "Metodologia (opcional)",
+    methodology: "METODOLOGIA",
+    move: "Mover",
+    moveOnlyExerciseTo: "Mover somente este exercício para:",
     newExercise: "Novo exercício",
     noConnection: "Sem conexão",
+    noLink: "Sem vínculo",
     noMethod: "Sem método",
     reps: "Reps",
     series: "Séries",
@@ -142,6 +184,7 @@ export const translations = {
       `Salvar "${name}" com ${count} exercício(s)?`,
     searchAnotherWorkout: "Busque por outro treino.",
     searchExercise: "Buscar exercício",
+    selectBlockToLink: "Selecione um bloco para executar junto:",
     selectedCount: ({ count }) => `${count} selecionado(s)`,
     selectedSession: "Sessão selecionada",
     skip: "Pular",
@@ -159,6 +202,9 @@ export const translations = {
     trainingSession: "Modo treino",
     trainingArchive: "Arquivo de treinos",
     recordsCount: ({ count }) => `${count} registro(s)`,
+    totalVolume: ({ value }) => `Volume total: ${value}kg`,
+    exercisesWithNotesCount: ({ count }) =>
+      `${count} exercício(s) com observações`,
     searchWorkout: "Pesquisar treino...",
     unnamedWorkout: "Treino sem nome",
     unavailable: "Não disponível",
@@ -207,13 +253,16 @@ export const translations = {
     exercises: "Exercises",
     createForMe: "Create for me",
     createWorkout: "Create workout",
+    createdAt: "Created at",
     dayExercises: "DAY EXERCISES",
+    days: "Days",
     descriptionOptional: "Description / notes (optional)",
     description: "Description",
     descriptionPlaceholder:
       "E.g.: control the descent, hold 2s at the top, focus on range...",
     descriptionShortPlaceholder: "Notes, execution cue, drop, pause...",
     duplicate: "Duplicate",
+    connectedBlocksCount: ({ count }) => `${count} connected block(s)`,
     exercisesCount: ({ count }) => `${count} exercise(s)`,
     firstWorkoutHint: "Create your first workout.",
     fontSize: "Font size",
@@ -221,6 +270,7 @@ export const translations = {
     finished: "Finished",
     hide: "Hide",
     howTo: "How to do it",
+    lastUpdate: "Last update",
     import: "Import",
     importBackup: "Import backup",
     importJson: "Import by JSON",
@@ -230,6 +280,9 @@ export const translations = {
     language: "Language",
     linked: "Linked",
     levelsCount: ({ count }) => `${count} levels`,
+    link: "Link",
+    linkedBlockHint:
+      "Exercises in the same block are performed together (bi-set, tri-set, etc.)",
     noExercisesThisDay: "No exercises on this day",
     nextSeries: "Next set",
     noResults: "No results",
@@ -253,8 +306,12 @@ export const translations = {
     restSound: "Rest sound",
     load: "Load",
     methodologyOptional: "Methodology (optional)",
+    methodology: "METHODOLOGY",
+    move: "Move",
+    moveOnlyExerciseTo: "Move only this exercise to:",
     newExercise: "New exercise",
     noConnection: "No connection",
+    noLink: "No link",
     noMethod: "No method",
     reps: "Reps",
     series: "Sets",
@@ -266,6 +323,7 @@ export const translations = {
       `Save "${name}" with ${count} exercise(s)?`,
     searchAnotherWorkout: "Search for another workout.",
     searchExercise: "Search exercise",
+    selectBlockToLink: "Select a block to perform together:",
     selectedCount: ({ count }) => `${count} selected`,
     selectedSession: "Selected session",
     skip: "Skip",
@@ -283,6 +341,9 @@ export const translations = {
     trainingSession: "Training mode",
     trainingArchive: "Workout archive",
     recordsCount: ({ count }) => `${count} record(s)`,
+    totalVolume: ({ value }) => `Total volume: ${value}kg`,
+    exercisesWithNotesCount: ({ count }) =>
+      `${count} exercise(s) with notes`,
     searchWorkout: "Search workout...",
     unnamedWorkout: "Untitled workout",
     unavailable: "Unavailable",
@@ -317,3 +378,19 @@ export const translateDayAbbrev = (
   language: AppLanguagePreference,
   day: string,
 ) => (language === "en" ? enDayAbbrev[day] : ptDayAbbrev[day]) ?? day;
+
+export const translateMethodology = (
+  language: AppLanguagePreference,
+  value: string,
+) =>
+  value
+    .split("+")
+    .map((item) => {
+      const trimmed = item.trim();
+      const normalized = trimmed.toLocaleLowerCase(
+        language === "en" ? "en-US" : "pt-BR",
+      );
+
+      return methodologyLabels[language][normalized] ?? trimmed;
+    })
+    .join(" + ");

@@ -49,7 +49,7 @@ export function WorkoutExerciseCardHeader({
   title,
   totalSeries,
 }: WorkoutExerciseCardHeaderProps) {
-  const { language, t } = useTranslation();
+  const { language, methodologyName, t } = useTranslation();
   const firstExercise = exercises[0];
   const firstLibraryExercise = getExerciseLibraryItem(
     firstExercise?.libraryId,
@@ -57,7 +57,7 @@ export function WorkoutExerciseCardHeader({
   );
   const firstExerciseName =
     firstLibraryExercise?.name || firstExercise?.name || t("customExercise");
-  const methodologyLabel = methodology.trim();
+  const methodologyLabel = methodologyName(methodology.trim());
   const gifSource =
     !isLinkedBlock && firstExercise
       ? getExerciseGifSource(firstExercise.libraryId)

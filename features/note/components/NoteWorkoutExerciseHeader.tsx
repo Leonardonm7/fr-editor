@@ -57,7 +57,7 @@ export function NoteWorkoutExerciseHeader({
   onPreview,
 }: NoteWorkoutExerciseHeaderProps) {
   const theme = useTheme();
-  const { language, t } = useTranslation();
+  const { language, methodologyName, t } = useTranslation();
   const gifSource = getExerciseGifSource(exercise.libraryId);
   const libraryExercise = getExerciseLibraryItem(exercise.libraryId, language);
   const instructions = getExerciseLibraryInstructions(
@@ -177,7 +177,7 @@ export function NoteWorkoutExerciseHeader({
               style={[styles.methodologyBadgeText, { color: colors.ink }]}
               numberOfLines={1}
             >
-              {currentMethodology}
+              {methodologyName(currentMethodology)}
             </Text>
           </View>
         )}

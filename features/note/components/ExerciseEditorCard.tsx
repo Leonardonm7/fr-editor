@@ -60,7 +60,7 @@ export function ExerciseEditorCard({
   prevDayLabel,
 }: ExerciseEditorCardProps) {
   const theme = useTheme();
-  const { t } = useTranslation();
+  const { methodologyName, t } = useTranslation();
 
   return (
     <Card
@@ -89,7 +89,7 @@ export function ExerciseEditorCard({
                 >
                   {exercise.series}×{exercise.reps} · {exercise.load}kg
                   {exercise.methodology.trim()
-                    ? ` · ${exercise.methodology}`
+                    ? ` · ${methodologyName(exercise.methodology)}`
                     : ""}
                   {exercise.connectionGroup.trim()
                     ? ` (${t("block")} ${exercise.connectionGroup.toUpperCase()})`
@@ -200,11 +200,14 @@ export function ExerciseEditorCard({
                   key={method}
                   compact
                   selected={
-                    exercise.methodology.toLowerCase() === method.toLowerCase()
+                    exercise.methodology.toLowerCase() ===
+                      method.toLowerCase() ||
+                    methodologyName(exercise.methodology).toLowerCase() ===
+                      methodologyName(method).toLowerCase()
                   }
                   onPress={() => onChangeExercise("methodology", method)}
                 >
-                  {method}
+                  {methodologyName(method)}
                 </Chip>
               ))}
             </View>

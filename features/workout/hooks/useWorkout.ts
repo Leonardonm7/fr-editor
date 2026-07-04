@@ -104,11 +104,12 @@ const getWorkoutBlockLabel = (
     blockLabel: string;
     fallbackName: string;
     language: "en" | "pt-BR";
+    methodologyName: (value: string) => string;
   },
 ) => {
   if (block.exercises.length > 1) {
     if (block.methodology)
-      return `${block.methodology} / ${options.blockLabel} ${block.groupKey}`;
+      return `${options.methodologyName(block.methodology)} / ${options.blockLabel} ${block.groupKey}`;
     return `${options.blockLabel} ${block.groupKey}`;
   }
 
@@ -121,7 +122,7 @@ const getWorkoutBlockLabel = (
 };
 
 export function useWorkout() {
-  const { language, t } = useTranslation();
+  const { language, methodologyName, t } = useTranslation();
   const { noteId, day } = useLocalSearchParams<{
     noteId: string;
     day: string;
@@ -230,12 +231,13 @@ export function useWorkout() {
             blockLabel: t("block"),
             fallbackName: t("customExercise"),
             language,
+            methodologyName,
           })
         : t("nextSeries"),
       remaining: restState.remaining,
       total: restState.total,
     };
-  }, [activeRests, language, t, workoutBlocks]);
+  }, [activeRests, language, methodologyName, t, workoutBlocks]);
 
   const getBlockLabel = useCallback(
     (blockId: string) => {
@@ -245,10 +247,11 @@ export function useWorkout() {
             blockLabel: t("block"),
             fallbackName: t("customExercise"),
             language,
+            methodologyName,
           })
         : t("nextSeries");
     },
-    [language, t, workoutBlocks],
+    [language, methodologyName, t, workoutBlocks],
   );
 
   const saveProgress = useCallback(async () => {

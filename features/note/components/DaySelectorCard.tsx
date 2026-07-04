@@ -1,4 +1,5 @@
-import { dayAbbrev, days } from "@/features/note/utils/note";
+import { days } from "@/features/note/utils/note";
+import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import type { MD3Theme } from "react-native-paper";
@@ -27,6 +28,7 @@ export function DaySelectorCard({
   viewMode,
 }: DaySelectorCardProps) {
   const theme = useTheme();
+  const { dayShort } = useTranslation();
   const colors = useMemo(() => getDaySelectorColors(theme), [theme]);
 
   return (
@@ -60,7 +62,7 @@ export function DaySelectorCard({
                     { color: isActive ? colors.ink : colors.muted },
                   ]}
                 >
-                  {dayAbbrev[day]}
+                  {dayShort(day)}
                 </Text>
                 {isActive && (
                   <View

@@ -3,11 +3,13 @@ import { replaceDatabaseBackup } from "@/database/repositories/backupRepository"
 import { type Note } from "@/database/types";
 import { useFocusCallback } from "@/hooks/useFocusCallback";
 import { createBackupPayload, parseBackupJson } from "@/services/backup/backup";
+import { useTranslation } from "@/hooks/useTranslation";
 import { router } from "expo-router";
 import { useState } from "react";
 import { Share } from "react-native";
 
 export function useHomeScreen() {
+  const { t } = useTranslation();
   const [notes, setNotes] = useState<Note[]>([]);
   const [filtered, setFiltered] = useState<Note[]>([]);
   const [query, setQuery] = useState("");
@@ -83,14 +85,12 @@ export function useHomeScreen() {
       setImportVisible(false);
       setSelectedIds([]);
       setQuery("");
-      setFeedbackMessage(`${backupData.notes.length} treino(s) importado(s).`);
+      setFeedbackMessage(
+        t("importSuccess", { count: backupData.notes.length }),
+      );
       await loadNotes();
-    } catch (error) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : "Não foi possível importar esse JSON.";
-      setFeedbackMessage(message);
+    } catch {
+      setFeedbackMessage(t("importJsonFallback"));
     }
   };
 

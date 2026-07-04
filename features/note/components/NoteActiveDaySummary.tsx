@@ -1,4 +1,5 @@
 import { type NoteEditColors } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 
@@ -13,6 +14,8 @@ export function NoteActiveDaySummary({
   colors,
   exerciseCount,
 }: NoteActiveDaySummaryProps) {
+  const { dayName, t } = useTranslation();
+
   return (
     <View
       style={[
@@ -26,10 +29,10 @@ export function NoteActiveDaySummary({
       <View style={[styles.dayTitleAccent, { backgroundColor: colors.accent }]} />
       <View style={styles.dayTitleCopy}>
         <Text style={[styles.panelKicker, { color: colors.accent }]}>
-          Dia ativo
+          {t("activeDay")}
         </Text>
         <Text style={[styles.dayTitleText, { color: colors.ink }]}>
-          {activeDay}
+          {dayName(activeDay)}
         </Text>
       </View>
       <View
@@ -39,7 +42,7 @@ export function NoteActiveDaySummary({
         ]}
       >
         <Text style={[styles.dayCountText, { color: colors.ink }]}>
-          {exerciseCount} ex.
+          {exerciseCount} {t("exercise")}
         </Text>
       </View>
     </View>

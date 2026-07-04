@@ -18,6 +18,7 @@ import {
   TextInput,
   useTheme,
 } from "react-native-paper";
+import { useTranslation } from "@/hooks/useTranslation";
 
 type ExerciseEditorCardProps = {
   disabledMoveDown: boolean;
@@ -59,6 +60,7 @@ export function ExerciseEditorCard({
   prevDayLabel,
 }: ExerciseEditorCardProps) {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Card
@@ -76,7 +78,7 @@ export function ExerciseEditorCard({
             />
             <View style={styles.flex}>
               <Text variant="titleSmall" numberOfLines={1}>
-                {exercise.name || "Novo exercício"}
+                {exercise.name || t("newExercise")}
               </Text>
               {!isExpanded && exercise.name.trim() && (
                 <Text
@@ -90,7 +92,7 @@ export function ExerciseEditorCard({
                     ? ` · ${exercise.methodology}`
                     : ""}
                   {exercise.connectionGroup.trim()
-                    ? ` (Bloco ${exercise.connectionGroup.toUpperCase()})`
+                    ? ` (${t("block")} ${exercise.connectionGroup.toUpperCase()})`
                     : ""}
                 </Text>
               )}
@@ -109,7 +111,7 @@ export function ExerciseEditorCard({
                   style={{ color: theme.colors.primary }}
                   numberOfLines={1}
                 >
-                  Vinculado: {linkedNames.join(" • ")}
+                  {t("linked")}: {linkedNames.join(" • ")}
                 </Text>
               )}
             </View>
@@ -136,15 +138,15 @@ export function ExerciseEditorCard({
             <Divider style={styles.formDivider} />
 
             <NoteTextField
-              label="Nome do exercício"
+              label={t("exerciseName")}
               value={exercise.name}
               onChangeText={(value) => onChangeExercise("name", value)}
               left={<TextInput.Icon icon="dumbbell" size={18} />}
             />
 
             <NoteTextField
-              label="Descrição / observações (opcional)"
-              placeholder="Ex.: controlar a descida, segurar 2s no topo, foco em amplitude..."
+              label={t("descriptionOptional")}
+              placeholder={t("descriptionPlaceholder")}
               value={exercise.description}
               onChangeText={(value) => onChangeExercise("description", value)}
               multiline
@@ -155,21 +157,21 @@ export function ExerciseEditorCard({
 
             <View style={styles.inputRow}>
               <NoteTextField
-                label="Séries"
+                label={t("series")}
                 value={exercise.series}
                 keyboardType="numeric"
                 onChangeText={(value) => onChangeExercise("series", value)}
                 style={styles.flex}
               />
               <NoteTextField
-                label="Reps"
+                label={t("reps")}
                 value={exercise.reps}
                 keyboardType="numeric"
                 onChangeText={(value) => onChangeExercise("reps", value)}
                 style={styles.flex}
               />
               <NoteTextField
-                label="Carga"
+                label={t("load")}
                 value={exercise.load}
                 keyboardType="numeric"
                 onChangeText={(value) => onChangeExercise("load", value)}
@@ -179,7 +181,7 @@ export function ExerciseEditorCard({
             </View>
 
             <NoteTextField
-              label="Metodologia (opcional)"
+              label={t("methodologyOptional")}
               value={exercise.methodology}
               onChangeText={(value) => onChangeExercise("methodology", value)}
               left={<TextInput.Icon icon="tag-outline" />}
@@ -191,7 +193,7 @@ export function ExerciseEditorCard({
                 selected={!exercise.methodology.trim()}
                 onPress={() => onChangeExercise("methodology", "")}
               >
-                Sem método
+                {t("noMethod")}
               </Chip>
               {methodologies.map((method) => (
                 <Chip
@@ -213,7 +215,7 @@ export function ExerciseEditorCard({
                   variant="labelMedium"
                   style={{ color: theme.colors.onSurfaceVariant }}
                 >
-                  Conectar este exercício a um bloco
+                  {t("connectExerciseToBlock")}
                 </Text>
                 <View style={styles.connectionChipRow}>
                   <Chip
@@ -221,7 +223,7 @@ export function ExerciseEditorCard({
                     selected={!exercise.connectionGroup.trim()}
                     onPress={() => onChangeExercise("connectionGroup", "")}
                   >
-                    Sem conexão
+                    {t("noConnection")}
                   </Chip>
                   {connectionGroups.map((group) => (
                     <Chip
@@ -241,14 +243,13 @@ export function ExerciseEditorCard({
                       }
                       onPress={() => onChangeExercise("connectionGroup", group)}
                     >
-                      Bloco {group}
+                      {t("block")} {group}
                     </Chip>
                   ))}
                 </View>
                 {exercise.connectionGroup.trim() && (
                   <Text variant="bodySmall" style={{ color: theme.colors.primary }}>
-                    Dica: exercícios com mesma metodologia + mesmo bloco ficam
-                    vinculados.
+                    {t("sameMethodologyTip")}
                   </Text>
                 )}
               </View>
@@ -261,7 +262,7 @@ export function ExerciseEditorCard({
                 icon="content-copy"
                 onPress={onDuplicate}
               >
-                Duplicar
+                {t("duplicate")}
               </Button>
               <Button
                 mode="text"

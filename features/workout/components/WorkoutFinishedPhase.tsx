@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { Icon, Text, TouchableRipple, useTheme } from "react-native-paper";
 import type { MD3Theme } from "react-native-paper";
+import { useTranslation } from "@/hooks/useTranslation";
 
 type WorkoutFinishedPhaseProps = {
   onFinish: () => void;
@@ -24,6 +25,7 @@ export function WorkoutFinishedPhase({
   totalExercises,
 }: WorkoutFinishedPhaseProps) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const colors = useMemo(() => getFinishedColors(theme), [theme]);
 
   return (
@@ -42,9 +44,11 @@ export function WorkoutFinishedPhase({
 
         <View style={styles.titleBlock}>
           <Text style={[styles.eyebrow, { color: colors.accent }]}>
-            Treino concluído
+            {t("workoutCompleted")}
           </Text>
-          <Text style={[styles.title, { color: colors.ink }]}>Finalizado</Text>
+          <Text style={[styles.title, { color: colors.ink }]}>
+            {t("finished")}
+          </Text>
         </View>
 
         <View style={[styles.statsRow, { borderColor: colors.border }]}>
@@ -53,7 +57,7 @@ export function WorkoutFinishedPhase({
               {totalExercises}
             </Text>
             <Text style={[styles.statLabel, { color: colors.muted }]}>
-              Exercícios
+              {t("exercises")}
             </Text>
           </View>
           <View style={[styles.statDivider, { backgroundColor: colors.border }]} />
@@ -62,7 +66,7 @@ export function WorkoutFinishedPhase({
               {totalCompletedSeries}
             </Text>
             <Text style={[styles.statLabel, { color: colors.muted }]}>
-              Séries
+              {t("series")}
             </Text>
           </View>
         </View>
@@ -74,7 +78,7 @@ export function WorkoutFinishedPhase({
         >
           <View style={styles.finishBtnInner}>
             <Icon source="check" size={18} color="#FFFFFF" />
-            <Text style={styles.finishBtnText}>Finalizar treino</Text>
+            <Text style={styles.finishBtnText}>{t("finishWorkout")}</Text>
           </View>
         </TouchableRipple>
       </View>

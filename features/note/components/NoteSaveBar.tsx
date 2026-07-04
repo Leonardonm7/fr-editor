@@ -1,4 +1,5 @@
 import { type GlobalContainerColors } from "@/components/ui/GlobalContainer";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Icon, Text, TouchableRipple, useTheme } from "react-native-paper";
 
@@ -18,6 +19,7 @@ export function NoteSaveBar({
   totalExercises,
 }: NoteSaveBarProps) {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <View
@@ -37,7 +39,7 @@ export function NoteSaveBar({
               {totalExercises}
             </Text>
             <Text style={[styles.statLabel, { color: colors.muted }]}>
-              ex.
+              {t("exercise")}
             </Text>
           </View>
           <View style={[styles.statDivider, { backgroundColor: colors.border }]} />
@@ -51,7 +53,7 @@ export function NoteSaveBar({
               {daysWithExercisesCount}
             </Text>
             <Text style={[styles.statLabel, { color: colors.muted }]}>
-              dia(s)
+              {t("daysCountShort")}
             </Text>
           </View>
         </View>
@@ -84,7 +86,7 @@ export function NoteSaveBar({
                 },
               ]}
             >
-              SALVAR
+              {t("save")}
             </Text>
           </View>
         </TouchableRipple>

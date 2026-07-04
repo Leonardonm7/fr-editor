@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import { Icon, Text, TouchableRipple, useTheme } from "react-native-paper";
+import { useTranslation } from "@/hooks/useTranslation";
 
 import { AppModal } from "./AppModal";
 
@@ -17,6 +18,7 @@ export function ImportJsonDialog({
 }: ImportJsonDialogProps) {
   const [rawJson, setRawJson] = useState("");
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const handleCancel = () => {
     setRawJson("");
@@ -55,10 +57,10 @@ export function ImportJsonDialog({
             </View>
             <View style={styles.headerCopy}>
               <Text style={[styles.eyebrow, { color: theme.colors.primary }]}>
-                Importar backup
+                {t("importBackup")}
               </Text>
               <Text style={[styles.title, { color: theme.colors.onSurface }]}>
-                Importar por JSON
+                {t("importJson")}
               </Text>
             </View>
           </View>
@@ -96,7 +98,7 @@ export function ImportJsonDialog({
             <Text
               style={[styles.btnText, { color: theme.colors.onSurfaceVariant }]}
             >
-              Cancelar
+              {t("cancel")}
             </Text>
           </TouchableRipple>
 
@@ -126,7 +128,7 @@ export function ImportJsonDialog({
                 },
               ]}
             >
-              Importar
+              {t("import")}
             </Text>
           </TouchableRipple>
         </View>
@@ -134,7 +136,7 @@ export function ImportJsonDialog({
     >
       <View style={styles.content}>
         <Text style={[styles.hint, { color: theme.colors.onSurfaceVariant }]}>
-          Cole aqui o JSON exportado para importar os treinos.
+          {t("importJsonHint")}
         </Text>
 
         <View

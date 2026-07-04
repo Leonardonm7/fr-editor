@@ -10,6 +10,7 @@ import {
   type IndexedExercise,
 } from "@/features/note/utils/note";
 import { type NoteEditColors } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Text, TextInput } from "react-native-paper";
 
@@ -58,6 +59,7 @@ export function NoteWorkoutExerciseCard({
   onToggleDayPicker,
   onToggleLinkPicker,
 }: NoteWorkoutExerciseCardProps) {
+  const { t } = useTranslation();
   const orderNum = String(index + 1).padStart(2, "0");
   const group = exercise.connectionGroup.trim().toUpperCase();
   const accentColor = group
@@ -114,8 +116,8 @@ export function NoteWorkoutExerciseCard({
         />
 
         <NoteTextField
-          label="Descrição"
-          placeholder="Observações, ajuste de execução, drop, pausa..."
+          label={t("description")}
+          placeholder={t("descriptionShortPlaceholder")}
           value={exercise.description}
           onChangeText={(value) =>
             onChangeExercise(exercise.index, "description", value)

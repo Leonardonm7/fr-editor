@@ -1,11 +1,14 @@
 import {
   getFontSizePreference,
+  getLanguagePreference,
   getThemePreference,
   setFontSizePreference,
+  setLanguagePreference,
   setThemePreference,
 } from "@/database/repositories/settingsRepository";
 import {
   type AppFontSizePreference,
+  type AppLanguagePreference,
   type AppThemePreference,
 } from "@/database/types";
 import {
@@ -113,11 +116,13 @@ export const lightTheme: MD3Theme = {
 
 export type AppThemeContextValue = {
   fontSizePreference: AppFontSizePreference;
+  languagePreference: AppLanguagePreference;
   preference: AppThemePreference;
   theme: MD3Theme;
   isThemeLoading: boolean;
   statusBarStyle: "light" | "dark";
   setFontSizePreference: (value: AppFontSizePreference) => Promise<void>;
+  setLanguagePreference: (value: AppLanguagePreference) => Promise<void>;
   setPreference: (value: AppThemePreference) => Promise<void>;
 };
 
@@ -127,6 +132,8 @@ export function AppThemeProvider({ children }: { children: ReactNode }) {
   const [preference, setThemeValue] = useState<AppThemePreference>("dark");
   const [fontSizePreferenceValue, setFontSizePreferenceValue] =
     useState<AppFontSizePreference>("default");
+  const [languagePreferenceValue, setLanguagePreferenceValue] =
+    useState<AppLanguagePreference>("pt-BR");
   const [isThemeLoading, setIsThemeLoading] = useState(true);
 
   useEffect(() => {
@@ -134,14 +141,20 @@ export function AppThemeProvider({ children }: { children: ReactNode }) {
 
     const loadPreference = async () => {
       try {
-        const [savedPreference, savedFontSizePreference] = await Promise.all([
+        const [
+          savedPreference,
+          savedFontSizePreference,
+          savedLanguagePreference,
+        ] = await Promise.all([
           getThemePreference(),
           getFontSizePreference(),
+          getLanguagePreference(),
         ]);
         if (isMounted) {
           setCurrentFontSizeScale(fontSizeScales[savedFontSizePreference]);
           setThemeValue(savedPreference);
           setFontSizePreferenceValue(savedFontSizePreference);
+          setLanguagePreferenceValue(savedLanguagePreference);
         }
       } finally {
         if (isMounted) setIsThemeLoading(false);
@@ -169,6 +182,14 @@ export function AppThemeProvider({ children }: { children: ReactNode }) {
     [],
   );
 
+  const setAppLanguagePreference = useCallback(
+    async (value: AppLanguagePreference) => {
+      setLanguagePreferenceValue(value);
+      await setLanguagePreference(value);
+    },
+    [],
+  );
+
   const baseTheme = preference === "light" ? lightTheme : darkTheme;
   const theme = useMemo(() => {
     return { ...baseTheme };
@@ -179,18 +200,22 @@ export function AppThemeProvider({ children }: { children: ReactNode }) {
   const contextValue = useMemo(
     () => ({
       fontSizePreference: fontSizePreferenceValue,
+      languagePreference: languagePreferenceValue,
       preference,
       theme,
       isThemeLoading,
       statusBarStyle,
       setFontSizePreference: setAppFontSizePreference,
+      setLanguagePreference: setAppLanguagePreference,
       setPreference,
     }),
     [
       fontSizePreferenceValue,
       isThemeLoading,
+      languagePreferenceValue,
       preference,
       setAppFontSizePreference,
+      setAppLanguagePreference,
       setPreference,
       statusBarStyle,
       theme,

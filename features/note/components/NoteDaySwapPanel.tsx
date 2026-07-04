@@ -1,5 +1,6 @@
-import { dayAbbrev, days } from "@/features/note/utils/note";
+import { days } from "@/features/note/utils/note";
 import { type NoteEditColors } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Icon, Text, TouchableRipple } from "react-native-paper";
@@ -17,6 +18,7 @@ export function NoteDaySwapPanel({
   countByDay,
   onSwapDayExercises,
 }: NoteDaySwapPanelProps) {
+  const { dayName, dayShort, t } = useTranslation();
   const [swapPickerOpen, setSwapPickerOpen] = useState(false);
 
   return (
@@ -30,7 +32,7 @@ export function NoteDaySwapPanel({
         <View style={styles.sectionLabelRow}>
           <View style={[styles.sectionAccent, { backgroundColor: colors.accent }]} />
           <Text numberOfLines={1} style={[styles.sectionLabel, { color: colors.muted }]}>
-            TROCAR DIA
+            {t("swapDay")}
           </Text>
         </View>
 
@@ -45,7 +47,7 @@ export function NoteDaySwapPanel({
           <View style={styles.swapToggleInner}>
             <Icon source="swap-horizontal" size={15} color={colors.accent} />
             <Text style={[styles.swapToggleText, { color: colors.muted }]}>
-              {swapPickerOpen ? "Ocultar" : "Escolher"}
+              {swapPickerOpen ? t("hide") : t("choose")}
             </Text>
             <Icon
               source={swapPickerOpen ? "chevron-up" : "chevron-down"}
@@ -57,7 +59,7 @@ export function NoteDaySwapPanel({
       </View>
 
       <Text style={[styles.swapHint, { color: colors.muted }]}>
-        Troca todos os exercícios de {activeDay} com outro dia.
+        {t("swapDayHint", { day: dayName(activeDay) })}
       </Text>
 
       {swapPickerOpen && (
@@ -90,10 +92,10 @@ export function NoteDaySwapPanel({
                 >
                   <View style={styles.swapDayInner}>
                     <Text style={[styles.swapDayText, { color: colors.ink }]}>
-                      {dayAbbrev[day]}
+                      {dayShort(day)}
                     </Text>
                     <Text style={[styles.swapDayCount, { color: colors.muted }]}>
-                      {count} ex.
+                      {count} {t("exercise")}
                     </Text>
                   </View>
                 </TouchableRipple>

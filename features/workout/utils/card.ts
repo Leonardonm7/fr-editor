@@ -2,7 +2,7 @@ import { connectionColors, parseSeriesCount, type IndexedExercise } from "@/feat
 import type { MD3Theme } from "react-native-paper";
 
 export const REST_PRESETS = [
-  { value: 0, label: "Sem" },
+  { value: 0, label: "0" },
   { value: 30, label: "30s" },
   { value: 60, label: "1min" },
   { value: 90, label: "1:30" },
@@ -32,21 +32,30 @@ export const getWorkoutCardTitle = ({
   exercises,
   groupKey,
   methodology,
+  blockLabel = "Bloco",
+  fallbackName = "Sem nome",
 }: {
+  blockLabel?: string;
   exercises: IndexedExercise[];
+  fallbackName?: string;
   groupKey: string;
   methodology: string;
 }) => {
   if (exercises.length > 1) {
-    return methodology ? `${methodology} / Bloco ${groupKey}` : `Bloco ${groupKey}`;
+    return methodology
+      ? `${methodology} / ${blockLabel} ${groupKey}`
+      : `${blockLabel} ${groupKey}`;
   }
 
-  return exercises[0]?.name || "Sem nome";
+  return exercises[0]?.name || fallbackName;
 };
 
-export const getWorkoutCardSubtitle = (exercises: IndexedExercise[]) =>
+export const getWorkoutCardSubtitle = (
+  exercises: IndexedExercise[],
+  fallbackName = "Sem nome",
+) =>
   exercises.length > 1
-    ? exercises.map((exercise) => exercise.name || "Sem nome").join(" + ")
+    ? exercises.map((exercise) => exercise.name || fallbackName).join(" + ")
     : "";
 
 export const getWorkoutSeriesNumbers = (exercises: IndexedExercise[]) => {

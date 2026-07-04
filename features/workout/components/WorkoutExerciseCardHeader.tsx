@@ -1,9 +1,14 @@
-import { getExerciseGifSource } from "@/assets/exercises/data/exerciseLibrary";
 import { ExerciseGifPreviewButton } from "@/features/exercise/components/ExerciseGifPreviewButton";
 import { type ExercisePreview } from "@/features/exercise/components/ExercisePreviewModal";
-import { getExerciseLibraryInstructions } from "@/features/exercise/utils/library";
+import {
+  getExerciseGifSource,
+  getExerciseLibraryInstructions,
+  getExerciseLibraryItem,
+} from "@/features/exercise/utils/library";
 import { type IndexedExercise } from "@/features/note/utils/note";
 import { type WorkoutCardColors } from "@/features/workout/utils/card";
+import { formatExerciseTag } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Icon, Text, TouchableRipple } from "react-native-paper";
 
@@ -44,7 +49,14 @@ export function WorkoutExerciseCardHeader({
   title,
   totalSeries,
 }: WorkoutExerciseCardHeaderProps) {
+  const { language, t } = useTranslation();
   const firstExercise = exercises[0];
+  const firstLibraryExercise = getExerciseLibraryItem(
+    firstExercise?.libraryId,
+    language,
+  );
+  const firstExerciseName =
+    firstLibraryExercise?.name || firstExercise?.name || t("customExercise");
   const methodologyLabel = methodology.trim();
   const gifSource =
     !isLinkedBlock && firstExercise
@@ -69,13 +81,17 @@ export function WorkoutExerciseCardHeader({
                 onPreview({
                   instructions: getExerciseLibraryInstructions(
                     firstExercise.libraryId,
+                    language,
                   ),
-                  name: firstExercise.name || "Sem nome",
+                  name: firstExerciseName,
                   source: gifSource,
                   meta: [
-                    firstExercise.bodyPart,
-                    firstExercise.target,
-                    firstExercise.equipment,
+                    formatExerciseTag(
+                      firstLibraryExercise?.bodyPart ?? firstExercise.bodyPart,
+                      language,
+                    ),
+                    firstLibraryExercise?.target ?? firstExercise.target,
+                    firstLibraryExercise?.equipment ?? firstExercise.equipment,
                   ]
                     .filter(Boolean)
                     .join(" / "),
@@ -123,7 +139,7 @@ export function WorkoutExerciseCardHeader({
               >
                 <Icon source="link-variant" size={11} color={accentColor} />
                 <Text style={[styles.pillText, { color: accentColor }]}>
-                  Vinculado
+                  {t("linked")}
                 </Text>
               </View>
             )}
@@ -139,7 +155,7 @@ export function WorkoutExerciseCardHeader({
               >
                 <Icon source="check" size={11} color={secondaryColor} />
                 <Text style={[styles.pillText, { color: secondaryColor }]}>
-                  Concluído
+                  {t("done")}
                 </Text>
               </View>
             )}

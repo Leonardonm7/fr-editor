@@ -1,4 +1,4 @@
-import { type ExerciseLibraryItem } from "@/assets/exercises/data/exerciseLibrary";
+import { type ExerciseLibraryItem } from "@/features/exercise/utils/library";
 import {
   addNote,
   getNoteById,
@@ -13,6 +13,7 @@ import {
   loadWorkoutState,
 } from "@/database/repositories/workoutRepository";
 import { useFocusCallback } from "@/hooks/useFocusCallback";
+import { useTranslation } from "@/hooks/useTranslation";
 import {
   buildSeriesDetails,
   connectionGroups,
@@ -60,6 +61,7 @@ const toEditableExercises = (note: NonNullable<LoadedNote>): ExerciseForm[] =>
   }));
 
 export function useNoteScreen() {
+  const { t } = useTranslation();
   const { id } = useLocalSearchParams<{ id?: string | string[] }>();
   const rawId = Array.isArray(id) ? id[0] : id;
   const isNew = rawId === "new";
@@ -287,7 +289,7 @@ export function useNoteScreen() {
         const title =
           workoutName.trim() ||
           currentNote.title ||
-          "Treino";
+          t("workout");
         const payload = {
           exercises: storedExercises,
           createdAt: currentNote.createdAt || now,
@@ -309,7 +311,7 @@ export function useNoteScreen() {
       });
 
     await persistQueueRef.current;
-  }, [isNew, numericId, workoutName]);
+  }, [isNew, numericId, t, workoutName]);
 
   const flushExerciseLoadPersist = useCallback(async () => {
     if (persistTimeoutRef.current) {
@@ -457,7 +459,7 @@ export function useNoteScreen() {
       ...current,
       {
         uid: createExerciseUid(),
-        name: "Exercício personalizado",
+        name: t("customExercise"),
         description: "",
         series: "3",
         reps: "12",
@@ -470,7 +472,7 @@ export function useNoteScreen() {
     ]);
 
     setTimeout(() => setExpandedIndex(nextIndex), 50);
-  }, [activeDay, exercises.length]);
+  }, [activeDay, exercises.length, t]);
 
   const addExerciseFromLibrary = useCallback(
     (libraryExercise: ExerciseLibraryItem) => {
@@ -740,7 +742,8 @@ export function useNoteScreen() {
     [exercises, totalExercises, workoutName],
   );
 
-  const screenTitle = workoutName.trim() || (isNew ? "Novo treino" : "Treino");
+  const screenTitle =
+    workoutName.trim() || (isNew ? t("newWorkout") : t("workout"));
 
   return {
     activeDay,

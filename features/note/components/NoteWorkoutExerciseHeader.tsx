@@ -1,12 +1,16 @@
-import { getExerciseGifSource } from "@/assets/exercises/data/exerciseLibrary";
 import { ExerciseGifPreviewButton } from "@/features/exercise/components/ExerciseGifPreviewButton";
 import { type ExercisePreview } from "@/features/exercise/components/ExercisePreviewModal";
-import { getExerciseLibraryInstructions } from "@/features/exercise/utils/library";
+import {
+  getExerciseGifSource,
+  getExerciseLibraryInstructions,
+  getExerciseLibraryItem,
+} from "@/features/exercise/utils/library";
 import { type ExerciseForm, type IndexedExercise } from "@/features/note/utils/note";
 import {
   formatExerciseTag,
   type NoteEditColors,
 } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import {
   Icon,
@@ -53,9 +57,23 @@ export function NoteWorkoutExerciseHeader({
   onPreview,
 }: NoteWorkoutExerciseHeaderProps) {
   const theme = useTheme();
+  const { language, t } = useTranslation();
   const gifSource = getExerciseGifSource(exercise.libraryId);
-  const instructions = getExerciseLibraryInstructions(exercise.libraryId);
+  const libraryExercise = getExerciseLibraryItem(exercise.libraryId, language);
+  const instructions = getExerciseLibraryInstructions(
+    exercise.libraryId,
+    language,
+  );
   const isCustomExercise = !exercise.libraryId;
+  const displayName =
+    libraryExercise?.name || exercise.name || t("customExercise");
+  const displayMeta = [
+    formatExerciseTag(libraryExercise?.bodyPart ?? exercise.bodyPart, language),
+    libraryExercise?.target ?? exercise.target,
+    libraryExercise?.equipment ?? exercise.equipment,
+  ]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
     <View style={styles.workoutTopRow}>
@@ -68,15 +86,9 @@ export function NoteWorkoutExerciseHeader({
           onPress={() =>
             onPreview({
               instructions,
-              name: exercise.name || "Exercício personalizado",
+              name: displayName,
               source: gifSource,
-              meta: [
-                formatExerciseTag(exercise.bodyPart),
-                exercise.target,
-                exercise.equipment,
-              ]
-                .filter(Boolean)
-                .join(" · "),
+              meta: displayMeta,
             })
           }
         />
@@ -89,7 +101,7 @@ export function NoteWorkoutExerciseHeader({
             dense
             value={exercise.name}
             autoFocus
-            placeholder="Nome do exercício"
+            placeholder={t("exerciseName")}
             onChangeText={(value) =>
               onChangeExercise(exercise.index, "name", value)
             }
@@ -115,7 +127,7 @@ export function NoteWorkoutExerciseHeader({
               style={[styles.workoutName, { color: colors.ink }]}
               numberOfLines={2}
             >
-              {exercise.name || "Exercício personalizado"}
+              {exercise.name || t("customExercise")}
             </Text>
           </TouchableRipple>
         ) : (
@@ -123,21 +135,15 @@ export function NoteWorkoutExerciseHeader({
             style={[styles.workoutName, { color: colors.ink }]}
             numberOfLines={2}
           >
-            {exercise.name || "Exercício personalizado"}
+            {displayName}
           </Text>
         )}
-        {!!(exercise.target || exercise.equipment || exercise.bodyPart) && (
+        {!!displayMeta && (
           <Text
             style={[styles.workoutMeta, { color: colors.muted }]}
             numberOfLines={1}
           >
-            {[
-              formatExerciseTag(exercise.bodyPart),
-              exercise.target,
-              exercise.equipment,
-            ]
-              .filter(Boolean)
-              .join(" · ")}
+            {displayMeta}
           </Text>
         )}
         {group ? (
@@ -152,7 +158,7 @@ export function NoteWorkoutExerciseHeader({
           >
             <Icon source="link-variant" size={10} color={accentColor} />
             <Text style={[styles.linkBadgeText, { color: accentColor }]}>
-              Bloco {group}
+              {t("block")} {group}
             </Text>
           </View>
         ) : null}

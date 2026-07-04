@@ -15,8 +15,10 @@ export function useSettingsScreen() {
   const [restSoundBusy, setRestSoundBusy] = useState(false);
   const {
     fontSizePreference,
+    languagePreference,
     preference,
     setFontSizePreference,
+    setLanguagePreference,
     setPreference,
   } = useAppTheme();
 
@@ -69,10 +71,12 @@ export function useSettingsScreen() {
     fontSizePreference,
     handleImportRestSound,
     handleResetRestSound,
+    languagePreference,
     preference,
     restSound,
     restSoundBusy,
     setFontSizePreference,
+    setLanguagePreference,
     setPreference,
   };
 }

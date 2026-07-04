@@ -1,10 +1,13 @@
-import { getExerciseGifSource } from "@/assets/exercises/data/exerciseLibrary";
 import { ExerciseGifPreviewButton } from "@/features/exercise/components/ExerciseGifPreviewButton";
 import {
   ExercisePreviewModal,
   type ExercisePreview,
 } from "@/features/exercise/components/ExercisePreviewModal";
-import { getExerciseLibraryInstructions } from "@/features/exercise/utils/library";
+import {
+  getExerciseGifSource,
+  getExerciseLibraryInstructions,
+  getExerciseLibraryItem,
+} from "@/features/exercise/utils/library";
 import {
   buildSeriesDetails,
   connectionColors,
@@ -12,6 +15,7 @@ import {
   type IndexedExercise,
 } from "@/features/note/utils/note";
 import { formatExerciseTag } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import type { MD3Theme } from "react-native-paper";
@@ -35,19 +39,26 @@ const getCardColors = (theme: MD3Theme) => ({
 
 export function ExerciseViewCard({ exercise, order }: ExerciseViewCardProps) {
   const theme = useTheme();
+  const { language, t } = useTranslation();
   const colors = useMemo(() => getCardColors(theme), [theme]);
   const [exercisePreview, setExercisePreview] =
     useState<ExercisePreview | null>(null);
   const gifSource = getExerciseGifSource(exercise.libraryId);
-  const instructions = getExerciseLibraryInstructions(exercise.libraryId);
+  const libraryExercise = getExerciseLibraryItem(exercise.libraryId, language);
+  const instructions = getExerciseLibraryInstructions(
+    exercise.libraryId,
+    language,
+  );
+  const displayName =
+    libraryExercise?.name || exercise.name || t("customExercise");
   const groupKey = exercise.connectionGroup?.trim().toUpperCase() ?? "";
   const accentColor = groupKey
     ? (connectionColors[groupKey] ?? colors.accent)
     : colors.accent;
   const metadata = [
-    formatExerciseTag(exercise.bodyPart),
-    exercise.target,
-    exercise.equipment,
+    formatExerciseTag(libraryExercise?.bodyPart ?? exercise.bodyPart, language),
+    libraryExercise?.target ?? exercise.target,
+    libraryExercise?.equipment ?? exercise.equipment,
   ].filter(Boolean);
   const seriesDetails = buildSeriesDetails(
     exercise.series,
@@ -92,7 +103,7 @@ export function ExerciseViewCard({ exercise, order }: ExerciseViewCardProps) {
                   onPress={() =>
                     setExercisePreview({
                       instructions,
-                      name: exercise.name || "Exercício",
+                      name: displayName,
                       source: gifSource,
                       meta: metadata.join(" / "),
                     })
@@ -117,7 +128,7 @@ export function ExerciseViewCard({ exercise, order }: ExerciseViewCardProps) {
                     <Text
                       style={[styles.linkBadgeText, { color: accentColor }]}
                     >
-                      Bloco {groupKey}
+                      {t("block")} {groupKey}
                     </Text>
                   </View>
                 )}
@@ -127,7 +138,7 @@ export function ExerciseViewCard({ exercise, order }: ExerciseViewCardProps) {
                 numberOfLines={2}
                 style={[styles.exerciseName, { color: colors.ink }]}
               >
-                {exercise.name || "Exercício"}
+                {displayName}
               </Text>
 
               {metadata.length > 0 && (
@@ -192,7 +203,7 @@ export function ExerciseViewCard({ exercise, order }: ExerciseViewCardProps) {
                 <Text
                   style={[styles.seriesPanelLabel, { color: colors.muted }]}
                 >
-                  Séries
+                  {t("series")}
                 </Text>
                 <View
                   style={[

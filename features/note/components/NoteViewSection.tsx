@@ -1,5 +1,6 @@
 import { ExerciseViewCard } from "@/features/note/components/ExerciseViewCard";
 import { type IndexedExercise } from "@/features/note/utils/note";
+import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import type { MD3Theme } from "react-native-paper";
@@ -38,6 +39,7 @@ export function NoteViewSection({
   workoutSavedState,
 }: NoteViewSectionProps) {
   const theme = useTheme();
+  const { dayName, t } = useTranslation();
   const colors = useMemo(() => getViewColors(theme), [theme]);
   const initial = (workoutName || "T").charAt(0).toUpperCase();
 
@@ -67,16 +69,16 @@ export function NoteViewSection({
 
           <View style={styles.sessionTitleBlock}>
             <Text style={[styles.panelKicker, { color: colors.accent }]}>
-              Sessão selecionada
+              {t("selectedSession")}
             </Text>
             <Text
               numberOfLines={1}
               style={[styles.workoutName, { color: colors.muted }]}
             >
-              {workoutName || "Treino"}
+              {workoutName || t("workout")}
             </Text>
             <Text style={[styles.dayName, { color: colors.ink }]}>
-              {activeDay}
+              {dayName(activeDay)}
             </Text>
           </View>
         </View>
@@ -102,7 +104,7 @@ export function NoteViewSection({
                   source={workoutSavedState ? "play-pause" : "play"}
                 />
                 <Text style={styles.primaryActionText}>
-                  {workoutSavedState ? "RETOMAR TREINO" : "INICIAR TREINO"}
+                  {workoutSavedState ? t("resumeWorkout") : t("startWorkout")}
                 </Text>
               </View>
             </TouchableRipple>
@@ -128,7 +130,7 @@ export function NoteViewSection({
                       { color: colors.muted },
                     ]}
                   >
-                    REINICIAR
+                    {t("restart")}
                   </Text>
                 </View>
               </TouchableRipple>
@@ -148,20 +150,20 @@ export function NoteViewSection({
             <Icon source="dumbbell" size={40} color={colors.accent} />
           </View>
           <Text style={[styles.emptyTitle, { color: colors.ink }]}>
-            Nenhum exercício neste dia
+            {t("noExercisesThisDay")}
           </Text>
           <Text style={[styles.emptyHint, { color: colors.muted }]}>
-            Alterne para edição para adicionar.
+            {t("switchToEditToAdd")}
           </Text>
         </View>
       ) : (
         <>
           <View style={styles.listHeader}>
             <Text style={[styles.listTitle, { color: colors.ink }]}>
-              Roteiro do treino
+              {t("trainingRoute")}
             </Text>
             <Text style={[styles.listLabel, { color: colors.muted }]}>
-              {dayExercises.length} exercício(s)
+              {t("exercisesCount", { count: dayExercises.length })}
             </Text>
           </View>
 

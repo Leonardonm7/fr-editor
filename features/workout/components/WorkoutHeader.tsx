@@ -8,6 +8,7 @@ import {
 import { StyleSheet, View } from "react-native";
 import { Icon, Text, TouchableRipple } from "react-native-paper";
 import { formatRestTime } from "@/features/workout/services/workout";
+import { useTranslation } from "@/hooks/useTranslation";
 
 type WorkoutHeaderProps = {
   colors: GlobalContainerColors;
@@ -34,6 +35,7 @@ export function WorkoutHeader({
   restTotal,
   totalSeries,
 }: WorkoutHeaderProps) {
+  const { dayName, t } = useTranslation();
   const restActive =
     typeof restRemaining === "number" && restRemaining > 0 && !!onSkipRest;
   const restProgress =
@@ -48,14 +50,14 @@ export function WorkoutHeader({
           iconColor={colors.ink}
           onPress={onBack}
         />
-        <HeaderSignalPlate colors={colors} label="Modo treino" />
+        <HeaderSignalPlate colors={colors} label={t("trainingSession")} />
       </View>
 
       <View style={styles.heroRow}>
         <HeaderTitleBlock
           colors={colors}
-          eyebrow="Sessão ativa"
-          title={day}
+          eyebrow={t("activeSession")}
+          title={dayName(day)}
         />
         <HeaderStatPlate
           colors={colors}
@@ -88,13 +90,13 @@ export function WorkoutHeader({
             <Icon source="timer-sand" size={16} color={colors.accent} />
             <View style={styles.restTextBlock}>
               <Text style={[styles.restKicker, { color: colors.accent }]}>
-                Descansando
+                {t("resting")}
               </Text>
               <Text
                 numberOfLines={1}
                 style={[styles.restLabel, { color: colors.muted }]}
               >
-                {restLabel || "Próxima série"}
+                {restLabel || t("nextSeries")}
               </Text>
             </View>
           </View>
@@ -107,7 +109,7 @@ export function WorkoutHeader({
             style={[styles.skipBtn, { borderColor: colors.border }]}
           >
             <Text style={[styles.skipText, { color: colors.muted }]}>
-              Pular
+              {t("skip")}
             </Text>
           </TouchableRipple>
           <View

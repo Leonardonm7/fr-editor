@@ -5,6 +5,7 @@ import {
   type IndexedExercise,
 } from "@/features/note/utils/note";
 import { type NoteEditColors } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Icon, Text, TextInput, TouchableRipple } from "react-native-paper";
 
@@ -23,6 +24,8 @@ export function NoteWorkoutSeriesEditor({
   exercise,
   onChangeExercise,
 }: NoteWorkoutSeriesEditorProps) {
+  const { t } = useTranslation();
+
   const updateSeriesDetail = (
     seriesIndex: number,
     key: "reps" | "load",
@@ -39,7 +42,7 @@ export function NoteWorkoutSeriesEditor({
     <View style={styles.seriesSection}>
       <View style={styles.seriesTopRow}>
         <Text style={[styles.seriesSectionHeader, { color: colors.muted }]}>
-          SÉRIES
+          {t("series").toUpperCase()}
         </Text>
         <View style={styles.seriesStepper}>
           <TouchableRipple
@@ -96,7 +99,7 @@ export function NoteWorkoutSeriesEditor({
                 { color: colors.muted },
               ]}
             >
-              REPS
+              {t("reps").toUpperCase()}
             </Text>
             <Text
               style={[
@@ -105,7 +108,7 @@ export function NoteWorkoutSeriesEditor({
                 { color: colors.muted },
               ]}
             >
-              CARGA
+              {t("load").toUpperCase()}
             </Text>
           </View>
 

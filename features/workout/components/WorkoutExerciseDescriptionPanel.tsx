@@ -1,5 +1,7 @@
 import { type WorkoutCardColors } from "@/features/workout/utils/card";
+import { getExerciseLibraryItem } from "@/features/exercise/utils/library";
 import { type IndexedExercise } from "@/features/note/utils/note";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Icon, Text } from "react-native-paper";
 
@@ -14,6 +16,7 @@ export function WorkoutExerciseDescriptionPanel({
   exercises,
   isLinkedBlock,
 }: WorkoutExerciseDescriptionPanelProps) {
+  const { language, t } = useTranslation();
   const describedExercises = exercises.filter((exercise) =>
     exercise.description.trim(),
   );
@@ -32,12 +35,24 @@ export function WorkoutExerciseDescriptionPanel({
     >
       <Icon source="note-text-outline" size={14} color={colors.accent} />
       <View style={styles.descriptionList}>
-        {describedExercises.map((exercise) => (
-          <Text key={exercise.uid} style={[styles.descText, { color: colors.muted }]}>
-            {isLinkedBlock ? `${exercise.name || "Sem nome"}: ` : ""}
-            {exercise.description}
-          </Text>
-        ))}
+        {describedExercises.map((exercise) => {
+          const libraryExercise = getExerciseLibraryItem(
+            exercise.libraryId,
+            language,
+          );
+          const exerciseName =
+            libraryExercise?.name || exercise.name || t("customExercise");
+
+          return (
+            <Text
+              key={exercise.uid}
+              style={[styles.descText, { color: colors.muted }]}
+            >
+              {isLinkedBlock ? `${exerciseName}: ` : ""}
+              {exercise.description}
+            </Text>
+          );
+        })}
       </View>
     </View>
   );

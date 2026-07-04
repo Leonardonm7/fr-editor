@@ -16,6 +16,8 @@ import {
   getWorkoutSeriesNumbers,
 } from "@/features/workout/utils/card";
 import { type IndexedExercise, type SeriesDetail } from "@/features/note/utils/note";
+import { getExerciseLibraryItem } from "@/features/exercise/utils/library";
+import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
@@ -65,6 +67,7 @@ export function WorkoutExerciseCard({
   restTime,
 }: WorkoutExerciseCardProps) {
   const theme = useTheme();
+  const { language, t } = useTranslation();
   const colors = useMemo(() => getWorkoutCardColors(theme), [theme]);
   const [exercisePreview, setExercisePreview] =
     useState<ExercisePreview | null>(null);
@@ -89,8 +92,27 @@ export function WorkoutExerciseCard({
   });
   const allDone = !nextSeries;
   const accentColor = getWorkoutAccentColor(groupKey, colors);
-  const title = getWorkoutCardTitle({ exercises, groupKey, methodology });
-  const subtitle = getWorkoutCardSubtitle(exercises);
+  const displayExercises = useMemo(
+    () =>
+      exercises.map((exercise) => ({
+        ...exercise,
+        name:
+          getExerciseLibraryItem(exercise.libraryId, language)?.name ||
+          exercise.name,
+      })),
+    [exercises, language],
+  );
+  const title = getWorkoutCardTitle({
+    blockLabel: t("block"),
+    exercises: displayExercises,
+    fallbackName: t("customExercise"),
+    groupKey,
+    methodology,
+  });
+  const subtitle = getWorkoutCardSubtitle(
+    displayExercises,
+    t("customExercise"),
+  );
 
   return (
     <>

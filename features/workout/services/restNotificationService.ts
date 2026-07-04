@@ -62,6 +62,12 @@ const ensureRestForegroundService = () => {
 
   notifee.registerForegroundService(async (notification) => {
     const endsAt = Number(getNotificationDataString(notification.data?.restEndsAt));
+    const finishedBody = getNotificationDataString(
+      notification.data?.restFinishedBody,
+    );
+    const finishedTitle = getNotificationDataString(
+      notification.data?.restFinishedTitle,
+    );
     const label = getNotificationDataString(notification.data?.restLabel);
     const restKey = getNotificationDataString(notification.data?.restKey);
 
@@ -77,7 +83,10 @@ const ensureRestForegroundService = () => {
     if (activeForegroundRestKey !== restKey) return;
 
     await playRestFinishedSound(restKey);
-    await showRestFinishedNotification(label);
+    await showRestFinishedNotification(label, {
+      body: finishedBody || undefined,
+      title: finishedTitle || undefined,
+    });
   });
   foregroundServiceRegistered = true;
 };
@@ -135,12 +144,20 @@ export const setupRestNotifications = async () => {
 
 export const showRestTimerNotification = async ({
   endsAt: providedEndsAt,
+  finishedBody,
+  finishedTitle = "Descanso acabou",
   label,
   remainingMs,
+  remainingSuffix = "restantes",
+  title = "Descanso em andamento",
 }: {
   endsAt?: number;
+  finishedBody?: string;
+  finishedTitle?: string;
   label: string;
   remainingMs: number;
+  remainingSuffix?: string;
+  title?: string;
 }) => {
   try {
     const enabled = await setupRestNotifications();
@@ -198,14 +215,16 @@ export const showRestTimerNotification = async ({
       body:
         Platform.OS === "android"
           ? label
-          : `${formatRestTime(remainingMs)} restantes · ${label}`,
+          : `${formatRestTime(remainingMs)} ${remainingSuffix} · ${label}`,
       data: {
         restEndsAt: String(endsAt),
+        restFinishedBody: finishedBody ?? "",
+        restFinishedTitle: finishedTitle ?? "",
         restKey,
         restLabel: label,
       },
       id: REST_TIMER_NOTIFICATION_ID,
-      title: "Descanso em andamento",
+      title,
     });
 
     if (useForegroundService) {
@@ -235,9 +254,9 @@ export const showRestTimerNotification = async ({
           vibrationPattern: REST_FINISHED_VIBRATION_PATTERN,
           visibility: AndroidVisibility.PUBLIC,
         },
-        body: `${label} pronto para a próxima série.`,
+        body: finishedBody ?? `${label} pronto para a próxima série.`,
         id: REST_FINISHED_NOTIFICATION_ID,
-        title: "Descanso acabou",
+        title: finishedTitle,
       },
       trigger,
     );
@@ -269,7 +288,10 @@ export const clearRestNotifications = async () => {
   ]);
 };
 
-export const showRestFinishedNotification = async (label: string) => {
+export const showRestFinishedNotification = async (
+  label: string,
+  options: { body?: string; title?: string } = {},
+) => {
   try {
     const enabled = await setupRestNotifications();
     if (!enabled) return;
@@ -290,9 +312,9 @@ export const showRestFinishedNotification = async (label: string) => {
         vibrationPattern: REST_FINISHED_VIBRATION_PATTERN,
         visibility: AndroidVisibility.PUBLIC,
       },
-      body: `${label} pronto para a próxima série.`,
+      body: options.body ?? `${label} pronto para a próxima série.`,
       id: REST_FINISHED_NOTIFICATION_ID,
-      title: "Descanso acabou",
+      title: options.title ?? "Descanso acabou",
     });
   } catch (error) {
     console.warn("[workout] Falha ao mostrar fim do descanso.", error);

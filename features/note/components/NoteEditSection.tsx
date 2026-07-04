@@ -1,4 +1,4 @@
-import { type ExerciseLibraryItem } from "@/assets/exercises/data/exerciseLibrary";
+import { type ExerciseLibraryItem } from "@/features/exercise/utils/library";
 import {
   ExercisePreviewModal,
   type ExercisePreview,

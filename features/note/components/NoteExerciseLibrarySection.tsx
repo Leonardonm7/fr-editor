@@ -1,16 +1,17 @@
-import {
-  exerciseLibrary,
-  type ExerciseLibraryItem,
-} from "@/assets/exercises/data/exerciseLibrary";
 import { type ExercisePreview } from "@/features/exercise/components/ExercisePreviewModal";
+import {
+  getExerciseLibrary,
+  getExerciseLibraryIndex,
+  type ExerciseLibraryItem,
+} from "@/features/exercise/utils/library";
 import { NoteLibraryExerciseCard } from "@/features/note/components/NoteLibraryExerciseCard";
 import { NoteTextField } from "@/features/note/components/NoteTextField";
 import {
-  buildExerciseLibrarySearchText,
   formatExerciseTag,
   LIBRARY_PAGE_SIZE,
   type NoteEditColors,
 } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import {
   FlatList,
@@ -27,24 +28,6 @@ type NoteExerciseLibrarySectionProps = {
   onPreview: (preview: ExercisePreview) => void;
 };
 
-const EXERCISE_LIBRARY_BODY_PARTS = Array.from(
-  new Set(exerciseLibrary.map((item) => item.bodyPart)),
-).sort();
-
-const EXERCISE_LIBRARY_BY_BODY_PART = exerciseLibrary.reduce<
-  Record<string, ExerciseLibraryItem[]>
->((groups, exercise) => {
-  (groups[exercise.bodyPart] ??= []).push(exercise);
-  return groups;
-}, {});
-
-const EXERCISE_LIBRARY_SEARCH_INDEX = new Map(
-  exerciseLibrary.map((exercise) => [
-    exercise.id,
-    buildExerciseLibrarySearchText(exercise),
-  ]),
-);
-
 const LIBRARY_ROW_HEIGHT = 92;
 
 export const NoteExerciseLibrarySection = memo(function NoteExerciseLibrarySection({
@@ -52,29 +35,40 @@ export const NoteExerciseLibrarySection = memo(function NoteExerciseLibrarySecti
   onAddExerciseFromLibrary,
   onPreview,
 }: NoteExerciseLibrarySectionProps) {
+  const { language, t } = useTranslation();
   const [query, setQuery] = useState("");
   const [selectedBodyPart, setSelectedBodyPart] = useState<string | null>(null);
   const [libraryVisibleCount, setLibraryVisibleCount] =
     useState(LIBRARY_PAGE_SIZE);
 
-  const bodyParts = EXERCISE_LIBRARY_BODY_PARTS;
+  const library = useMemo(() => getExerciseLibrary(language), [language]);
+  const libraryIndex = useMemo(
+    () => getExerciseLibraryIndex(language),
+    [language],
+  );
+  const bodyParts = libraryIndex.bodyParts;
 
   const filteredExercises = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     const baseExercises = selectedBodyPart
-      ? EXERCISE_LIBRARY_BY_BODY_PART[selectedBodyPart] ?? []
-      : exerciseLibrary;
+      ? libraryIndex.byBodyPart[selectedBodyPart] ?? []
+      : library;
 
     if (!normalizedQuery) return baseExercises;
 
     return baseExercises.filter((exercise) => {
       const matchesQuery =
-        EXERCISE_LIBRARY_SEARCH_INDEX.get(exercise.id)?.includes(
+        libraryIndex.searchIndex.get(exercise.id)?.includes(
           normalizedQuery,
         ) ?? false;
       return matchesQuery;
     });
-  }, [query, selectedBodyPart]);
+  }, [library, libraryIndex, query, selectedBodyPart]);
+
+  useEffect(() => {
+    setSelectedBodyPart(null);
+    setLibraryVisibleCount(LIBRARY_PAGE_SIZE);
+  }, [language]);
 
   useEffect(() => {
     setLibraryVisibleCount(LIBRARY_PAGE_SIZE);
@@ -125,13 +119,13 @@ export const NoteExerciseLibrarySection = memo(function NoteExerciseLibrarySecti
       <View style={styles.sectionLabelRow}>
         <View style={[styles.sectionAccent, { backgroundColor: colors.accent }]} />
         <Text style={[styles.sectionLabel, { color: colors.muted }]}>
-          BIBLIOTECA
+          {t("exerciseLibrary")}
         </Text>
       </View>
 
       <NoteTextField
-        label="Buscar exercício"
-        placeholder="Nome, músculo, equipamento..."
+        label={t("searchExercise")}
+        placeholder={t("bodyPartEquipmentSearch")}
         value={query}
         onChangeText={setQuery}
         left={<TextInput.Icon icon="magnify" />}
@@ -168,7 +162,9 @@ export const NoteExerciseLibrarySection = memo(function NoteExerciseLibrarySecti
                   { color: isActive ? colors.ink : colors.muted },
                 ]}
               >
-                {bodyPart === null ? "Todos" : formatExerciseTag(bodyPart)}
+                {bodyPart === null
+                  ? t("all")
+                  : formatExerciseTag(bodyPart, language)}
               </Text>
             </TouchableRipple>
           );

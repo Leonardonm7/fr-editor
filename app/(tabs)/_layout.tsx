@@ -1,7 +1,10 @@
 import { AppTabBar } from "@/features/navigation/components/AppTabBar";
+import { useTranslation } from "@/hooks/useTranslation";
 import { Tabs } from "expo-router";
 
 export default function TabsLayout() {
+  const { t } = useTranslation();
+
   return (
     <Tabs
       tabBar={(props) => <AppTabBar {...props} />}
@@ -12,13 +15,13 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Treinos",
+          title: t("workouts"),
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
-          title: "Aparência",
+          title: t("appearanceSettings"),
         }}
       />
     </Tabs>

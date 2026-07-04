@@ -5,6 +5,7 @@ import {
   HeaderStatPlate,
   HeaderTitleBlock,
 } from "@/components/ui/ScreenHeaderParts";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { IconButton, Text } from "react-native-paper";
 
@@ -31,6 +32,8 @@ export function HomeHeader({
   selectedCount,
   workoutCount,
 }: HomeHeaderProps) {
+  const { t } = useTranslation();
+
   if (isSelecting) {
     return (
       <View style={styles.selectionRow}>
@@ -43,10 +46,10 @@ export function HomeHeader({
         />
         <View style={styles.selectionTextBlock}>
           <Text style={[styles.selectionKicker, { color: colors.accent }]}>
-            Seleção ativa
+            {t("activeSelection")}
           </Text>
           <Text style={[styles.selectionCount, { color: colors.ink }]}>
-            {selectedCount} selecionado(s)
+            {t("selectedCount", { count: selectedCount })}
           </Text>
         </View>
         <View style={styles.selectionActions}>
@@ -92,13 +95,13 @@ export function HomeHeader({
       <View style={styles.heroRow}>
         <HeaderTitleBlock
           colors={colors}
-          eyebrow="Área de treino"
-          title="Meus treinos"
+          eyebrow={t("trainArea")}
+          title={t("workouts")}
         />
 
         <HeaderStatPlate
           colors={colors}
-          label="treinos"
+          label={t("workouts").toLowerCase()}
           minWidth={92}
           value={workoutCount}
         />

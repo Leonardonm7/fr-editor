@@ -3,6 +3,7 @@ import {
   HeaderSignalPlate,
   HeaderTitleBlock,
 } from "@/components/ui/ScreenHeaderParts";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 
 type SettingsHeaderProps = {
@@ -10,15 +11,17 @@ type SettingsHeaderProps = {
 };
 
 export function SettingsHeader({ colors }: SettingsHeaderProps) {
+  const { t } = useTranslation();
+
   return (
     <>
-      <HeaderSignalPlate colors={colors} label="Preferências" />
+      <HeaderSignalPlate colors={colors} label={t("preferences")} />
 
       <View style={styles.heroRow}>
         <HeaderTitleBlock
           colors={colors}
-          eyebrow="Calibração visual"
-          title="Aparência"
+          eyebrow={t("appearanceCalibration")}
+          title={t("appearanceSettings")}
         />
       </View>
     </>

@@ -1,9 +1,14 @@
-import { getExerciseGifSource } from "@/assets/exercises/data/exerciseLibrary";
 import { ExerciseGifPreviewButton } from "@/features/exercise/components/ExerciseGifPreviewButton";
 import { type ExercisePreview } from "@/features/exercise/components/ExercisePreviewModal";
-import { getExerciseLibraryInstructions } from "@/features/exercise/utils/library";
+import {
+  getExerciseGifSource,
+  getExerciseLibraryInstructions,
+  getExerciseLibraryItem,
+} from "@/features/exercise/utils/library";
+import { formatExerciseTag } from "@/features/note/utils/editSection";
 import { type IndexedExercise } from "@/features/note/utils/note";
 import { type WorkoutCardColors } from "@/features/workout/utils/card";
+import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
@@ -19,6 +24,7 @@ export function WorkoutExercisePreviewStrip({
   exercises,
   onPreview,
 }: WorkoutExercisePreviewStripProps) {
+  const { language, t } = useTranslation();
   const exercisePreviews = useMemo(
     () =>
       exercises.flatMap((exercise) => {
@@ -36,38 +42,57 @@ export function WorkoutExercisePreviewStrip({
       horizontal
       showsHorizontalScrollIndicator={false}
     >
-      {exercisePreviews.map(({ exercise, source }) => (
-        <View
-          key={exercise.uid}
-          style={[
-            styles.previewItem,
-            {
-              backgroundColor: colors.thumb,
-              borderColor: colors.border,
-            },
-          ]}
-        >
-          <ExerciseGifPreviewButton
-            source={source}
-            imageStyle={styles.previewGif}
-            badgeBackgroundColor={colors.surface}
-            iconColor={colors.accent}
-            onPress={() =>
-              onPreview({
-                instructions: getExerciseLibraryInstructions(exercise.libraryId),
-                name: exercise.name || "Sem nome",
-                source,
-                meta: [exercise.bodyPart, exercise.target, exercise.equipment]
-                  .filter(Boolean)
-                  .join(" / "),
-              })
-            }
-          />
-          <Text numberOfLines={1} style={[styles.previewLabel, { color: colors.ink }]}>
-            {exercise.name || "Sem nome"}
-          </Text>
-        </View>
-      ))}
+      {exercisePreviews.map(({ exercise, source }) => {
+        const libraryExercise = getExerciseLibraryItem(exercise.libraryId, language);
+        const displayName =
+          libraryExercise?.name || exercise.name || t("customExercise");
+
+        return (
+          <View
+            key={exercise.uid}
+            style={[
+              styles.previewItem,
+              {
+                backgroundColor: colors.thumb,
+                borderColor: colors.border,
+              },
+            ]}
+          >
+            <ExerciseGifPreviewButton
+              source={source}
+              imageStyle={styles.previewGif}
+              badgeBackgroundColor={colors.surface}
+              iconColor={colors.accent}
+              onPress={() =>
+                onPreview({
+                  instructions: getExerciseLibraryInstructions(
+                    exercise.libraryId,
+                    language,
+                  ),
+                  name: displayName,
+                  source,
+                  meta: [
+                    formatExerciseTag(
+                      libraryExercise?.bodyPart ?? exercise.bodyPart,
+                      language,
+                    ),
+                    libraryExercise?.target ?? exercise.target,
+                    libraryExercise?.equipment ?? exercise.equipment,
+                  ]
+                    .filter(Boolean)
+                    .join(" / "),
+                })
+              }
+            />
+            <Text
+              numberOfLines={1}
+              style={[styles.previewLabel, { color: colors.ink }]}
+            >
+              {displayName}
+            </Text>
+          </View>
+        );
+      })}
     </ScrollView>
   );
 }

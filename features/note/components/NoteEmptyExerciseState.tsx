@@ -1,4 +1,5 @@
 import { type NoteEditColors } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Icon, Text } from "react-native-paper";
 
@@ -7,6 +8,8 @@ type NoteEmptyExerciseStateProps = {
 };
 
 export function NoteEmptyExerciseState({ colors }: NoteEmptyExerciseStateProps) {
+  const { t } = useTranslation();
+
   return (
     <View
       style={[
@@ -18,7 +21,7 @@ export function NoteEmptyExerciseState({ colors }: NoteEmptyExerciseStateProps) 
         <Icon source="dumbbell" size={32} color={colors.accent} />
       </View>
       <Text style={[styles.emptyText, { color: colors.muted }]}>
-        Toque em um exercício para adicionar.
+        {t("tapExerciseToAdd")}
       </Text>
     </View>
   );

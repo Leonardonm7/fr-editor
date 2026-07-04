@@ -3,6 +3,7 @@ import { formatRestTime } from "@/features/workout/services/workout";
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { useTranslation } from "@/hooks/useTranslation";
 
 type WorkoutRestPresetPickerProps = {
   colors: WorkoutCardColors;
@@ -15,6 +16,7 @@ export function WorkoutRestPresetPicker({
   onRestTimeChange,
   restTime,
 }: WorkoutRestPresetPickerProps) {
+  const { t } = useTranslation();
   const [showRestPresets, setShowRestPresets] = useState(false);
 
   return (
@@ -27,10 +29,8 @@ export function WorkoutRestPresetPicker({
         <View style={styles.restToggleInner}>
           <Icon source="timer-outline" size={14} color={colors.muted} />
           <Text style={[styles.restToggleText, { color: colors.muted }]}>
-            Descanso:{" "}
-            {restTime === 0
-              ? "Sem descanso"
-              : formatRestTime(restTime * 1000)}
+            {t("rest")}:{" "}
+            {restTime === 0 ? t("noRest") : formatRestTime(restTime * 1000)}
           </Text>
           <Icon
             source={showRestPresets ? "chevron-up" : "chevron-down"}
@@ -70,7 +70,7 @@ export function WorkoutRestPresetPicker({
                     { color: isActive ? colors.ink : colors.muted },
                   ]}
                 >
-                  {preset.label}
+                  {preset.value === 0 ? t("noRest") : preset.label}
                 </Text>
               </TouchableRipple>
             );

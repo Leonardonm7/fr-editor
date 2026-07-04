@@ -1,5 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { Icon, Text, TouchableRipple, useTheme } from "react-native-paper";
+import { useTranslation } from "@/hooks/useTranslation";
 
 import { AppModal } from "./AppModal";
 
@@ -17,12 +18,13 @@ export const ConfirmDialog = ({
   visible,
   title,
   message,
-  confirmLabel = "Confirmar",
-  cancelLabel = "Cancelar",
+  confirmLabel,
+  cancelLabel,
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <AppModal
@@ -44,7 +46,7 @@ export const ConfirmDialog = ({
             </View>
             <View style={styles.headerCopy}>
               <Text style={[styles.eyebrow, { color: theme.colors.primary }]}>
-                Atenção
+                {t("attention")}
               </Text>
               <Text style={[styles.title, { color: theme.colors.onSurface }]}>
                 {title}
@@ -85,7 +87,7 @@ export const ConfirmDialog = ({
             <Text
               style={[styles.btnText, { color: theme.colors.onSurfaceVariant }]}
             >
-              {cancelLabel}
+              {cancelLabel ?? t("cancel")}
             </Text>
           </TouchableRipple>
 
@@ -95,7 +97,7 @@ export const ConfirmDialog = ({
             style={[styles.btn, { backgroundColor: theme.colors.primary }]}
           >
             <Text style={[styles.btnText, { color: theme.colors.onPrimary }]}>
-              {confirmLabel}
+              {confirmLabel ?? t("confirm")}
             </Text>
           </TouchableRipple>
         </View>

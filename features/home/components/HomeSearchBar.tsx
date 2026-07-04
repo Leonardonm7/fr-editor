@@ -1,4 +1,5 @@
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, TextInput, View } from "react-native";
 import { Icon, TouchableRipple } from "react-native-paper";
 
@@ -21,6 +22,8 @@ export function HomeSearchBar({
   onFocus,
   value,
 }: HomeSearchBarProps) {
+  const { t } = useTranslation();
+
   return (
     <View
       style={[
@@ -37,7 +40,7 @@ export function HomeSearchBar({
         onBlur={onBlur}
         onChangeText={onChangeText}
         onFocus={onFocus}
-        placeholder="Pesquisar treino..."
+        placeholder={t("searchWorkout")}
         placeholderTextColor={colors.muted}
         returnKeyType="search"
         style={[styles.searchInput, { color: colors.ink }]}

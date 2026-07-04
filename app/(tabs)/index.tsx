@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/GlobalContainer";
 import { ImportJsonDialog } from "@/components/ui/ImportJsonDialog";
 import { useHomeScreen } from "@/features/home/hooks/useHomeScreen";
+import { useTranslation } from "@/hooks/useTranslation";
 import { router } from "expo-router";
 import { useMemo } from "react";
 import { StyleSheet } from "react-native";
@@ -16,6 +17,7 @@ import { Snackbar, useTheme } from "react-native-paper";
 
 export default function HomeTab() {
   const theme = useTheme();
+  const { t } = useTranslation();
   const colors = useMemo(() => getGlobalContainerColors(theme), [theme]);
   const {
     confirmDelete,
@@ -42,12 +44,12 @@ export default function HomeTab() {
   return (
     <>
       <ConfirmDialog
-        cancelLabel="Cancelar"
-        confirmLabel="Excluir"
-        message={`Excluir ${selectedIds.length} treino(s) selecionado(s)?`}
+        cancelLabel={t("cancel")}
+        confirmLabel={t("delete")}
+        message={t("deleteWorkoutsMessage", { count: selectedIds.length })}
         onCancel={() => setDeleteVisible(false)}
         onConfirm={confirmDelete}
-        title="Excluir treinos?"
+        title={t("deleteWorkouts")}
         visible={deleteVisible}
       />
       <ImportJsonDialog

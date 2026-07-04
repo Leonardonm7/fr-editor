@@ -1,13 +1,14 @@
+import { ExerciseGifPreviewButton } from "@/features/exercise/components/ExerciseGifPreviewButton";
+import { type ExercisePreview } from "@/features/exercise/components/ExercisePreviewModal";
 import {
   getExerciseGifSource,
   type ExerciseLibraryItem,
-} from "@/assets/exercises/data/exerciseLibrary";
-import { ExerciseGifPreviewButton } from "@/features/exercise/components/ExerciseGifPreviewButton";
-import { type ExercisePreview } from "@/features/exercise/components/ExercisePreviewModal";
+} from "@/features/exercise/utils/library";
 import {
   formatExerciseTag,
   type NoteEditColors,
 } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { memo, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { Icon, Text, TouchableRipple } from "react-native-paper";
@@ -25,17 +26,18 @@ export const NoteLibraryExerciseCard = memo(function NoteLibraryExerciseCard({
   onAdd,
   onPreview,
 }: NoteLibraryExerciseCardProps) {
+  const { language } = useTranslation();
   const gifSource = getExerciseGifSource(exercise.id);
   const exerciseMeta = useMemo(
     () =>
       [
-        formatExerciseTag(exercise.bodyPart),
+        formatExerciseTag(exercise.bodyPart, language),
         exercise.target,
         exercise.equipment,
       ]
         .filter(Boolean)
         .join(" · "),
-    [exercise.bodyPart, exercise.equipment, exercise.target],
+    [exercise.bodyPart, exercise.equipment, exercise.target, language],
   );
 
   return (

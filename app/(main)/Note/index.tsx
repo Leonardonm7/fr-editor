@@ -9,12 +9,14 @@ import {
   GlobalContainer,
 } from "@/components/ui/GlobalContainer";
 import { useNoteScreen } from "@/features/note/hooks/useNoteScreen";
+import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo } from "react";
 import { StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 
 export default function Note() {
   const theme = useTheme();
+  const { t } = useTranslation();
   const colors = useMemo(() => getGlobalContainerColors(theme), [theme]);
   const {
     activeDay,
@@ -57,20 +59,23 @@ export default function Note() {
     <>
       <ConfirmDialog
         visible={deleteVisible}
-        title="Remover exercício?"
-        message="Deseja realmente excluir este exercício?"
-        confirmLabel="Excluir"
-        cancelLabel="Cancelar"
+        title={t("removeExercise")}
+        message={t("removeExerciseMessage")}
+        confirmLabel={t("delete")}
+        cancelLabel={t("cancel")}
         onConfirm={confirmDelete}
         onCancel={cancelDelete}
       />
 
       <ConfirmDialog
         visible={saveVisible}
-        title="Salvar treino?"
-        message={`Salvar "${workoutName}" com ${totalExercises} exercício(s)?`}
-        confirmLabel="Salvar"
-        cancelLabel="Cancelar"
+        title={t("saveWorkout")}
+        message={t("saveWorkoutMessage", {
+          count: totalExercises,
+          name: workoutName,
+        })}
+        confirmLabel={t("save")}
+        cancelLabel={t("cancel")}
         onConfirm={confirmSave}
         onCancel={() => setSaveVisible(false)}
       />

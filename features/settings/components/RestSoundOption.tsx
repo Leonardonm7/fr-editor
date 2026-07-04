@@ -1,5 +1,6 @@
 import type { RestFinishedSoundPreference } from "@/database/types";
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Button, Icon, Text } from "react-native-paper";
 
@@ -18,6 +19,7 @@ export function RestSoundOption({
   onReset,
   sound,
 }: RestSoundOptionProps) {
+  const { t } = useTranslation();
   const hasCustomSound = !!sound;
 
   return (
@@ -45,13 +47,13 @@ export function RestSoundOption({
 
         <View style={styles.textBlock}>
           <Text style={[styles.title, { color: colors.ink }]}>
-            Som do descanso
+            {t("restSound")}
           </Text>
           <Text
             numberOfLines={1}
             style={[styles.caption, { color: colors.muted }]}
           >
-            {sound?.name ?? "Padrão do app"}
+            {sound?.name ?? t("appDefault")}
           </Text>
         </View>
       </View>
@@ -65,7 +67,7 @@ export function RestSoundOption({
           mode="contained"
           onPress={onImport}
         >
-          Importar
+          {t("import")}
         </Button>
         <Button
           compact
@@ -74,7 +76,7 @@ export function RestSoundOption({
           mode="outlined"
           onPress={onReset}
         >
-          Padrão
+          {t("reset")}
         </Button>
       </View>
     </View>

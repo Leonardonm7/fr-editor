@@ -5,6 +5,7 @@ import {
   HeaderStatPlate,
   HeaderTitleBlock,
 } from "@/components/ui/ScreenHeaderParts";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 
 type NoteHeaderProps = {
@@ -26,6 +27,8 @@ export function NoteHeader({
   totalExercises,
   viewMode,
 }: NoteHeaderProps) {
+  const { t } = useTranslation();
+
   return (
     <>
       <View style={styles.topBar}>
@@ -38,7 +41,7 @@ export function NoteHeader({
         <HeaderSignalPlate
           background={colors.panel}
           colors={colors}
-          label={viewMode ? "VISUALIZAR" : "EDITAR"}
+          label={viewMode ? t("view") : t("edit")}
         />
         {!isNew && (
           <HeaderIconAction
@@ -53,7 +56,7 @@ export function NoteHeader({
       <View style={styles.headerTitleRow}>
         <HeaderTitleBlock
           colors={colors}
-          eyebrow="Plano de treino"
+          eyebrow={t("trainingPlan")}
           numberOfLines={1}
           size="compact"
           title={screenTitle}
@@ -61,7 +64,7 @@ export function NoteHeader({
 
         <HeaderStatPlate
           colors={colors}
-          label="ex."
+          label={t("exercise")}
           minWidth={82}
           value={totalExercises}
         />

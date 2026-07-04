@@ -1,5 +1,6 @@
 import { NoteTextField } from "@/features/note/components/NoteTextField";
 import { type NoteEditColors } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Icon, Text, TextInput } from "react-native-paper";
 
@@ -14,6 +15,8 @@ export function NoteWorkoutInfoPanel({
   onChangeWorkoutName,
   workoutName,
 }: NoteWorkoutInfoPanelProps) {
+  const { t } = useTranslation();
+
   return (
     <View
       style={[
@@ -25,10 +28,10 @@ export function NoteWorkoutInfoPanel({
       <View style={styles.workoutHeader}>
         <View>
           <Text style={[styles.panelKicker, { color: colors.accent }]}>
-            Treino
+            {t("workout")}
           </Text>
           <Text style={[styles.panelTitle, { color: colors.ink }]}>
-            Dados do treino
+            {t("workoutData")}
           </Text>
         </View>
         <View style={[styles.workoutBadge, { borderColor: colors.border }]}>
@@ -36,8 +39,8 @@ export function NoteWorkoutInfoPanel({
         </View>
       </View>
       <NoteTextField
-        label="Nome do treino"
-        placeholder="Ex.: Hipertrofia 4x na semana"
+        label={t("workoutName")}
+        placeholder={t("workoutNamePlaceholder")}
         value={workoutName}
         onChangeText={onChangeWorkoutName}
         left={<TextInput.Icon icon="clipboard-text-outline" />}

@@ -26,6 +26,7 @@ export type Note = {
 
 export type AppThemePreference = "dark" | "light";
 export type AppFontSizePreference = "compact" | "default" | "large";
+export type AppLanguagePreference = "en" | "pt-BR";
 
 export type RestFinishedSoundPreference = {
   mimeType?: string;

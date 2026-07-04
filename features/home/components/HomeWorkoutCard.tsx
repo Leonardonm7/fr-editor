@@ -1,6 +1,7 @@
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
 import type { Note } from "@/database/types";
-import { dayAbbrev, formatNoteDate } from "@/features/note/utils/note";
+import { formatNoteDate } from "@/features/note/utils/note";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Icon, Text, TouchableRipple } from "react-native-paper";
 
@@ -41,8 +42,13 @@ export function HomeWorkoutCard({
   onPress,
   selected,
 }: HomeWorkoutCardProps) {
+  const { dayShort, language, t } = useTranslation();
   const meta = getWorkoutMeta(note);
-  const workoutName = note.title || "Treino sem nome";
+  const workoutName = note.title || t("unnamedWorkout");
+  const formattedDate = formatNoteDate(
+    note.updatedAt,
+    language === "en" ? "en-US" : "pt-BR",
+  );
   const cardBackground = selected ? colors.selected : colors.surface;
   const cardText = selected ? colors.selectedText : colors.ink;
   const supportingText = selected ? colors.selectedText : colors.muted;
@@ -87,7 +93,9 @@ export function HomeWorkoutCard({
             numberOfLines={1}
             style={[styles.dateText, { color: supportingText }]}
           >
-            Atualizado {formatNoteDate(note.updatedAt)}
+            {formattedDate
+              ? t("updatedAt", { date: formattedDate })
+              : t("unavailable")}
           </Text>
 
           {meta.days.length > 0 && (
@@ -109,7 +117,7 @@ export function HomeWorkoutCard({
                       { color: selected ? "#FFFFFF" : colors.muted },
                     ]}
                   >
-                    {dayAbbrev[day] || day}
+                    {dayShort(day)}
                   </Text>
                 </View>
               ))}

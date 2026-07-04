@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { IconButton, Text, useTheme } from "react-native-paper";
 
 import { AppModal } from "@/components/ui/AppModal";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export type ExercisePreview = {
   instructions?: string[];
@@ -21,6 +22,7 @@ export function ExercisePreviewModal({
   preview,
 }: ExercisePreviewModalProps) {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <AppModal
@@ -33,7 +35,7 @@ export function ExercisePreviewModal({
           <View style={styles.headerTop}>
             <View style={styles.headerCopy}>
               <Text style={[styles.eyebrow, { color: theme.colors.primary }]}>
-                Visualização
+                {t("preview")}
               </Text>
               <Text
                 style={[styles.title, { color: theme.colors.onSurface }]}
@@ -114,7 +116,7 @@ export function ExercisePreviewModal({
                 { color: theme.colors.onSurface },
               ]}
             >
-              Como fazer
+              {t("howTo")}
             </Text>
 
             <View style={styles.instructionsList}>

@@ -5,6 +5,10 @@ import {
   type SeriesDetail,
 } from "@/features/note/utils/note";
 import { type WorkoutCardColors } from "@/features/workout/utils/card";
+import {
+  getExerciseLibraryItem,
+} from "@/features/exercise/utils/library";
+import { useTranslation } from "@/hooks/useTranslation";
 import { useState } from "react";
 import {
   StyleSheet,
@@ -61,6 +65,7 @@ export function WorkoutSeriesPanel({
   seriesNumbers,
   totalSeries,
 }: WorkoutSeriesPanelProps) {
+  const { language, t } = useTranslation();
   const [focusedLoadKey, setFocusedLoadKey] = useState<string | null>(null);
 
   return (
@@ -70,7 +75,7 @@ export function WorkoutSeriesPanel({
           style={[styles.seriesPanelAccent, { backgroundColor: accentColor }]}
         />
         <Text style={[styles.seriesPanelLabel, { color: colors.muted }]}>
-          Séries
+          {t("series")}
         </Text>
         <View
           style={[
@@ -192,6 +197,12 @@ export function WorkoutSeriesPanel({
               <View style={styles.seriesExerciseList}>
                 {activeExercises.map((exercise) => {
                   const detail = getSeriesDetailForIndex(exercise, seriesNum);
+                  const libraryExercise = getExerciseLibraryItem(
+                    exercise.libraryId,
+                    language,
+                  );
+                  const exerciseName =
+                    libraryExercise?.name || exercise.name || t("customExercise");
                   const loadInputKey = `${exercise.uid}-${seriesNum}`;
                   const isLoadFocused = focusedLoadKey === loadInputKey;
 
@@ -202,7 +213,7 @@ export function WorkoutSeriesPanel({
                           numberOfLines={1}
                           style={[styles.seriesExerciseName, { color: colors.ink }]}
                         >
-                          {exercise.name || "Sem nome"}
+                          {exerciseName}
                         </Text>
                       )}
                       <View style={styles.seriesRowData}>

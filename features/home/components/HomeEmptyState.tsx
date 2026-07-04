@@ -1,4 +1,5 @@
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Icon, Text } from "react-native-paper";
 
@@ -8,6 +9,8 @@ type HomeEmptyStateProps = {
 };
 
 export function HomeEmptyState({ colors, hasQuery }: HomeEmptyStateProps) {
+  const { t } = useTranslation();
+
   return (
     <View
       style={[
@@ -19,10 +22,10 @@ export function HomeEmptyState({ colors, hasQuery }: HomeEmptyStateProps) {
         <Icon source="dumbbell" size={40} color={colors.accent} />
       </View>
       <Text style={[styles.emptyTitle, { color: colors.ink }]}>
-        {hasQuery ? "Nenhum resultado" : "Sem treinos ainda"}
+        {hasQuery ? t("noResults") : t("noWorkoutsYet")}
       </Text>
       <Text style={[styles.emptySubtitle, { color: colors.muted }]}>
-        {hasQuery ? "Busque por outro treino." : "Crie o primeiro treino."}
+        {hasQuery ? t("searchAnotherWorkout") : t("firstWorkoutHint")}
       </Text>
     </View>
   );

@@ -14,6 +14,8 @@ import {
   type IndexedExercise,
   type SeriesDetail,
 } from "@/features/note/utils/note";
+import { getExerciseLibraryItem } from "@/features/exercise/utils/library";
+import { useTranslation } from "@/hooks/useTranslation";
 import {
   clearRestNotifications,
   clearRestTimerNotification,
@@ -96,17 +98,30 @@ const buildWorkoutBlocks = (exercises: IndexedExercise[]) => {
   return blocks;
 };
 
-const getWorkoutBlockLabel = (block: WorkoutExerciseBlock) => {
+const getWorkoutBlockLabel = (
+  block: WorkoutExerciseBlock,
+  options: {
+    blockLabel: string;
+    fallbackName: string;
+    language: "en" | "pt-BR";
+  },
+) => {
   if (block.exercises.length > 1) {
     if (block.methodology)
-      return `${block.methodology} / Bloco ${block.groupKey}`;
-    return `Bloco ${block.groupKey}`;
+      return `${block.methodology} / ${options.blockLabel} ${block.groupKey}`;
+    return `${options.blockLabel} ${block.groupKey}`;
   }
 
-  return block.exercises[0]?.name || "Sem nome";
+  const exercise = block.exercises[0];
+  return (
+    getExerciseLibraryItem(exercise?.libraryId, options.language)?.name ||
+    exercise?.name ||
+    options.fallbackName
+  );
 };
 
 export function useWorkout() {
+  const { language, t } = useTranslation();
   const { noteId, day } = useLocalSearchParams<{
     noteId: string;
     day: string;
@@ -210,18 +225,30 @@ export function useWorkout() {
     return {
       blockId,
       endsAt: restState.endsAt,
-      label: block ? getWorkoutBlockLabel(block) : "Próxima série",
+      label: block
+        ? getWorkoutBlockLabel(block, {
+            blockLabel: t("block"),
+            fallbackName: t("customExercise"),
+            language,
+          })
+        : t("nextSeries"),
       remaining: restState.remaining,
       total: restState.total,
     };
-  }, [activeRests, workoutBlocks]);
+  }, [activeRests, language, t, workoutBlocks]);
 
   const getBlockLabel = useCallback(
     (blockId: string) => {
       const block = workoutBlocks.find((item) => item.id === blockId);
-      return block ? getWorkoutBlockLabel(block) : "Próxima série";
+      return block
+        ? getWorkoutBlockLabel(block, {
+            blockLabel: t("block"),
+            fallbackName: t("customExercise"),
+            language,
+          })
+        : t("nextSeries");
     },
-    [workoutBlocks],
+    [language, t, workoutBlocks],
   );
 
   const saveProgress = useCallback(async () => {
@@ -285,12 +312,15 @@ export function useWorkout() {
       void (async () => {
         await playRestFinishedSound(`${label}:${previousRest.endsAt}`);
         vibrateRestFinished();
-        await showRestFinishedNotification(label);
+        await showRestFinishedNotification(label, {
+          body: t("restFinishedBody", { label }),
+          title: t("restFinished"),
+        });
       })();
     });
 
     previousActiveRestsRef.current = activeRests;
-  }, [activeRests, getBlockLabel]);
+  }, [activeRests, getBlockLabel, t]);
 
   useEffect(() => {
     if (!activeRest) {
@@ -311,14 +341,18 @@ export function useWorkout() {
     pendingNotificationRestKeyRef.current = restKey;
     void showRestTimerNotification({
       endsAt: activeRest.endsAt,
+      finishedBody: t("restFinishedBody", { label: activeRest.label }),
+      finishedTitle: t("restFinished"),
       label: activeRest.label,
       remainingMs: activeRest.remaining,
+      remainingSuffix: t("restRemaining"),
+      title: t("restRunning"),
     }).then((shown) => {
       if (pendingNotificationRestKeyRef.current !== restKey) return;
       if (shown) notificationRestKeyRef.current = restKey;
       pendingNotificationRestKeyRef.current = null;
     });
-  }, [activeRest]);
+  }, [activeRest, t]);
 
   useEffect(
     () => () => {
@@ -362,11 +396,16 @@ export function useWorkout() {
 
       if (shouldStartRest && !hasActiveRest) {
         const restKey = `${blockId}:${endsAt}`;
+        const label = getBlockLabel(blockId);
         pendingNotificationRestKeyRef.current = restKey;
         void showRestTimerNotification({
           endsAt,
-          label: getBlockLabel(blockId),
+          finishedBody: t("restFinishedBody", { label }),
+          finishedTitle: t("restFinished"),
+          label,
           remainingMs: total,
+          remainingSuffix: t("restRemaining"),
+          title: t("restRunning"),
         }).then((shown) => {
           if (pendingNotificationRestKeyRef.current !== restKey) return;
           if (shown) notificationRestKeyRef.current = restKey;
@@ -394,7 +433,7 @@ export function useWorkout() {
         };
       });
     },
-    [completedSeries, getBlockLabel, hasActiveRest, restTime],
+    [completedSeries, getBlockLabel, hasActiveRest, restTime, t],
   );
 
   const handleSkipRest = useCallback((blockId: string) => {

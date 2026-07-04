@@ -18,6 +18,7 @@ import Animated, {
   ZoomIn,
   ZoomOut,
 } from "react-native-reanimated";
+import { useTranslation } from "@/hooks/useTranslation";
 
 type AppModalProps = {
   visible: boolean;
@@ -48,6 +49,7 @@ export function AppModal({
   scrollContentStyle,
 }: AppModalProps) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const colors = getModalColors(theme);
 
   useEffect(() => {
@@ -113,7 +115,7 @@ export function AppModal({
     <Portal>
       <Animated.View entering={FadeIn} exiting={FadeOut} style={styles.root}>
         <Pressable
-          accessibilityLabel="Fechar modal"
+          accessibilityLabel={t("closeModal")}
           accessibilityRole="button"
           onPress={onDismiss}
           style={[

@@ -1,4 +1,5 @@
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 
@@ -7,17 +8,16 @@ type HomeListHeaderProps = {
   count: number;
 };
 
-const pluralize = (count: number, singular: string, plural: string) =>
-  count === 1 ? singular : plural;
-
 export function HomeListHeader({ colors, count }: HomeListHeaderProps) {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.listHeader}>
       <Text style={[styles.listTitle, { color: colors.ink }]}>
-        Arquivo de treinos
+        {t("trainingArchive")}
       </Text>
       <Text style={[styles.listCount, { color: colors.muted }]}>
-        {count} {pluralize(count, "registro", "registros")}
+        {t("recordsCount", { count })}
       </Text>
     </View>
   );

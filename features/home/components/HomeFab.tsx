@@ -2,6 +2,7 @@ import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { useTranslation } from "@/hooks/useTranslation";
 import Animated, {
   FadeIn,
   FadeOut,
@@ -16,6 +17,7 @@ type HomeFabProps = {
 };
 
 export function HomeFab({ colors, onCreateManual }: HomeFabProps) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const progress = useSharedValue(0);
 
@@ -60,15 +62,15 @@ export function HomeFab({ colors, onCreateManual }: HomeFabProps) {
           <HomeFabMenuItem
             colors={colors}
             icon="pencil-plus-outline"
-            label="Criar treino"
+            label={t("createWorkout")}
             onPress={handleCreateManual}
           />
           <HomeFabMenuItem
             colors={colors}
             disabled
             icon="auto-fix"
-            label="Criar para mim"
-            meta="Em breve"
+            label={t("createForMe")}
+            meta={t("soon")}
           />
         </Animated.View>
       )}

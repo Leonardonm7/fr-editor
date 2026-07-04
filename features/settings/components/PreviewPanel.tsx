@@ -1,5 +1,6 @@
 import type { AppThemePreference } from "@/database/types";
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 
@@ -9,6 +10,7 @@ type PreviewPanelProps = {
 };
 
 export function PreviewPanel({ colors, preference }: PreviewPanelProps) {
+  const { language, t } = useTranslation();
   const isLight = preference === "light";
 
   return (
@@ -21,10 +23,16 @@ export function PreviewPanel({ colors, preference }: PreviewPanelProps) {
       <View style={styles.previewHeader}>
         <View>
           <Text style={[styles.panelKicker, { color: colors.accent }]}>
-            Tema ativo
+            {t("activeTheme")}
           </Text>
           <Text style={[styles.previewTitle, { color: colors.ink }]}>
-            {isLight ? "Claro" : "Escuro"}
+            {isLight
+              ? language === "en"
+                ? "Light"
+                : "Claro"
+              : language === "en"
+                ? "Dark"
+                : "Escuro"}
           </Text>
         </View>
       </View>

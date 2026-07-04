@@ -190,13 +190,13 @@ export const normalizeLoadValue = (value: string) => {
   return parsed === null ? value.trim() : parsed.toString();
 };
 
-export const formatNoteDate = (value: string) => {
-  if (!value) return "Não disponível";
+export const formatNoteDate = (value: string, locale = "pt-BR") => {
+  if (!value) return "";
 
   const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) return "Não disponível";
+  if (Number.isNaN(parsed.getTime())) return "";
 
-  return parsed.toLocaleString("pt-BR", {
+  return parsed.toLocaleString(locale, {
     dateStyle: "short",
     timeStyle: "short",
   });

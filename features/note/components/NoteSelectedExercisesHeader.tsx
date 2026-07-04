@@ -1,4 +1,5 @@
 import { type NoteEditColors } from "@/features/note/utils/editSection";
+import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
 import { Icon, Text, TouchableRipple } from "react-native-paper";
 
@@ -13,12 +14,14 @@ export function NoteSelectedExercisesHeader({
   onAddExercise,
   secondaryColor,
 }: NoteSelectedExercisesHeaderProps) {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.selectedHeader}>
       <View style={styles.sectionLabelRow}>
         <View style={[styles.sectionAccent, { backgroundColor: secondaryColor }]} />
         <Text style={[styles.sectionLabel, { color: colors.muted }]}>
-          EXERCÍCIOS DO DIA
+          {t("dayExercises")}
         </Text>
       </View>
       <TouchableRipple
@@ -32,7 +35,7 @@ export function NoteSelectedExercisesHeader({
         <View style={styles.addCustomBtnInner}>
           <Icon source="plus" size={14} color={secondaryColor} />
           <Text style={[styles.addCustomText, { color: secondaryColor }]}>
-            Personalizado
+            {t("custom")}
           </Text>
         </View>
       </TouchableRipple>

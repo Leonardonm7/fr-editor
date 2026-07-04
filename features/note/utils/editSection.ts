@@ -1,4 +1,5 @@
 import { type ExerciseLibraryItem } from "@/assets/exercises/data/exerciseLibrary";
+import type { AppLanguagePreference } from "@/database/types";
 import type { MD3Theme } from "react-native-paper";
 
 export const LIBRARY_PAGE_SIZE = 20;
@@ -16,13 +17,34 @@ const bodyPartLabels: Record<string, string> = {
   "pescoço": "Pescoço",
 };
 
-export const formatExerciseTag = (value?: string) => {
+const englishBodyPartLabels: Record<string, string> = {
+  back: "Back",
+  cardio: "Cardio",
+  chest: "Chest",
+  "lower arms": "Lower arms",
+  "lower legs": "Lower legs",
+  neck: "Neck",
+  shoulders: "Shoulders",
+  "upper arms": "Upper arms",
+  "upper legs": "Upper legs",
+  waist: "Waist",
+};
+
+export const formatExerciseTag = (
+  value?: string,
+  language: AppLanguagePreference = "pt-BR",
+) => {
   if (!value) return "";
-  const normalizedValue = value.trim().toLocaleLowerCase("pt-BR");
+  const normalizedValue = value
+    .trim()
+    .toLocaleLowerCase(language === "en" ? "en-US" : "pt-BR");
+  const labels = language === "en" ? englishBodyPartLabels : bodyPartLabels;
   return (
-    bodyPartLabels[normalizedValue] ??
+    labels[normalizedValue] ??
     normalizedValue.replace(/(^|[\s-])(\p{L})/gu, (_, separator, letter) => {
-      return `${separator}${letter.toLocaleUpperCase("pt-BR")}`;
+      return `${separator}${letter.toLocaleUpperCase(
+        language === "en" ? "en-US" : "pt-BR",
+      )}`;
     })
   );
 };

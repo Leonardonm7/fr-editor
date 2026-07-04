@@ -1,0 +1,27 @@
+{
+  "editor.wordWrap": "on",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "contentContainerClassName",
+    "contentClassName",
+    "headerClassName",
+    "placeholderClassName",
+    "classNameFont"
+  ],
+  "cSpell.words": [
+    "marginright",
+    "Pressable",
+    "specialities",
+    "speciality",
+    "Speciality"
+  ],
+  "tailwindCSS.classFunctions": ["cva"],
+  "cSpell.language": "en,pt,pt-BR"
+}

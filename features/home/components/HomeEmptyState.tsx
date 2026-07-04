@@ -1,0 +1,60 @@
+import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
+import { StyleSheet, View } from "react-native";
+import { Icon, Text } from "react-native-paper";
+
+type HomeEmptyStateProps = {
+  colors: GlobalContainerColors;
+  hasQuery: boolean;
+};
+
+export function HomeEmptyState({ colors, hasQuery }: HomeEmptyStateProps) {
+  return (
+    <View
+      style={[
+        styles.emptyState,
+        { backgroundColor: colors.panel, borderColor: colors.border },
+      ]}
+    >
+      <View style={[styles.emptyIconFrame, { borderColor: colors.border }]}>
+        <Icon source="dumbbell" size={40} color={colors.accent} />
+      </View>
+      <Text style={[styles.emptyTitle, { color: colors.ink }]}>
+        {hasQuery ? "Nenhum resultado" : "Sem treinos ainda"}
+      </Text>
+      <Text style={[styles.emptySubtitle, { color: colors.muted }]}>
+        {hasQuery ? "Busque por outro treino." : "Crie o primeiro treino."}
+      </Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  emptyIconFrame: {
+    alignItems: "center",
+    borderRadius: 8,
+    borderWidth: 1,
+    height: 88,
+    justifyContent: "center",
+    width: 88,
+  },
+  emptyState: {
+    alignItems: "center",
+    borderRadius: 8,
+    borderWidth: 1,
+    gap: 8,
+    justifyContent: "center",
+    marginTop: 8,
+    minHeight: 260,
+    padding: 24,
+  },
+  emptySubtitle: {
+    fontSize: 14,
+    fontWeight: "600",
+    textAlign: "center",
+  },
+  emptyTitle: {
+    fontSize: 22,
+    fontWeight: "900",
+    textAlign: "center",
+  },
+});

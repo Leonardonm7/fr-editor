@@ -1,5 +1,7 @@
 # FR Editor
 
+[Português](#fr-editor) | [English](#english)
+
 Aplicativo mobile local-first para criar, organizar e executar planos de treino de academia.
 
 O foco atual do app é o aluno: montar a própria ficha, acompanhar a sessão ativa, controlar descanso e manter tudo salvo no dispositivo.
@@ -121,3 +123,129 @@ npx tsc --noEmit
 - O app usa edge-to-edge e centraliza o esqueleto visual das telas em `GlobalContainer`.
 - A biblioteca de exercícios está em PT-BR em `assets/exercises/data/exerciseLibrary.ts`.
 - O projeto não mantém compatibilidade com formatos antigos de banco ou backup; a base esperada é o formato atual.
+
+---
+
+## English
+
+Local-first mobile app for creating, organizing, and running gym workout plans.
+
+The current focus of the app is the trainee experience: building a personal workout plan, tracking the active session, controlling rest time, and keeping everything saved on the device.
+
+## Features
+
+- Create and edit workout plans with free-form names.
+- Organize exercises by weekday.
+- Exercise library in Brazilian Portuguese, with normalized categories and visual previews when an image is available.
+- Custom exercises without depending on the library.
+- Per-exercise fields for description, methodology, sets, repetitions, load, and block linking.
+- Linked exercises sharing the same sets table during the active session.
+- Workout plan view with a button to start or resume training.
+- Compact active session, expanding only one block at a time.
+- Rest control with a header timer, notification, vibration, and sound on Android.
+- Default rest-finished audio, with an option to import a custom audio file.
+- Local persistence with SQLite.
+- JSON backup import and export.
+- Light/dark theme and font size adjustment.
+
+## Stack
+
+- Expo SDK 54
+- React Native 0.81
+- React 19
+- TypeScript
+- Expo Router
+- React Native Paper
+- Expo SQLite
+- Expo Audio
+- Expo Document Picker
+- React Native Notify Kit
+- React Native Keyboard Controller
+
+## Structure
+
+The project is split by responsibility:
+
+- `app/`: Expo Router routes. Screens stay thin and connect hooks + components.
+- `features/home`: workout list, search, selection, import, and export.
+- `features/note`: workout plan creation, editing, and viewing.
+- `features/workout`: active session, sets, rest, notifications, and sound.
+- `features/settings`: theme, font, and rest audio preferences.
+- `features/exercise`: exercise visual preview.
+- `features/navigation`: custom tab bar.
+- `components/ui`: global interface components, such as `GlobalContainer`, modal, and dialogs.
+- `database`: SQLite client, migrations, types, and repositories.
+- `services/backup`: JSON backup creation and parsing.
+- `assets/exercises`: exercise library and images.
+- `hooks`: global app hooks.
+- `utils`: global utilities.
+
+## Main Routes
+
+- `app/(tabs)/index.tsx`: Home with workout list.
+- `app/(tabs)/settings.tsx`: Settings.
+- `app/(main)/Note/index.tsx`: workout plan editing and viewing.
+- `app/(main)/Workout/index.tsx`: active session execution.
+
+## Local Data
+
+The app uses local SQLite. The current tables are:
+
+- `notes`: workout plans.
+- `workout_state`: saved active session progress.
+- `app_settings`: app preferences.
+
+The JSON backup exports workouts, settings, and workout states. The custom rest audio file is not embedded in the backup; it can be imported again from settings.
+
+## How to Run
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start Expo:
+
+```bash
+npm run start
+```
+
+Run directly on Android:
+
+```bash
+npm run android
+```
+
+Run on iOS:
+
+```bash
+npm run ios
+```
+
+Run in the browser:
+
+```bash
+npm run web
+```
+
+## Scripts
+
+- `npm run start`: starts Expo.
+- `npm run android`: builds/runs the app on Android.
+- `npm run ios`: builds/runs the app on iOS.
+- `npm run web`: starts the app in the browser.
+- `npm run lint`: runs Expo lint.
+
+For type checking:
+
+```bash
+npx tsc --noEmit
+```
+
+## Notes
+
+- Rest notification, vibration, and sound behavior is mainly focused on Android.
+- The app uses edge-to-edge and centralizes the visual screen skeleton in `GlobalContainer`.
+- The exercise library is in PT-BR at `assets/exercises/data/exerciseLibrary.ts`.
+- The project does not maintain compatibility with old database or backup formats; the expected baseline is the current format.

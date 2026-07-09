@@ -7,7 +7,8 @@ import {
 } from "@/components/ui/ScreenHeaderParts";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { IconButton, Text } from "react-native-paper";
+import { IconButton } from "@/components/ui/IconButton";
+import { Text } from "@/components/ui/Text";
 
 type HomeHeaderProps = {
   colors: GlobalContainerColors;
@@ -21,7 +22,7 @@ type HomeHeaderProps = {
   workoutCount: number;
 };
 
-export function HomeHeader({
+export const HomeHeader = ({
   colors,
   isSelecting,
   onClearSelection,
@@ -31,7 +32,7 @@ export function HomeHeader({
   onSelectAll,
   selectedCount,
   workoutCount,
-}: HomeHeaderProps) {
+}: HomeHeaderProps) => {
   const { t } = useTranslation();
 
   if (isSelecting) {
@@ -108,7 +109,7 @@ export function HomeHeader({
       </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   headerActions: {

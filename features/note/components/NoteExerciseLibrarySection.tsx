@@ -4,10 +4,10 @@ import {
   getExerciseLibraryIndex,
   type ExerciseLibraryItem,
 } from "@/features/exercise/utils/library";
+import { formatExerciseTag } from "@/features/exercise/utils/tags";
 import { NoteLibraryExerciseCard } from "@/features/note/components/NoteLibraryExerciseCard";
 import { NoteTextField } from "@/features/note/components/NoteTextField";
 import {
-  formatExerciseTag,
   LIBRARY_PAGE_SIZE,
   type NoteEditColors,
 } from "@/features/note/utils/editSection";
@@ -20,7 +20,9 @@ import {
   View,
   type ListRenderItem,
 } from "react-native";
-import { Text, TextInput, TouchableRipple } from "react-native-paper";
+import { Text } from "@/components/ui/Text";
+import { TextInput } from "@/components/ui/TextInput";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type NoteExerciseLibrarySectionProps = {
   colors: NoteEditColors;
@@ -30,11 +32,11 @@ type NoteExerciseLibrarySectionProps = {
 
 const LIBRARY_ROW_HEIGHT = 92;
 
-export const NoteExerciseLibrarySection = memo(function NoteExerciseLibrarySection({
+export const NoteExerciseLibrarySection = memo(({
   colors,
   onAddExerciseFromLibrary,
   onPreview,
-}: NoteExerciseLibrarySectionProps) {
+}: NoteExerciseLibrarySectionProps) => {
   const { language, t } = useTranslation();
   const [query, setQuery] = useState("");
   const [selectedBodyPart, setSelectedBodyPart] = useState<string | null>(null);
@@ -193,6 +195,8 @@ export const NoteExerciseLibrarySection = memo(function NoteExerciseLibrarySecti
     </View>
   );
 });
+
+NoteExerciseLibrarySection.displayName = "NoteExerciseLibrarySection";
 
 const LibraryListSeparator = () => <View style={styles.libraryListSeparator} />;
 

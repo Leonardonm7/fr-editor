@@ -10,7 +10,7 @@ type SettingsHeaderProps = {
   colors: GlobalContainerColors;
 };
 
-export function SettingsHeader({ colors }: SettingsHeaderProps) {
+export const SettingsHeader = ({ colors }: SettingsHeaderProps) => {
   const { t } = useTranslation();
 
   return (
@@ -26,7 +26,7 @@ export function SettingsHeader({ colors }: SettingsHeaderProps) {
       </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   heroRow: {

@@ -1,14 +1,14 @@
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
+import { Text } from "@/components/ui/Text";
 
 type HomeListHeaderProps = {
   colors: GlobalContainerColors;
   count: number;
 };
 
-export function HomeListHeader({ colors, count }: HomeListHeaderProps) {
+export const HomeListHeader = ({ colors, count }: HomeListHeaderProps) => {
   const { t } = useTranslation();
 
   return (
@@ -21,7 +21,7 @@ export function HomeListHeader({ colors, count }: HomeListHeaderProps) {
       </Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   listCount: {

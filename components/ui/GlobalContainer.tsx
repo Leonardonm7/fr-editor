@@ -9,8 +9,8 @@ import {
   type ViewStyle,
 } from "react-native";
 import { KeyboardAvoidingView } from "react-native-keyboard-controller";
-import type { MD3Theme } from "react-native-paper";
-import { useTheme } from "react-native-paper";
+import type { MD3Theme } from "@/components/ui/theme";
+import { useTheme } from "@/components/ui/theme";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export type GlobalContainerColors = ReturnType<typeof getGlobalContainerColors>;
@@ -57,7 +57,7 @@ export const getGlobalContainerColors = (theme: MD3Theme) => ({
   thumb: theme.dark ? "#202938" : "#E0E5DA",
 });
 
-export function GlobalContainer({
+export const GlobalContainer = ({
   applyBottomInset = true,
   bottomInsetColor,
   bottomOverlay,
@@ -79,7 +79,7 @@ export function GlobalContainer({
   scrollViewProps,
   style,
   withBackdrop = true,
-}: GlobalContainerProps) {
+}: GlobalContainerProps) => {
   const theme = useTheme();
   const insets = useSafeAreaInsets();
   const resolvedColors = colors ?? getGlobalContainerColors(theme);
@@ -187,13 +187,13 @@ export function GlobalContainer({
       {container}
     </KeyboardAvoidingView>
   );
-}
+};
 
 type GlobalContainerBackdropProps = {
   colors: GlobalContainerColors;
 };
 
-function GlobalContainerBackdrop({ colors }: GlobalContainerBackdropProps) {
+const GlobalContainerBackdrop = ({ colors }: GlobalContainerBackdropProps) => {
   return (
     <View pointerEvents="none" style={styles.backdrop}>
       <View
@@ -208,7 +208,7 @@ function GlobalContainerBackdrop({ colors }: GlobalContainerBackdropProps) {
       <View style={[styles.diagonalBlock, { backgroundColor: colors.grid }]} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   backdrop: {

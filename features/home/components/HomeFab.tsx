@@ -1,7 +1,9 @@
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 import { useTranslation } from "@/hooks/useTranslation";
 import Animated, {
   FadeIn,
@@ -16,7 +18,7 @@ type HomeFabProps = {
   onCreateManual: () => void;
 };
 
-export function HomeFab({ colors, onCreateManual }: HomeFabProps) {
+export const HomeFab = ({ colors, onCreateManual }: HomeFabProps) => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const progress = useSharedValue(0);
@@ -91,7 +93,7 @@ export function HomeFab({ colors, onCreateManual }: HomeFabProps) {
       </TouchableRipple>
     </View>
   );
-}
+};
 
 type HomeFabMenuItemProps = {
   colors: GlobalContainerColors;
@@ -102,14 +104,14 @@ type HomeFabMenuItemProps = {
   onPress?: () => void;
 };
 
-function HomeFabMenuItem({
+const HomeFabMenuItem = ({
   colors,
   disabled = false,
   icon,
   label,
   meta,
   onPress,
-}: HomeFabMenuItemProps) {
+}: HomeFabMenuItemProps) => {
   return (
     <TouchableRipple
       borderless
@@ -160,7 +162,7 @@ function HomeFabMenuItem({
       </View>
     </TouchableRipple>
   );
-}
+};
 
 const styles = StyleSheet.create({
   fab: {

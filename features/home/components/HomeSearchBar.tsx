@@ -1,7 +1,9 @@
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
+import { TextInput } from "@/components/ui/TextInput";
 import { useTranslation } from "@/hooks/useTranslation";
-import { StyleSheet, TextInput, View } from "react-native";
-import { Icon, TouchableRipple } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { Icon } from "@/components/ui/Icon";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type HomeSearchBarProps = {
   colors: GlobalContainerColors;
@@ -13,7 +15,7 @@ type HomeSearchBarProps = {
   value: string;
 };
 
-export function HomeSearchBar({
+export const HomeSearchBar = ({
   colors,
   focused,
   onBlur,
@@ -21,7 +23,7 @@ export function HomeSearchBar({
   onClear,
   onFocus,
   value,
-}: HomeSearchBarProps) {
+}: HomeSearchBarProps) => {
   const { t } = useTranslation();
 
   return (
@@ -37,13 +39,18 @@ export function HomeSearchBar({
       <View style={[styles.searchAccent, { backgroundColor: colors.accent }]} />
       <Icon source="magnify" size={19} color={colors.muted} />
       <TextInput
+        mode="flat"
+        dense
         onBlur={onBlur}
         onChangeText={onChangeText}
         onFocus={onFocus}
         placeholder={t("searchWorkout")}
         placeholderTextColor={colors.muted}
         returnKeyType="search"
-        style={[styles.searchInput, { color: colors.ink }]}
+        style={styles.searchInput}
+        contentStyle={[styles.searchInputContent, { color: colors.ink }]}
+        underlineColor="transparent"
+        activeUnderlineColor="transparent"
         value={value}
       />
       {value.length > 0 && (
@@ -53,7 +60,7 @@ export function HomeSearchBar({
       )}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   searchAccent: {
@@ -66,6 +73,9 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     flex: 1,
+    backgroundColor: "transparent",
+  },
+  searchInputContent: {
     fontSize: 15,
     fontWeight: "700",
     minHeight: 38,

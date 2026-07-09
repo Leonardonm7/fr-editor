@@ -1,18 +1,19 @@
+import { Text } from "@/components/ui/Text";
+import { TextInput } from "@/components/ui/TextInput";
 import { type ExercisePreview } from "@/features/exercise/components/ExercisePreviewModal";
 import { NoteTextField } from "@/features/note/components/NoteTextField";
 import { NoteWorkoutExerciseHeader } from "@/features/note/components/NoteWorkoutExerciseHeader";
 import { NoteWorkoutLinkControls } from "@/features/note/components/NoteWorkoutLinkControls";
 import { NoteWorkoutMethodologyPicker } from "@/features/note/components/NoteWorkoutMethodologyPicker";
 import { NoteWorkoutSeriesEditor } from "@/features/note/components/NoteWorkoutSeriesEditor";
+import { type NoteEditColors } from "@/features/note/utils/editSection";
 import {
   connectionColors,
   type ExerciseForm,
   type IndexedExercise,
 } from "@/features/note/utils/note";
-import { type NoteEditColors } from "@/features/note/utils/editSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Text, TextInput } from "react-native-paper";
 
 type NoteWorkoutExerciseCardProps = {
   activeDay: string;
@@ -39,7 +40,7 @@ type NoteWorkoutExerciseCardProps = {
   onToggleLinkPicker: () => void;
 };
 
-export function NoteWorkoutExerciseCard({
+export const NoteWorkoutExerciseCard = ({
   activeDay,
   colors,
   countByDay,
@@ -58,7 +59,7 @@ export function NoteWorkoutExerciseCard({
   onPreview,
   onToggleDayPicker,
   onToggleLinkPicker,
-}: NoteWorkoutExerciseCardProps) {
+}: NoteWorkoutExerciseCardProps) => {
   const { t } = useTranslation();
   const orderNum = String(index + 1).padStart(2, "0");
   const group = exercise.connectionGroup.trim().toUpperCase();
@@ -81,7 +82,9 @@ export function NoteWorkoutExerciseCard({
         <Text style={[styles.orderNum, { color: colors.muted }]}>
           {orderNum}
         </Text>
-        <View style={[styles.workoutAccentBar, { backgroundColor: accentColor }]} />
+        <View
+          style={[styles.workoutAccentBar, { backgroundColor: accentColor }]}
+        />
       </View>
 
       <View style={styles.workoutCardContent}>
@@ -147,7 +150,7 @@ export function NoteWorkoutExerciseCard({
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   exerciseDescriptionContent: {

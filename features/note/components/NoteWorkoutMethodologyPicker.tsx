@@ -2,7 +2,8 @@ import { methodologies } from "@/features/note/utils/note";
 import { type NoteEditColors } from "@/features/note/utils/editSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Text, TouchableRipple } from "react-native-paper";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type NoteWorkoutMethodologyPickerProps = {
   colors: NoteEditColors;
@@ -10,11 +11,11 @@ type NoteWorkoutMethodologyPickerProps = {
   onChangeMethodology: (value: string) => void;
 };
 
-export function NoteWorkoutMethodologyPicker({
+export const NoteWorkoutMethodologyPicker = ({
   colors,
   currentMethodology,
   onChangeMethodology,
-}: NoteWorkoutMethodologyPickerProps) {
+}: NoteWorkoutMethodologyPickerProps) => {
   const { methodologyName, t } = useTranslation();
 
   return (
@@ -94,7 +95,7 @@ export function NoteWorkoutMethodologyPicker({
       </ScrollView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   methodologyChipRow: {

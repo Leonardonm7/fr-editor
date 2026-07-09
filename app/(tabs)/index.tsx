@@ -13,9 +13,10 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { router } from "expo-router";
 import { useMemo } from "react";
 import { StyleSheet } from "react-native";
-import { Snackbar, useTheme } from "react-native-paper";
+import { Snackbar } from "@/components/ui/Snackbar";
+import { useTheme } from "@/components/ui/theme";
 
-export default function HomeTab() {
+const HomeTab = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   const colors = useMemo(() => getGlobalContainerColors(theme), [theme]);
@@ -121,7 +122,9 @@ export default function HomeTab() {
       </GlobalContainer>
     </>
   );
-}
+};
+
+export default HomeTab;
 
 const styles = StyleSheet.create({
   scrollContent: {

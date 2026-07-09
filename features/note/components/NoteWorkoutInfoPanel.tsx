@@ -2,7 +2,9 @@ import { NoteTextField } from "@/features/note/components/NoteTextField";
 import { type NoteEditColors } from "@/features/note/utils/editSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text, TextInput } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TextInput } from "@/components/ui/TextInput";
 
 type NoteWorkoutInfoPanelProps = {
   colors: NoteEditColors;
@@ -10,11 +12,11 @@ type NoteWorkoutInfoPanelProps = {
   workoutName: string;
 };
 
-export function NoteWorkoutInfoPanel({
+export const NoteWorkoutInfoPanel = ({
   colors,
   onChangeWorkoutName,
   workoutName,
-}: NoteWorkoutInfoPanelProps) {
+}: NoteWorkoutInfoPanelProps) => {
   const { t } = useTranslation();
 
   return (
@@ -47,7 +49,7 @@ export function NoteWorkoutInfoPanel({
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   panelKicker: {

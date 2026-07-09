@@ -10,8 +10,9 @@ import {
   type ViewStyle,
 } from "react-native";
 import { KeyboardAvoidingView } from "react-native-keyboard-controller";
-import type { MD3Theme } from "react-native-paper";
-import { Portal, useTheme } from "react-native-paper";
+import type { MD3Theme } from "@/components/ui/theme";
+import { Portal } from "@/components/ui/Portal";
+import { useTheme } from "@/components/ui/theme";
 import Animated, {
   FadeIn,
   FadeOut,
@@ -38,7 +39,7 @@ const getModalColors = (theme: MD3Theme) => ({
   panel: theme.colors.elevation.level1,
 });
 
-export function AppModal({
+export const AppModal = ({
   visible,
   children,
   onDismiss,
@@ -47,7 +48,7 @@ export function AppModal({
   keyboardAvoiding = false,
   contentStyle,
   scrollContentStyle,
-}: AppModalProps) {
+}: AppModalProps) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const colors = getModalColors(theme);
@@ -145,7 +146,7 @@ export function AppModal({
       </Animated.View>
     </Portal>
   );
-}
+};
 
 const styles = StyleSheet.create({
   content: {

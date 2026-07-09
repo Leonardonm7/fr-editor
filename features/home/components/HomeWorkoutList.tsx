@@ -14,14 +14,14 @@ type HomeWorkoutListProps = {
   workouts: Note[];
 };
 
-export function HomeWorkoutList({
+export const HomeWorkoutList = ({
   colors,
   hasQuery,
   onLongPressItem,
   onPressItem,
   selectedIds,
   workouts,
-}: HomeWorkoutListProps) {
+}: HomeWorkoutListProps) => {
   if (workouts.length === 0) {
     return <HomeEmptyState colors={colors} hasQuery={hasQuery} />;
   }
@@ -45,7 +45,7 @@ export function HomeWorkoutList({
       </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   cardList: {

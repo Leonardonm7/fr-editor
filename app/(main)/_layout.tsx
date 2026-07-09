@@ -1,8 +1,8 @@
 import { Slot } from "expo-router";
 import { View } from "react-native";
-import { useTheme } from "react-native-paper";
+import { useTheme } from "@/components/ui/theme";
 
-export default function MainLayout() {
+const MainLayout = () => {
   const theme = useTheme();
 
   return (
@@ -15,4 +15,6 @@ export default function MainLayout() {
       <Slot />
     </View>
   );
-}
+};
+
+export default MainLayout;

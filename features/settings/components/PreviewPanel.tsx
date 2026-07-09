@@ -2,14 +2,14 @@ import type { AppThemePreference } from "@/database/types";
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
+import { Text } from "@/components/ui/Text";
 
 type PreviewPanelProps = {
   colors: GlobalContainerColors;
   preference: AppThemePreference;
 };
 
-export function PreviewPanel({ colors, preference }: PreviewPanelProps) {
+export const PreviewPanel = ({ colors, preference }: PreviewPanelProps) => {
   const { language, t } = useTranslation();
   const isLight = preference === "light";
 
@@ -84,7 +84,7 @@ export function PreviewPanel({ colors, preference }: PreviewPanelProps) {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   panelKicker: {

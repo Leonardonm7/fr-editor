@@ -5,7 +5,7 @@ import {
 } from "@/assets/exercises/data/exerciseLibrary";
 import { exerciseLibrary as englishExerciseLibrary } from "@/assets/exercises/data/exerciseLibrary.en";
 import type { AppLanguagePreference } from "@/database/types";
-import { buildExerciseLibrarySearchText } from "@/features/note/utils/editSection";
+import { buildExerciseLibrarySearchText } from "@/features/exercise/utils/tags";
 
 export { getExerciseGifSource };
 export type { ExerciseLibraryItem };

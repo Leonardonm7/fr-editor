@@ -1,3 +1,5 @@
+import { ActivityIndicator } from "@/components/ui/ActivityIndicator";
+import { PortalProvider } from "@/components/ui/Portal";
 import { initDB } from "@/database/migrations";
 import { AppThemeProvider, darkTheme, useAppTheme } from "@/hooks/useAppTheme";
 import useUpdate from "@/hooks/useUpdate";
@@ -7,10 +9,9 @@ import { useEffect } from "react";
 import { View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
-import { ActivityIndicator, PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-function AppLayout() {
+const AppLayout = () => {
   const isLoading = useUpdate();
   const { fontSizePreference, isThemeLoading, statusBarStyle, theme } =
     useAppTheme();
@@ -39,11 +40,11 @@ function AppLayout() {
 
   return (
     <KeyboardProvider>
-      <PaperProvider theme={theme}>
-        <GestureHandlerRootView
-          key={`font-size-${fontSizePreference}`}
-          style={{ flex: 1, backgroundColor: theme.colors.background }}
-        >
+      <GestureHandlerRootView
+        key={`font-size-${fontSizePreference}`}
+        style={{ flex: 1, backgroundColor: theme.colors.background }}
+      >
+        <PortalProvider>
           <StatusBar style={statusBarStyle} />
           <Stack
             screenOptions={{
@@ -54,13 +55,13 @@ function AppLayout() {
               headerShown: false,
             }}
           />
-        </GestureHandlerRootView>
-      </PaperProvider>
+        </PortalProvider>
+      </GestureHandlerRootView>
     </KeyboardProvider>
   );
-}
+};
 
-export default function App() {
+const App = () => {
   return (
     <SafeAreaProvider>
       <AppThemeProvider>
@@ -68,4 +69,6 @@ export default function App() {
       </AppThemeProvider>
     </SafeAreaProvider>
   );
-}
+};
+
+export default App;

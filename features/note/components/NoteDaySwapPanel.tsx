@@ -3,7 +3,9 @@ import { type NoteEditColors } from "@/features/note/utils/editSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type NoteDaySwapPanelProps = {
   activeDay: string;
@@ -12,12 +14,12 @@ type NoteDaySwapPanelProps = {
   onSwapDayExercises: (sourceDay: string, targetDay: string) => void;
 };
 
-export function NoteDaySwapPanel({
+export const NoteDaySwapPanel = ({
   activeDay,
   colors,
   countByDay,
   onSwapDayExercises,
-}: NoteDaySwapPanelProps) {
+}: NoteDaySwapPanelProps) => {
   const { dayName, dayShort, t } = useTranslation();
   const [swapPickerOpen, setSwapPickerOpen] = useState(false);
 
@@ -105,7 +107,7 @@ export function NoteDaySwapPanel({
       )}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   sectionAccent: {

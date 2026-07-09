@@ -1,7 +1,9 @@
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
 import type { LanguageOption } from "@/features/settings/utils/options";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type LanguageChoiceProps = {
   colors: GlobalContainerColors;
@@ -10,12 +12,12 @@ type LanguageChoiceProps = {
   option: LanguageOption;
 };
 
-export function LanguageChoice({
+export const LanguageChoice = ({
   colors,
   isActive,
   onPress,
   option,
-}: LanguageChoiceProps) {
+}: LanguageChoiceProps) => {
   return (
     <TouchableRipple
       accessibilityRole="button"
@@ -62,7 +64,7 @@ export function LanguageChoice({
       </View>
     </TouchableRipple>
   );
-}
+};
 
 const styles = StyleSheet.create({
   choiceTop: {

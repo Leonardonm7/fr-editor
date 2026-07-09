@@ -60,7 +60,7 @@ const toEditableExercises = (note: NonNullable<LoadedNote>): ExerciseForm[] =>
     gifUrl: exercise.gifUrl,
   }));
 
-export function useNoteScreen() {
+export const useNoteScreen = () => {
   const { t } = useTranslation();
   const { id } = useLocalSearchParams<{ id?: string | string[] }>();
   const rawId = Array.isArray(id) ? id[0] : id;
@@ -798,4 +798,4 @@ export function useNoteScreen() {
     daysWithExercises,
     linkedBlockCount,
   };
-}
+};

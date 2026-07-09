@@ -18,9 +18,9 @@ import {
 import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
-import { useTheme } from "react-native-paper";
+import { useTheme } from "@/components/ui/theme";
 
-export default function SettingsTab() {
+const SettingsTab = () => {
   const theme = useTheme();
   const { language, t } = useTranslation();
   const colors = useMemo(() => getGlobalContainerColors(theme), [theme]);
@@ -125,7 +125,9 @@ export default function SettingsTab() {
       />
     </GlobalContainer>
   );
-}
+};
+
+export default SettingsTab;
 
 const styles = StyleSheet.create({
   content: {

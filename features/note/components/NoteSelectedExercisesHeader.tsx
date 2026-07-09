@@ -1,7 +1,9 @@
 import { type NoteEditColors } from "@/features/note/utils/editSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type NoteSelectedExercisesHeaderProps = {
   colors: NoteEditColors;
@@ -9,11 +11,11 @@ type NoteSelectedExercisesHeaderProps = {
   secondaryColor: string;
 };
 
-export function NoteSelectedExercisesHeader({
+export const NoteSelectedExercisesHeader = ({
   colors,
   onAddExercise,
   secondaryColor,
-}: NoteSelectedExercisesHeaderProps) {
+}: NoteSelectedExercisesHeaderProps) => {
   const { t } = useTranslation();
 
   return (
@@ -41,7 +43,7 @@ export function NoteSelectedExercisesHeader({
       </TouchableRipple>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   addCustomBtn: {

@@ -8,18 +8,20 @@ import {
   getExerciseLibraryInstructions,
   getExerciseLibraryItem,
 } from "@/features/exercise/utils/library";
+import { formatExerciseTag } from "@/features/exercise/utils/tags";
 import {
   buildSeriesDetails,
   connectionColors,
   formatLoadDisplay,
   type IndexedExercise,
 } from "@/features/note/utils/note";
-import { formatExerciseTag } from "@/features/note/utils/editSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import type { MD3Theme } from "react-native-paper";
-import { Icon, Text, useTheme } from "react-native-paper";
+import type { MD3Theme } from "@/components/ui/theme";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { useTheme } from "@/components/ui/theme";
 
 type ExerciseViewCardProps = {
   exercise: IndexedExercise;
@@ -37,7 +39,7 @@ const getCardColors = (theme: MD3Theme) => ({
   thumb: theme.dark ? "#202938" : "#E0E5DA",
 });
 
-export function ExerciseViewCard({ exercise, order }: ExerciseViewCardProps) {
+export const ExerciseViewCard = ({ exercise, order }: ExerciseViewCardProps) => {
   const theme = useTheme();
   const { language, methodologyName, t } = useTranslation();
   const colors = useMemo(() => getCardColors(theme), [theme]);
@@ -274,7 +276,7 @@ export function ExerciseViewCard({ exercise, order }: ExerciseViewCardProps) {
       </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   card: {

@@ -3,8 +3,11 @@ import { type IndexedExercise } from "@/features/note/utils/note";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
-import type { MD3Theme } from "react-native-paper";
-import { Icon, Text, TouchableRipple, useTheme } from "react-native-paper";
+import type { MD3Theme } from "@/components/ui/theme";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
+import { useTheme } from "@/components/ui/theme";
 
 type NoteViewSectionProps = {
   activeDay: string;
@@ -28,7 +31,7 @@ const getViewColors = (theme: MD3Theme) => ({
   thumb: theme.dark ? "#202938" : "#E0E5DA",
 });
 
-export function NoteViewSection({
+export const NoteViewSection = ({
   activeDay,
   dayExercises,
   onOpenWorkout,
@@ -37,7 +40,7 @@ export function NoteViewSection({
   workoutActionPending,
   workoutName,
   workoutSavedState,
-}: NoteViewSectionProps) {
+}: NoteViewSectionProps) => {
   const theme = useTheme();
   const { dayName, t } = useTranslation();
   const colors = useMemo(() => getViewColors(theme), [theme]);
@@ -180,7 +183,7 @@ export function NoteViewSection({
       )}
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   actionBtnInner: {

@@ -1,4 +1,3 @@
-import { type RestState } from "@/features/workout/components/WorkoutExerciseCard";
 import {
   getNoteById,
 } from "@/database/repositories/notesRepository";
@@ -9,7 +8,6 @@ import {
 } from "@/database/repositories/workoutRepository";
 import {
   buildSeriesDetails,
-  parseSeriesCount,
   sortExercisesByLinkedBlocks,
   type IndexedExercise,
   type SeriesDetail,
@@ -19,12 +17,14 @@ import { useTranslation } from "@/hooks/useTranslation";
 import {
   clearRestNotifications,
   clearRestTimerNotification,
-  playRestFinishedSound,
   setupRestNotifications,
   showRestFinishedNotification,
   showRestTimerNotification,
   vibrateRestFinished,
-} from "@/features/workout/services/workout";
+} from "@/features/workout/services/restNotificationService";
+import { playRestFinishedSound } from "@/features/workout/services/restSoundService";
+import { type RestState } from "@/features/workout/utils/card";
+import { parseSeriesCount } from "@/utils/workoutSeries";
 import { router, useLocalSearchParams } from "expo-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BackHandler } from "react-native";
@@ -121,7 +121,7 @@ const getWorkoutBlockLabel = (
   );
 };
 
-export function useWorkout() {
+export const useWorkout = () => {
   const { language, methodologyName, t } = useTranslation();
   const { noteId, day } = useLocalSearchParams<{
     noteId: string;
@@ -624,4 +624,4 @@ export function useWorkout() {
     totalSeries,
     workoutBlocks,
   };
-}
+};

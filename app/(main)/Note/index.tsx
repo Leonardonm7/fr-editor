@@ -1,20 +1,20 @@
-import { DaySelectorCard } from "@/features/note/components/DaySelectorCard";
-import { NoteHeader } from "@/features/note/components/NoteHeader";
-import { NoteEditSection } from "@/features/note/components/NoteEditSection";
-import { NoteSaveBar } from "@/features/note/components/NoteSaveBar";
-import { NoteViewSection } from "@/features/note/components/NoteViewSection";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import {
   getGlobalContainerColors,
   GlobalContainer,
 } from "@/components/ui/GlobalContainer";
+import { useTheme } from "@/components/ui/theme";
+import { DaySelectorCard } from "@/features/note/components/DaySelectorCard";
+import { NoteEditSection } from "@/features/note/components/NoteEditSection";
+import { NoteHeader } from "@/features/note/components/NoteHeader";
+import { NoteSaveBar } from "@/features/note/components/NoteSaveBar";
+import { NoteViewSection } from "@/features/note/components/NoteViewSection";
 import { useNoteScreen } from "@/features/note/hooks/useNoteScreen";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo } from "react";
 import { StyleSheet } from "react-native";
-import { useTheme } from "react-native-paper";
 
-export default function Note() {
+const Note = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   const colors = useMemo(() => getGlobalContainerColors(theme), [theme]);
@@ -146,7 +146,9 @@ export default function Note() {
       </GlobalContainer>
     </>
   );
-}
+};
+
+export default Note;
 
 const styles = StyleSheet.create({
   scrollContent: {

@@ -18,7 +18,7 @@ type NoteHeaderProps = {
   viewMode: boolean;
 };
 
-export function NoteHeader({
+export const NoteHeader = ({
   colors,
   isNew,
   onBack,
@@ -26,7 +26,7 @@ export function NoteHeader({
   screenTitle,
   totalExercises,
   viewMode,
-}: NoteHeaderProps) {
+}: NoteHeaderProps) => {
   const { t } = useTranslation();
 
   return (
@@ -71,7 +71,7 @@ export function NoteHeader({
       </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   headerTitleRow: {

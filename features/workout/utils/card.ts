@@ -1,5 +1,9 @@
-import { connectionColors, parseSeriesCount, type IndexedExercise } from "@/features/note/utils/note";
-import type { MD3Theme } from "react-native-paper";
+import { type IndexedExercise } from "@/features/note/utils/note";
+import type { MD3Theme } from "@/components/ui/theme";
+import { connectionColors } from "@/utils/workoutConnections";
+import { parseSeriesCount } from "@/utils/workoutSeries";
+
+export type RestState = { endsAt: number; remaining: number; total: number };
 
 export const REST_PRESETS = [
   { value: 0, label: "0" },

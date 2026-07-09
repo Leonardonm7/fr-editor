@@ -5,12 +5,14 @@ import {
   getExerciseLibraryInstructions,
   getExerciseLibraryItem,
 } from "@/features/exercise/utils/library";
+import { formatExerciseTag } from "@/features/exercise/utils/tags";
 import { type IndexedExercise } from "@/features/note/utils/note";
 import { type WorkoutCardColors } from "@/features/workout/utils/card";
-import { formatExerciseTag } from "@/features/note/utils/editSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type WorkoutExerciseCardHeaderProps = {
   accentColor: string;
@@ -31,7 +33,7 @@ type WorkoutExerciseCardHeaderProps = {
   totalSeries: number;
 };
 
-export function WorkoutExerciseCardHeader({
+export const WorkoutExerciseCardHeader = ({
   accentColor,
   allDone,
   colors,
@@ -48,7 +50,7 @@ export function WorkoutExerciseCardHeader({
   subtitle,
   title,
   totalSeries,
-}: WorkoutExerciseCardHeaderProps) {
+}: WorkoutExerciseCardHeaderProps) => {
   const { language, methodologyName, t } = useTranslation();
   const firstExercise = exercises[0];
   const firstLibraryExercise = getExerciseLibraryItem(
@@ -194,7 +196,7 @@ export function WorkoutExerciseCardHeader({
       </View>
     </TouchableRipple>
   );
-}
+};
 
 const styles = StyleSheet.create({
   blockSubtitle: {

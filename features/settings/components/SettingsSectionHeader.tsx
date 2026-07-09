@@ -1,6 +1,6 @@
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
 import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
+import { Text } from "@/components/ui/Text";
 
 type SettingsSectionHeaderProps = {
   colors: GlobalContainerColors;
@@ -8,11 +8,11 @@ type SettingsSectionHeaderProps = {
   title: string;
 };
 
-export function SettingsSectionHeader({
+export const SettingsSectionHeader = ({
   colors,
   meta,
   title,
-}: SettingsSectionHeaderProps) {
+}: SettingsSectionHeaderProps) => {
   return (
     <View style={styles.sectionHeader}>
       <Text style={[styles.sectionTitle, { color: colors.ink }]}>
@@ -21,7 +21,7 @@ export function SettingsSectionHeader({
       <Text style={[styles.sectionMeta, { color: colors.muted }]}>{meta}</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   sectionHeader: {

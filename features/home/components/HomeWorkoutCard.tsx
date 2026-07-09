@@ -3,7 +3,9 @@ import type { Note } from "@/database/types";
 import { formatNoteDate } from "@/features/note/utils/note";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type WorkoutMeta = {
   days: string[];
@@ -34,14 +36,14 @@ const getWorkoutMeta = (note: Note): WorkoutMeta => {
   };
 };
 
-export function HomeWorkoutCard({
+export const HomeWorkoutCard = ({
   colors,
   index,
   note,
   onLongPress,
   onPress,
   selected,
-}: HomeWorkoutCardProps) {
+}: HomeWorkoutCardProps) => {
   const { dayShort, language, t } = useTranslation();
   const meta = getWorkoutMeta(note);
   const workoutName = note.title || t("unnamedWorkout");
@@ -142,7 +144,7 @@ export function HomeWorkoutCard({
       </View>
     </TouchableRipple>
   );
-}
+};
 
 const styles = StyleSheet.create({
   cardBody: {

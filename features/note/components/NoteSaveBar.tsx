@@ -1,7 +1,10 @@
 import { type GlobalContainerColors } from "@/components/ui/GlobalContainer";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple, useTheme } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
+import { useTheme } from "@/components/ui/theme";
 
 type NoteSaveBarProps = {
   canSave: boolean;
@@ -11,13 +14,13 @@ type NoteSaveBarProps = {
   totalExercises: number;
 };
 
-export function NoteSaveBar({
+export const NoteSaveBar = ({
   canSave,
   colors,
   daysWithExercisesCount,
   onSave,
   totalExercises,
-}: NoteSaveBarProps) {
+}: NoteSaveBarProps) => {
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -93,7 +96,7 @@ export function NoteSaveBar({
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   bottomBar: {

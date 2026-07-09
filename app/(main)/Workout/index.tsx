@@ -8,9 +8,9 @@ import { WorkoutHeader } from "@/features/workout/components/WorkoutHeader";
 import { useWorkout } from "@/features/workout/hooks/useWorkout";
 import { useMemo } from "react";
 import { StyleSheet } from "react-native";
-import { useTheme } from "react-native-paper";
+import { useTheme } from "@/components/ui/theme";
 
-export default function WorkoutScreen() {
+const WorkoutScreen = () => {
   const theme = useTheme();
   const colors = useMemo(() => getGlobalContainerColors(theme), [theme]);
   const {
@@ -91,7 +91,9 @@ export default function WorkoutScreen() {
       ))}
     </GlobalContainer>
   );
-}
+};
+
+export default WorkoutScreen;
 
 const styles = StyleSheet.create({
   listContent: {

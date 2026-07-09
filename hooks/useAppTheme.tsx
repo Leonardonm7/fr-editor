@@ -24,9 +24,51 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { MD3DarkTheme, MD3LightTheme, type MD3Theme } from "react-native-paper";
 
 installFontSizeScaling();
+
+type ThemeElevation = {
+  level0: string;
+  level1: string;
+  level2: string;
+  level3: string;
+  level4: string;
+  level5: string;
+};
+
+export type AppTheme = {
+  dark: boolean;
+  roundness: number;
+  colors: {
+    primary: string;
+    onPrimary: string;
+    primaryContainer: string;
+    onPrimaryContainer: string;
+    secondary: string;
+    onSecondary: string;
+    secondaryContainer: string;
+    onSecondaryContainer: string;
+    tertiary: string;
+    onTertiary: string;
+    tertiaryContainer: string;
+    onTertiaryContainer: string;
+    surface: string;
+    onSurface: string;
+    surfaceVariant: string;
+    onSurfaceVariant: string;
+    outline: string;
+    outlineVariant: string;
+    background: string;
+    onBackground: string;
+    error: string;
+    onError: string;
+    errorContainer: string;
+    onErrorContainer: string;
+    elevation: ThemeElevation;
+  };
+};
+
+export type MD3Theme = AppTheme;
 
 const fontSizeScales: Record<AppFontSizePreference, number> = {
   compact: 0.92,
@@ -34,10 +76,10 @@ const fontSizeScales: Record<AppFontSizePreference, number> = {
   large: 1.12,
 };
 
-export const darkTheme: MD3Theme = {
-  ...MD3DarkTheme,
+export const darkTheme: AppTheme = {
+  dark: true,
+  roundness: 12,
   colors: {
-    ...MD3DarkTheme.colors,
     primary: "#E8400A",
     onPrimary: "#FFFFFF",
     primaryContainer: "#481300",
@@ -63,7 +105,6 @@ export const darkTheme: MD3Theme = {
     errorContainer: "#93000A",
     onErrorContainer: "#FFDAD6",
     elevation: {
-      ...MD3DarkTheme.colors.elevation,
       level0: "#090B0F",
       level1: "#111720",
       level2: "#121821",
@@ -74,10 +115,10 @@ export const darkTheme: MD3Theme = {
   },
 };
 
-export const lightTheme: MD3Theme = {
-  ...MD3LightTheme,
+export const lightTheme: AppTheme = {
+  dark: false,
+  roundness: 12,
   colors: {
-    ...MD3LightTheme.colors,
     primary: "#C93508",
     onPrimary: "#FFFFFF",
     primaryContainer: "#FFDBCE",
@@ -103,7 +144,6 @@ export const lightTheme: MD3Theme = {
     errorContainer: "#FFDAD6",
     onErrorContainer: "#410002",
     elevation: {
-      ...MD3LightTheme.colors.elevation,
       level0: "#EEF1EA",
       level1: "#FAFAF3",
       level2: "#FFFFFF",
@@ -118,7 +158,7 @@ export type AppThemeContextValue = {
   fontSizePreference: AppFontSizePreference;
   languagePreference: AppLanguagePreference;
   preference: AppThemePreference;
-  theme: MD3Theme;
+  theme: AppTheme;
   isThemeLoading: boolean;
   statusBarStyle: "light" | "dark";
   setFontSizePreference: (value: AppFontSizePreference) => Promise<void>;
@@ -128,7 +168,7 @@ export type AppThemeContextValue = {
 
 const AppThemeContext = createContext<AppThemeContextValue | null>(null);
 
-export function AppThemeProvider({ children }: { children: ReactNode }) {
+export const AppThemeProvider = ({ children }: { children: ReactNode }) => {
   const [preference, setThemeValue] = useState<AppThemePreference>("dark");
   const [fontSizePreferenceValue, setFontSizePreferenceValue] =
     useState<AppFontSizePreference>("default");
@@ -227,9 +267,9 @@ export function AppThemeProvider({ children }: { children: ReactNode }) {
       {children}
     </AppThemeContext.Provider>
   );
-}
+};
 
-export function useAppTheme() {
+export const useAppTheme = () => {
   const context = useContext(AppThemeContext);
 
   if (!context) {
@@ -237,4 +277,4 @@ export function useAppTheme() {
   }
 
   return context;
-}
+};

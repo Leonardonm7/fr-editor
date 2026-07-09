@@ -14,7 +14,7 @@ import { type ExerciseForm, type IndexedExercise } from "@/features/note/utils/n
 import { getNoteEditColors } from "@/features/note/utils/editSection";
 import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { useTheme } from "react-native-paper";
+import { useTheme } from "@/components/ui/theme";
 
 type NoteEditSectionProps = {
   activeDay: string;
@@ -34,7 +34,7 @@ type NoteEditSectionProps = {
   workoutName: string;
 };
 
-export function NoteEditSection({
+export const NoteEditSection = ({
   activeDay,
   dayExercises,
   onAddExercise,
@@ -46,7 +46,7 @@ export function NoteEditSection({
   onSwapDayExercises,
   countByDay,
   workoutName,
-}: NoteEditSectionProps) {
+}: NoteEditSectionProps) => {
   const theme = useTheme();
   const colors = useMemo(() => getNoteEditColors(theme), [theme]);
   const [linkPickerUid, setLinkPickerUid] = useState<string | null>(null);
@@ -138,7 +138,7 @@ export function NoteEditSection({
       )}
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   workoutList: {

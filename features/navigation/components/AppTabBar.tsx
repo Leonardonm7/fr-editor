@@ -1,9 +1,11 @@
 import MaterialDesignIcons from "@react-native-vector-icons/material-design-icons";
 import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useEffect } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import type { MD3Theme } from "react-native-paper";
-import { useTheme } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
+import type { MD3Theme } from "@/components/ui/theme";
+import { useTheme } from "@/components/ui/theme";
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -13,6 +15,7 @@ import Animated, {
 
 const TAB_BAR_HEIGHT = 82;
 const TAB_ANIMATION_DURATION = 460;
+const AnimatedText = Animated.createAnimatedComponent(Text);
 
 const tabIcons: Record<
   string,
@@ -47,7 +50,7 @@ type AnimatedTabItemProps = {
   tabBarButtonTestID: string | undefined;
 };
 
-function AnimatedTabItem({
+const AnimatedTabItem = ({
   colors,
   focused,
   iconName,
@@ -57,7 +60,7 @@ function AnimatedTabItem({
   onPress,
   tabBarAccessibilityLabel,
   tabBarButtonTestID,
-}: AnimatedTabItemProps) {
+}: AnimatedTabItemProps) => {
   const progress = useSharedValue(focused ? 1 : 0);
   const targetProgress = useSharedValue(focused ? 1 : 0);
 
@@ -89,11 +92,11 @@ function AnimatedTabItem({
   }));
 
   return (
-    <Pressable
+    <TouchableRipple
       accessibilityLabel={tabBarAccessibilityLabel}
       accessibilityRole="button"
       accessibilityState={focused ? { selected: true } : {}}
-      android_ripple={{ color: "transparent" }}
+      rippleColor="transparent"
       onLongPress={onLongPress}
       onPress={onPress}
       style={({ pressed }) => [
@@ -129,7 +132,7 @@ function AnimatedTabItem({
           </Animated.View>
         </View>
 
-        <Animated.Text
+        <AnimatedText
           numberOfLines={1}
           style={[
             styles.tabLabel,
@@ -138,18 +141,18 @@ function AnimatedTabItem({
           ]}
         >
           {label}
-        </Animated.Text>
+        </AnimatedText>
       </View>
-    </Pressable>
+    </TouchableRipple>
   );
-}
+};
 
-export function AppTabBar({
+export const AppTabBar = ({
   descriptors,
   insets,
   navigation,
   state,
-}: BottomTabBarProps) {
+}: BottomTabBarProps) => {
   const theme = useTheme();
   const colors = getTabBarColors(theme);
   const bottomPadding = Math.max(insets.bottom, 10);
@@ -223,7 +226,7 @@ export function AppTabBar({
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   activePlate: {

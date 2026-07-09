@@ -1,5 +1,5 @@
 import type { Exercise, Note } from "@/database/types";
-import { buildSeriesDetails } from "@/features/note/utils/note";
+import { buildSeriesDetails } from "@/utils/workoutSeries";
 
 type StoredNoteRow = {
   id: number;

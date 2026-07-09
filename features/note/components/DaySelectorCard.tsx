@@ -2,8 +2,10 @@ import { days } from "@/features/note/utils/note";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import type { MD3Theme } from "react-native-paper";
-import { Text, TouchableRipple, useTheme } from "react-native-paper";
+import type { MD3Theme } from "@/components/ui/theme";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
+import { useTheme } from "@/components/ui/theme";
 
 type DaySelectorCardProps = {
   activeDay: string;
@@ -21,12 +23,12 @@ const getDaySelectorColors = (theme: MD3Theme) => ({
   selected: theme.dark ? "#481300" : "#FFDBCE",
 });
 
-export function DaySelectorCard({
+export const DaySelectorCard = ({
   activeDay,
   countByDay,
   onSelectDay,
   viewMode,
-}: DaySelectorCardProps) {
+}: DaySelectorCardProps) => {
   const theme = useTheme();
   const { dayShort } = useTranslation();
   const colors = useMemo(() => getDaySelectorColors(theme), [theme]);
@@ -100,7 +102,7 @@ export function DaySelectorCard({
       })}
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   content: {

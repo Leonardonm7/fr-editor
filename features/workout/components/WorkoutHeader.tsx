@@ -6,8 +6,10 @@ import {
   HeaderTitleBlock,
 } from "@/components/ui/ScreenHeaderParts";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple } from "react-native-paper";
-import { formatRestTime } from "@/features/workout/services/workout";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
+import { formatRestTime } from "@/features/workout/services/restTime";
 import { useTranslation } from "@/hooks/useTranslation";
 
 type WorkoutHeaderProps = {
@@ -23,7 +25,7 @@ type WorkoutHeaderProps = {
   totalSeries: number;
 };
 
-export function WorkoutHeader({
+export const WorkoutHeader = ({
   colors,
   completedCount,
   day,
@@ -34,7 +36,7 @@ export function WorkoutHeader({
   restRemaining,
   restTotal,
   totalSeries,
-}: WorkoutHeaderProps) {
+}: WorkoutHeaderProps) => {
   const { dayName, t } = useTranslation();
   const restActive =
     typeof restRemaining === "number" && restRemaining > 0 && !!onSkipRest;
@@ -133,7 +135,7 @@ export function WorkoutHeader({
       )}
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   heroRow: {

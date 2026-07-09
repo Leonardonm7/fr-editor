@@ -11,7 +11,8 @@ import {
 import {
   getWorkoutStates,
 } from "@/database/repositories/workoutRepository";
-import { buildSeriesDetails, createExerciseUid } from "@/features/note/utils/note";
+import { createExerciseUid } from "@/utils/exerciseUid";
+import { buildSeriesDetails } from "@/utils/workoutSeries";
 
 const BACKUP_APP_NAME = "FR Editor";
 const BACKUP_VERSION = 2;

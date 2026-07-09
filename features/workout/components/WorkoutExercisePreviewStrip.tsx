@@ -5,13 +5,13 @@ import {
   getExerciseLibraryInstructions,
   getExerciseLibraryItem,
 } from "@/features/exercise/utils/library";
-import { formatExerciseTag } from "@/features/note/utils/editSection";
+import { formatExerciseTag } from "@/features/exercise/utils/tags";
 import { type IndexedExercise } from "@/features/note/utils/note";
 import { type WorkoutCardColors } from "@/features/workout/utils/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
+import { Text } from "@/components/ui/Text";
 
 type WorkoutExercisePreviewStripProps = {
   colors: WorkoutCardColors;
@@ -19,11 +19,11 @@ type WorkoutExercisePreviewStripProps = {
   onPreview: (preview: ExercisePreview) => void;
 };
 
-export function WorkoutExercisePreviewStrip({
+export const WorkoutExercisePreviewStrip = ({
   colors,
   exercises,
   onPreview,
-}: WorkoutExercisePreviewStripProps) {
+}: WorkoutExercisePreviewStripProps) => {
   const { language, t } = useTranslation();
   const exercisePreviews = useMemo(
     () =>
@@ -95,7 +95,7 @@ export function WorkoutExercisePreviewStrip({
       })}
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   previewGif: {

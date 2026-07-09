@@ -1,7 +1,9 @@
 import type { FontSizeOption } from "@/features/settings/utils/options";
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type FontSizeChoiceProps = {
   colors: GlobalContainerColors;
@@ -10,12 +12,12 @@ type FontSizeChoiceProps = {
   onPress: () => void;
 };
 
-export function FontSizeChoice({
+export const FontSizeChoice = ({
   colors,
   isActive,
   option,
   onPress,
-}: FontSizeChoiceProps) {
+}: FontSizeChoiceProps) => {
   const previewSize =
     option.value === "compact" ? 20 : option.value === "large" ? 28 : 24;
 
@@ -69,7 +71,7 @@ export function FontSizeChoice({
       </View>
     </TouchableRipple>
   );
-}
+};
 
 const styles = StyleSheet.create({
   choiceTop: {

@@ -1,7 +1,9 @@
 import type { ThemeOption } from "@/features/settings/utils/options";
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type ThemeChoiceProps = {
   colors: GlobalContainerColors;
@@ -10,12 +12,12 @@ type ThemeChoiceProps = {
   onPress: () => void;
 };
 
-export function ThemeChoice({
+export const ThemeChoice = ({
   colors,
   isActive,
   option,
   onPress,
-}: ThemeChoiceProps) {
+}: ThemeChoiceProps) => {
   return (
     <TouchableRipple
       accessibilityRole="button"
@@ -61,7 +63,7 @@ export function ThemeChoice({
       </View>
     </TouchableRipple>
   );
-}
+};
 
 const styles = StyleSheet.create({
   optionCaption: {

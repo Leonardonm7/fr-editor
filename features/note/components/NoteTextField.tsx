@@ -1,14 +1,16 @@
 import { StyleSheet } from "react-native";
-import { TextInput, useTheme, type TextInputProps } from "react-native-paper";
+import { TextInput } from "@/components/ui/TextInput";
+import { useTheme } from "@/components/ui/theme";
+import type { TextInputProps } from "@/components/ui/TextInput";
 
 type NoteTextFieldProps = TextInputProps;
 
-export function NoteTextField({
+export const NoteTextField = ({
   contentStyle,
   outlineStyle,
   style,
   ...props
-}: NoteTextFieldProps) {
+}: NoteTextFieldProps) => {
   const theme = useTheme();
 
   return (
@@ -31,7 +33,7 @@ export function NoteTextField({
       {...props}
     />
   );
-}
+};
 
 const styles = StyleSheet.create({
   input: {

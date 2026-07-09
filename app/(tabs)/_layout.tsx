@@ -2,7 +2,7 @@ import { AppTabBar } from "@/features/navigation/components/AppTabBar";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Tabs } from "expo-router";
 
-export default function TabsLayout() {
+const TabsLayout = () => {
   const { t } = useTranslation();
 
   return (
@@ -26,4 +26,6 @@ export default function TabsLayout() {
       />
     </Tabs>
   );
-}
+};
+
+export default TabsLayout;

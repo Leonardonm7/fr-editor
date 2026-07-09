@@ -1,6 +1,5 @@
 import {
   getSeriesDetailForIndex,
-  parseSeriesCount,
   type IndexedExercise,
   type SeriesDetail,
 } from "@/features/note/utils/note";
@@ -15,7 +14,11 @@ import {
   TextInput as NativeTextInput,
   View,
 } from "react-native";
-import { Icon, IconButton, Text, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { IconButton } from "@/components/ui/IconButton";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
+import { parseSeriesCount } from "@/utils/workoutSeries";
 
 type WorkoutSeriesPanelProps = {
   accentColor: string;
@@ -46,7 +49,7 @@ type WorkoutSeriesPanelProps = {
   seriesNumbers: number[];
 };
 
-export function WorkoutSeriesPanel({
+export const WorkoutSeriesPanel = ({
   accentColor,
   allDone,
   blockId,
@@ -64,7 +67,7 @@ export function WorkoutSeriesPanel({
   secondaryColor,
   seriesNumbers,
   totalSeries,
-}: WorkoutSeriesPanelProps) {
+}: WorkoutSeriesPanelProps) => {
   const { language, t } = useTranslation();
   const [focusedLoadKey, setFocusedLoadKey] = useState<string | null>(null);
 
@@ -306,7 +309,7 @@ export function WorkoutSeriesPanel({
       })}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   exerciseSeriesLine: {

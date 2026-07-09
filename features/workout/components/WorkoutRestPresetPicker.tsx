@@ -1,8 +1,10 @@
 import { REST_PRESETS, type WorkoutCardColors } from "@/features/workout/utils/card";
-import { formatRestTime } from "@/features/workout/services/workout";
+import { formatRestTime } from "@/features/workout/services/restTime";
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 import { useTranslation } from "@/hooks/useTranslation";
 
 type WorkoutRestPresetPickerProps = {
@@ -11,11 +13,11 @@ type WorkoutRestPresetPickerProps = {
   restTime: number;
 };
 
-export function WorkoutRestPresetPicker({
+export const WorkoutRestPresetPicker = ({
   colors,
   onRestTimeChange,
   restTime,
-}: WorkoutRestPresetPickerProps) {
+}: WorkoutRestPresetPickerProps) => {
   const { t } = useTranslation();
   const [showRestPresets, setShowRestPresets] = useState(false);
 
@@ -79,7 +81,7 @@ export function WorkoutRestPresetPicker({
       )}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   presetPill: {

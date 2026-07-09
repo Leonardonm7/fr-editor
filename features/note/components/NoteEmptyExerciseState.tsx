@@ -1,13 +1,14 @@
 import { type NoteEditColors } from "@/features/note/utils/editSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
 
 type NoteEmptyExerciseStateProps = {
   colors: NoteEditColors;
 };
 
-export function NoteEmptyExerciseState({ colors }: NoteEmptyExerciseStateProps) {
+export const NoteEmptyExerciseState = ({ colors }: NoteEmptyExerciseStateProps) => {
   const { t } = useTranslation();
 
   return (
@@ -25,7 +26,7 @@ export function NoteEmptyExerciseState({ colors }: NoteEmptyExerciseStateProps) 
       </Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   emptyState: {

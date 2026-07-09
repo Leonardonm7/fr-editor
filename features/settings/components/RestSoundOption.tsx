@@ -2,7 +2,9 @@ import type { RestFinishedSoundPreference } from "@/database/types";
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Button, Icon, Text } from "react-native-paper";
+import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
 
 type RestSoundOptionProps = {
   colors: GlobalContainerColors;
@@ -12,13 +14,13 @@ type RestSoundOptionProps = {
   sound: RestFinishedSoundPreference | null;
 };
 
-export function RestSoundOption({
+export const RestSoundOption = ({
   colors,
   isBusy,
   onImport,
   onReset,
   sound,
-}: RestSoundOptionProps) {
+}: RestSoundOptionProps) => {
   const { t } = useTranslation();
   const hasCustomSound = !!sound;
 
@@ -81,7 +83,7 @@ export function RestSoundOption({
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   actions: {

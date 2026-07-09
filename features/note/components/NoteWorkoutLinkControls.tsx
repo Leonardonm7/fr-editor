@@ -8,7 +8,9 @@ import {
 import { type NoteEditColors } from "@/features/note/utils/editSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type NoteWorkoutLinkControlsProps = {
   accentColor: string;
@@ -30,7 +32,7 @@ type NoteWorkoutLinkControlsProps = {
   onToggleLinkPicker: () => void;
 };
 
-export function NoteWorkoutLinkControls({
+export const NoteWorkoutLinkControls = ({
   accentColor,
   activeDay,
   colors,
@@ -44,7 +46,7 @@ export function NoteWorkoutLinkControls({
   onCloseLinkPicker,
   onToggleDayPicker,
   onToggleLinkPicker,
-}: NoteWorkoutLinkControlsProps) {
+}: NoteWorkoutLinkControlsProps) => {
   const { dayShort, t } = useTranslation();
   const exerciseDay = exercise.day || activeDay;
 
@@ -252,7 +254,7 @@ export function NoteWorkoutLinkControls({
       )}
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   dayPicker: {

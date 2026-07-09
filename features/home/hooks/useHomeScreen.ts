@@ -8,7 +8,7 @@ import { router } from "expo-router";
 import { useState } from "react";
 import { Share } from "react-native";
 
-export function useHomeScreen() {
+export const useHomeScreen = () => {
   const { t } = useTranslation();
   const [notes, setNotes] = useState<Note[]>([]);
   const [filtered, setFiltered] = useState<Note[]>([]);
@@ -116,4 +116,4 @@ export function useHomeScreen() {
     setSearchFocused,
     setSelectedIds,
   };
-}
+};

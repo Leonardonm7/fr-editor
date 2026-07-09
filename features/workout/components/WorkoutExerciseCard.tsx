@@ -20,9 +20,8 @@ import { getExerciseLibraryItem } from "@/features/exercise/utils/library";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Text, useTheme } from "react-native-paper";
-
-export type RestState = { endsAt: number; remaining: number; total: number };
+import { Text } from "@/components/ui/Text";
+import { useTheme } from "@/components/ui/theme";
 
 type WorkoutExerciseCardProps = {
   blockId: string;
@@ -50,7 +49,7 @@ type WorkoutExerciseCardProps = {
   restTime: number;
 };
 
-export function WorkoutExerciseCard({
+export const WorkoutExerciseCard = ({
   blockId,
   completedSeries,
   exercises,
@@ -65,7 +64,7 @@ export function WorkoutExerciseCard({
   onToggleExpanded,
   orderIndex,
   restTime,
-}: WorkoutExerciseCardProps) {
+}: WorkoutExerciseCardProps) => {
   const theme = useTheme();
   const { language, methodologyName, t } = useTranslation();
   const colors = useMemo(() => getWorkoutCardColors(theme), [theme]);
@@ -203,7 +202,7 @@ export function WorkoutExerciseCard({
       </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   card: {

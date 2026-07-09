@@ -7,17 +7,15 @@ import {
   type IndexedExercise,
 } from "@/features/note/utils/note";
 import { StyleSheet, View } from "react-native";
-import {
-  Button,
-  Card,
-  Chip,
-  Divider,
-  IconButton,
-  Surface,
-  Text,
-  TextInput,
-  useTheme,
-} from "react-native-paper";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { Chip } from "@/components/ui/Chip";
+import { Divider } from "@/components/ui/Divider";
+import { IconButton } from "@/components/ui/IconButton";
+import { Surface } from "@/components/ui/Surface";
+import { Text } from "@/components/ui/Text";
+import { TextInput } from "@/components/ui/TextInput";
+import { useTheme } from "@/components/ui/theme";
 import { useTranslation } from "@/hooks/useTranslation";
 
 type ExerciseEditorCardProps = {
@@ -40,7 +38,7 @@ type ExerciseEditorCardProps = {
   prevDayLabel: string;
 };
 
-export function ExerciseEditorCard({
+export const ExerciseEditorCard = ({
   disabledMoveDown,
   disabledMovePrevDay,
   disabledMoveUp,
@@ -58,7 +56,7 @@ export function ExerciseEditorCard({
   onMoveUp,
   onToggleExpand,
   prevDayLabel,
-}: ExerciseEditorCardProps) {
+}: ExerciseEditorCardProps) => {
   const theme = useTheme();
   const { methodologyName, t } = useTranslation();
 
@@ -299,7 +297,7 @@ export function ExerciseEditorCard({
       </Card.Content>
     </Card>
   );
-}
+};
 
 const styles = StyleSheet.create({
   card: {

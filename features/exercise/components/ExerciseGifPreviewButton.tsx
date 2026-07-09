@@ -1,7 +1,8 @@
 import { Image } from "expo-image";
 import type { ImageStyle, StyleProp } from "react-native";
 import { StyleSheet, View } from "react-native";
-import { Icon, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type ExerciseGifPreviewButtonProps = {
   badgeBackgroundColor: string;
@@ -11,13 +12,13 @@ type ExerciseGifPreviewButtonProps = {
   source: number;
 };
 
-export function ExerciseGifPreviewButton({
+export const ExerciseGifPreviewButton = ({
   badgeBackgroundColor,
   iconColor,
   imageStyle,
   onPress,
   source,
-}: ExerciseGifPreviewButtonProps) {
+}: ExerciseGifPreviewButtonProps) => {
   return (
     <TouchableRipple
       onPress={(event) => {
@@ -45,7 +46,7 @@ export function ExerciseGifPreviewButton({
       </View>
     </TouchableRipple>
   );
-}
+};
 
 const styles = StyleSheet.create({
   previewBadge: {

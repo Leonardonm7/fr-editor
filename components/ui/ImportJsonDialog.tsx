@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
-import { Icon, Text, TouchableRipple, useTheme } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TextInput } from "@/components/ui/TextInput";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
+import { useTheme } from "@/components/ui/theme";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { AppModal } from "./AppModal";
@@ -11,11 +15,11 @@ type ImportJsonDialogProps = {
   onImport: (rawJson: string) => Promise<void> | void;
 };
 
-export function ImportJsonDialog({
+export const ImportJsonDialog = ({
   visible,
   onCancel,
   onImport,
-}: ImportJsonDialogProps) {
+}: ImportJsonDialogProps) => {
   const [rawJson, setRawJson] = useState("");
   const theme = useTheme();
   const { t } = useTranslation();
@@ -139,36 +143,29 @@ export function ImportJsonDialog({
           {t("importJsonHint")}
         </Text>
 
-        <View
-          style={[
-          styles.inputWrapper,
-          {
-              backgroundColor: theme.colors.elevation.level2,
-              borderColor: rawJson
-                ? theme.colors.primary
-                : theme.colors.outlineVariant,
+        <TextInput
+          mode="outlined"
+          multiline
+          numberOfLines={10}
+          value={rawJson}
+          onChangeText={setRawJson}
+          placeholder="{ … }"
+          placeholderTextColor={theme.colors.outline}
+          style={styles.input}
+          contentStyle={[
+            styles.inputContent,
+            {
+              color: theme.colors.onSurface,
             },
           ]}
-        >
-          <TextInput
-            multiline
-            numberOfLines={10}
-            value={rawJson}
-            onChangeText={setRawJson}
-            placeholder="{ … }"
-            placeholderTextColor={theme.colors.outline}
-            style={[
-              styles.input,
-              {
-                color: theme.colors.onSurface,
-              },
-            ]}
-          />
-        </View>
+          outlineColor={theme.colors.outlineVariant}
+          activeOutlineColor={theme.colors.primary}
+          outlineStyle={styles.inputOutline}
+        />
       </View>
     </AppModal>
   );
-}
+};
 
 const styles = StyleSheet.create({
   header: {
@@ -227,19 +224,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
   },
-  inputWrapper: {
-    borderRadius: 8,
-    borderWidth: 1,
-    minHeight: 220,
-    overflow: "hidden",
-  },
   input: {
+    minHeight: 220,
+  },
+  inputContent: {
     fontSize: 13,
     fontFamily: "monospace",
     paddingHorizontal: 14,
     paddingVertical: 12,
     textAlignVertical: "top",
     minHeight: 220,
+  },
+  inputOutline: {
+    borderRadius: 8,
   },
   actions: {
     flexDirection: "row",

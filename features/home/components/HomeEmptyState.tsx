@@ -1,14 +1,15 @@
 import type { GlobalContainerColors } from "@/components/ui/GlobalContainer";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
 
 type HomeEmptyStateProps = {
   colors: GlobalContainerColors;
   hasQuery: boolean;
 };
 
-export function HomeEmptyState({ colors, hasQuery }: HomeEmptyStateProps) {
+export const HomeEmptyState = ({ colors, hasQuery }: HomeEmptyStateProps) => {
   const { t } = useTranslation();
 
   return (
@@ -29,7 +30,7 @@ export function HomeEmptyState({ colors, hasQuery }: HomeEmptyStateProps) {
       </Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   emptyIconFrame: {

@@ -4,10 +4,13 @@ import {
   type ExerciseForm,
   type IndexedExercise,
 } from "@/features/note/utils/note";
+import { NoteCompactTextField } from "@/features/note/components/NoteCompactTextField";
 import { type NoteEditColors } from "@/features/note/utils/editSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text, TextInput, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type NoteWorkoutSeriesEditorProps = {
   colors: NoteEditColors;
@@ -19,11 +22,11 @@ type NoteWorkoutSeriesEditorProps = {
   ) => void;
 };
 
-export function NoteWorkoutSeriesEditor({
+export const NoteWorkoutSeriesEditor = ({
   colors,
   exercise,
   onChangeExercise,
-}: NoteWorkoutSeriesEditorProps) {
+}: NoteWorkoutSeriesEditorProps) => {
   const { t } = useTranslation();
 
   const updateSeriesDetail = (
@@ -131,39 +134,24 @@ export function NoteWorkoutSeriesEditor({
                 {seriesIndex + 1}
               </Text>
               <View style={styles.seriesGridCol1}>
-                <TextInput
-                  mode="flat"
-                  dense
+                <NoteCompactTextField
+                  colors={colors}
                   value={detail.reps}
                   keyboardType="numeric"
                   onChangeText={(value) =>
                     updateSeriesDetail(seriesIndex, "reps", value)
                   }
-                  style={[
-                    styles.seriesCompactInput,
-                    { backgroundColor: "transparent" },
-                  ]}
-                  contentStyle={styles.seriesCompactContent}
-                  underlineColor={colors.border}
-                  activeUnderlineColor={colors.accent}
                 />
               </View>
               <View style={[styles.seriesGridCol2, styles.seriesInputWithUnit]}>
-                <TextInput
-                  mode="flat"
-                  dense
+                <NoteCompactTextField
+                  colors={colors}
                   value={detail.load}
                   keyboardType="numeric"
                   onChangeText={(value) =>
                     updateSeriesDetail(seriesIndex, "load", value)
                   }
-                  style={[
-                    styles.seriesCompactInput,
-                    { backgroundColor: "transparent", flex: 1 },
-                  ]}
-                  contentStyle={styles.seriesCompactContent}
-                  underlineColor={colors.border}
-                  activeUnderlineColor={colors.accent}
+                  fieldStyle={styles.seriesCompactInput}
                 />
                 <Text style={[styles.seriesUnit, { color: colors.muted }]}>
                   kg
@@ -175,7 +163,7 @@ export function NoteWorkoutSeriesEditor({
       )}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   seriesColLabel: {
@@ -183,13 +171,8 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     textTransform: "uppercase",
   },
-  seriesCompactContent: {
-    fontSize: 14,
-    fontWeight: "700",
-    paddingHorizontal: 0,
-  },
   seriesCompactInput: {
-    height: 38,
+    flex: 1,
   },
   seriesGrid: {
     borderRadius: 8,

@@ -4,12 +4,12 @@ import {
   importRestFinishedSoundFile,
   resetRestFinishedSoundFile,
 } from "@/features/settings/utils/restSound";
-import { reloadRestFinishedSound } from "@/features/workout/services/workout";
+import { reloadRestFinishedSound } from "@/features/workout/services/restSoundService";
 import { useAppTheme } from "@/hooks/useAppTheme";
 import { useCallback, useEffect, useState } from "react";
 import { Alert } from "react-native";
 
-export function useSettingsScreen() {
+export const useSettingsScreen = () => {
   const [restSound, setRestSound] =
     useState<RestFinishedSoundPreference | null>(null);
   const [restSoundBusy, setRestSoundBusy] = useState(false);
@@ -79,4 +79,4 @@ export function useSettingsScreen() {
     setLanguagePreference,
     setPreference,
   };
-}
+};

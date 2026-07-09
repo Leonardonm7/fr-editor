@@ -1,7 +1,10 @@
 import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple, useTheme } from "react-native-paper";
-import type { MD3Theme } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
+import { useTheme } from "@/components/ui/theme";
+import type { MD3Theme } from "@/components/ui/theme";
 import { useTranslation } from "@/hooks/useTranslation";
 
 type WorkoutFinishedPhaseProps = {
@@ -19,11 +22,11 @@ const getFinishedColors = (theme: MD3Theme) => ({
   surface: theme.dark ? "#171E28" : "#FFFFFF",
 });
 
-export function WorkoutFinishedPhase({
+export const WorkoutFinishedPhase = ({
   onFinish,
   totalCompletedSeries,
   totalExercises,
-}: WorkoutFinishedPhaseProps) {
+}: WorkoutFinishedPhaseProps) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const colors = useMemo(() => getFinishedColors(theme), [theme]);
@@ -84,7 +87,7 @@ export function WorkoutFinishedPhase({
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   body: {

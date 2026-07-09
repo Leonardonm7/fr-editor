@@ -1,25 +1,21 @@
 import { ExerciseGifPreviewButton } from "@/features/exercise/components/ExerciseGifPreviewButton";
 import { type ExercisePreview } from "@/features/exercise/components/ExercisePreviewModal";
+import { NoteCompactTextField } from "@/features/note/components/NoteCompactTextField";
 import {
   getExerciseGifSource,
   getExerciseLibraryInstructions,
   getExerciseLibraryItem,
 } from "@/features/exercise/utils/library";
+import { formatExerciseTag } from "@/features/exercise/utils/tags";
 import { type ExerciseForm, type IndexedExercise } from "@/features/note/utils/note";
-import {
-  formatExerciseTag,
-  type NoteEditColors,
-} from "@/features/note/utils/editSection";
+import { type NoteEditColors } from "@/features/note/utils/editSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import {
-  Icon,
-  IconButton,
-  Text,
-  TextInput,
-  TouchableRipple,
-  useTheme,
-} from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { IconButton } from "@/components/ui/IconButton";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
+import { useTheme } from "@/components/ui/theme";
 
 type NoteWorkoutExerciseHeaderProps = {
   accentColor: string;
@@ -41,7 +37,7 @@ type NoteWorkoutExerciseHeaderProps = {
   onPreview: (preview: ExercisePreview) => void;
 };
 
-export function NoteWorkoutExerciseHeader({
+export const NoteWorkoutExerciseHeader = ({
   accentColor,
   colors,
   currentMethodology,
@@ -55,7 +51,7 @@ export function NoteWorkoutExerciseHeader({
   onEditName,
   onMoveExercise,
   onPreview,
-}: NoteWorkoutExerciseHeaderProps) {
+}: NoteWorkoutExerciseHeaderProps) => {
   const theme = useTheme();
   const { language, methodologyName, t } = useTranslation();
   const gifSource = getExerciseGifSource(exercise.libraryId);
@@ -96,9 +92,9 @@ export function NoteWorkoutExerciseHeader({
 
       <View style={styles.workoutInfo}>
         {isCustomExercise && editingName ? (
-          <TextInput
-            mode="flat"
-            dense
+          <NoteCompactTextField
+            colors={colors}
+            strong
             value={exercise.name}
             autoFocus
             placeholder={t("exerciseName")}
@@ -106,16 +102,7 @@ export function NoteWorkoutExerciseHeader({
               onChangeExercise(exercise.index, "name", value)
             }
             onBlur={onEditName}
-            style={[
-              styles.customExerciseNameInput,
-              { backgroundColor: "transparent" },
-            ]}
-            contentStyle={[
-              styles.customExerciseNameInputContent,
-              { color: colors.ink },
-            ]}
-            underlineColor={colors.border}
-            activeUnderlineColor={colors.accent}
+            fieldStyle={styles.customExerciseNameInput}
           />
         ) : isCustomExercise ? (
           <TouchableRipple
@@ -210,7 +197,7 @@ export function NoteWorkoutExerciseHeader({
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   actionIconButton: {
@@ -218,12 +205,6 @@ const styles = StyleSheet.create({
   },
   customExerciseNameInput: {
     height: 38,
-  },
-  customExerciseNameInputContent: {
-    fontSize: 15,
-    fontWeight: "900",
-    lineHeight: 19,
-    paddingHorizontal: 0,
   },
   customExerciseNamePressable: {
     alignSelf: "stretch",

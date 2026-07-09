@@ -10,7 +10,7 @@ import { useCallback, useMemo } from "react";
 
 type TranslationParams = Record<string, number | string>;
 
-export function useTranslation() {
+export const useTranslation = () => {
   const { languagePreference } = useAppTheme();
 
   const t = useCallback(
@@ -44,4 +44,4 @@ export function useTranslation() {
     }),
     [dayName, dayShort, languagePreference, methodologyName, t],
   );
-}
+};

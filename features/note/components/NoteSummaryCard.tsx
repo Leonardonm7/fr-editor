@@ -1,7 +1,11 @@
 import { formatNoteDate } from "@/features/note/utils/note";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Card, Divider, Icon, Text, useTheme } from "react-native-paper";
+import { Card } from "@/components/ui/Card";
+import { Divider } from "@/components/ui/Divider";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { useTheme } from "@/components/ui/theme";
 
 type NoteSummaryCardProps = {
   createdAt: string;
@@ -14,7 +18,7 @@ type NoteSummaryCardProps = {
   workoutName: string;
 };
 
-export function NoteSummaryCard({
+export const NoteSummaryCard = ({
   createdAt,
   daysWithExercisesCount,
   exercisesWithDescriptionCount,
@@ -23,7 +27,7 @@ export function NoteSummaryCard({
   totalVolume,
   updatedAt,
   workoutName,
-}: NoteSummaryCardProps) {
+}: NoteSummaryCardProps) => {
   const theme = useTheme();
   const { language, t } = useTranslation();
   const locale = language === "en" ? "en-US" : "pt-BR";
@@ -180,7 +184,7 @@ export function NoteSummaryCard({
       </Card.Content>
     </Card>
   );
-}
+};
 
 const styles = StyleSheet.create({
   card: {

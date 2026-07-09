@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { StyleSheet, View, type StyleProp, type ViewStyle } from "react-native";
-import { IconButton, Text } from "react-native-paper";
+import { IconButton } from "@/components/ui/IconButton";
+import { Text } from "@/components/ui/Text";
 import type { GlobalContainerColors } from "./GlobalContainer";
 
 type HeaderSignalPlateProps = {
@@ -10,12 +11,12 @@ type HeaderSignalPlateProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-export function HeaderSignalPlate({
+export const HeaderSignalPlate = ({
   background,
   colors,
   label,
   style,
-}: HeaderSignalPlateProps) {
+}: HeaderSignalPlateProps) => {
   return (
     <View
       style={[
@@ -31,7 +32,7 @@ export function HeaderSignalPlate({
       <Text style={[styles.signalText, { color: colors.muted }]}>{label}</Text>
     </View>
   );
-}
+};
 
 type HeaderTitleBlockProps = {
   colors: GlobalContainerColors;
@@ -42,14 +43,14 @@ type HeaderTitleBlockProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-export function HeaderTitleBlock({
+export const HeaderTitleBlock = ({
   colors,
   eyebrow,
   numberOfLines,
   size = "default",
   style,
   title,
-}: HeaderTitleBlockProps) {
+}: HeaderTitleBlockProps) => {
   return (
     <View style={[styles.titleBlock, style]}>
       <Text style={[styles.titleEyebrow, { color: colors.accent }]}>
@@ -73,7 +74,7 @@ export function HeaderTitleBlock({
       </View>
     </View>
   );
-}
+};
 
 type HeaderStatPlateProps = {
   colors: GlobalContainerColors;
@@ -82,12 +83,12 @@ type HeaderStatPlateProps = {
   value: ReactNode;
 };
 
-export function HeaderStatPlate({
+export const HeaderStatPlate = ({
   colors,
   label,
   minWidth,
   value,
-}: HeaderStatPlateProps) {
+}: HeaderStatPlateProps) => {
   return (
     <View
       style={[
@@ -103,7 +104,7 @@ export function HeaderStatPlate({
       <Text style={[styles.statLabel, { color: colors.muted }]}>{label}</Text>
     </View>
   );
-}
+};
 
 type HeaderIconActionProps = {
   colors: GlobalContainerColors;
@@ -112,12 +113,12 @@ type HeaderIconActionProps = {
   onPress: () => void;
 };
 
-export function HeaderIconAction({
+export const HeaderIconAction = ({
   colors,
   icon,
   iconColor,
   onPress,
-}: HeaderIconActionProps) {
+}: HeaderIconActionProps) => {
   return (
     <IconButton
       icon={icon}
@@ -133,7 +134,7 @@ export function HeaderIconAction({
       ]}
     />
   );
-}
+};
 
 const styles = StyleSheet.create({
   iconButton: {

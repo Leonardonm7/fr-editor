@@ -3,7 +3,8 @@ import { getExerciseLibraryItem } from "@/features/exercise/utils/library";
 import { type IndexedExercise } from "@/features/note/utils/note";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
 
 type WorkoutExerciseDescriptionPanelProps = {
   colors: WorkoutCardColors;
@@ -11,11 +12,11 @@ type WorkoutExerciseDescriptionPanelProps = {
   isLinkedBlock: boolean;
 };
 
-export function WorkoutExerciseDescriptionPanel({
+export const WorkoutExerciseDescriptionPanel = ({
   colors,
   exercises,
   isLinkedBlock,
-}: WorkoutExerciseDescriptionPanelProps) {
+}: WorkoutExerciseDescriptionPanelProps) => {
   const { language, t } = useTranslation();
   const describedExercises = exercises.filter((exercise) =>
     exercise.description.trim(),
@@ -56,7 +57,7 @@ export function WorkoutExerciseDescriptionPanel({
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   descPanel: {

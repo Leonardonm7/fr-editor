@@ -4,14 +4,14 @@ import {
   getExerciseGifSource,
   type ExerciseLibraryItem,
 } from "@/features/exercise/utils/library";
-import {
-  formatExerciseTag,
-  type NoteEditColors,
-} from "@/features/note/utils/editSection";
+import { formatExerciseTag } from "@/features/exercise/utils/tags";
+import { type NoteEditColors } from "@/features/note/utils/editSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { memo, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
-import { Icon, Text, TouchableRipple } from "react-native-paper";
+import { Icon } from "@/components/ui/Icon";
+import { Text } from "@/components/ui/Text";
+import { TouchableRipple } from "@/components/ui/TouchableRipple";
 
 type NoteLibraryExerciseCardProps = {
   colors: NoteEditColors;
@@ -20,12 +20,12 @@ type NoteLibraryExerciseCardProps = {
   onPreview: (preview: ExercisePreview) => void;
 };
 
-export const NoteLibraryExerciseCard = memo(function NoteLibraryExerciseCard({
+export const NoteLibraryExerciseCard = memo(({
   colors,
   exercise,
   onAdd,
   onPreview,
-}: NoteLibraryExerciseCardProps) {
+}: NoteLibraryExerciseCardProps) => {
   const { language } = useTranslation();
   const gifSource = getExerciseGifSource(exercise.id);
   const exerciseMeta = useMemo(
@@ -109,6 +109,8 @@ export const NoteLibraryExerciseCard = memo(function NoteLibraryExerciseCard({
     </View>
   );
 });
+
+NoteLibraryExerciseCard.displayName = "NoteLibraryExerciseCard";
 
 const styles = StyleSheet.create({
   gifPlaceholder: {

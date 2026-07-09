@@ -1,6 +1,8 @@
 import { Image } from "expo-image";
 import { StyleSheet, View } from "react-native";
-import { IconButton, Text, useTheme } from "react-native-paper";
+import { IconButton } from "@/components/ui/IconButton";
+import { Text } from "@/components/ui/Text";
+import { useTheme } from "@/components/ui/theme";
 
 import { AppModal } from "@/components/ui/AppModal";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -17,10 +19,10 @@ type ExercisePreviewModalProps = {
   preview: ExercisePreview | null;
 };
 
-export function ExercisePreviewModal({
+export const ExercisePreviewModal = ({
   onClose,
   preview,
-}: ExercisePreviewModalProps) {
+}: ExercisePreviewModalProps) => {
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -146,7 +148,7 @@ export function ExercisePreviewModal({
       </View>
     </AppModal>
   );
-}
+};
 
 const styles = StyleSheet.create({
   closeButton: {

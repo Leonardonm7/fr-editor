@@ -1,7 +1,7 @@
 import { type NoteEditColors } from "@/features/note/utils/editSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
+import { Text } from "@/components/ui/Text";
 
 type NoteActiveDaySummaryProps = {
   activeDay: string;
@@ -9,11 +9,11 @@ type NoteActiveDaySummaryProps = {
   exerciseCount: number;
 };
 
-export function NoteActiveDaySummary({
+export const NoteActiveDaySummary = ({
   activeDay,
   colors,
   exerciseCount,
-}: NoteActiveDaySummaryProps) {
+}: NoteActiveDaySummaryProps) => {
   const { dayName, t } = useTranslation();
 
   return (
@@ -47,7 +47,7 @@ export function NoteActiveDaySummary({
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   dayCountBadge: {

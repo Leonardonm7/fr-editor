@@ -29,7 +29,7 @@ O foco atual do app é o aluno: montar a própria ficha, acompanhar a sessão at
 - React 19
 - TypeScript
 - Expo Router
-- React Native Paper
+- Componentes próprios em `components/ui`
 - Expo SQLite
 - Expo Audio
 - Expo Document Picker
@@ -155,7 +155,7 @@ The current focus of the app is the trainee experience: building a personal work
 - React 19
 - TypeScript
 - Expo Router
-- React Native Paper
+- Custom components in `components/ui`
 - Expo SQLite
 - Expo Audio
 - Expo Document Picker

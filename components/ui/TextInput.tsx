@@ -236,9 +236,12 @@ const styles = StyleSheet.create({
   inputControl: {
     flex: 1,
     fontSize: 15,
+    includeFontPadding: false,
+    lineHeight: 20,
     minHeight: 40,
     paddingHorizontal: 0,
     paddingVertical: 0,
+    textAlignVertical: "center",
   },
   inputControlOutlined: {
     height: 56,
@@ -251,6 +254,8 @@ const styles = StyleSheet.create({
     minHeight: 40,
   },
   inputControlMultiline: {
+    includeFontPadding: true,
+    lineHeight: undefined,
     minHeight: 72,
     paddingTop: 14,
     textAlignVertical: "top",

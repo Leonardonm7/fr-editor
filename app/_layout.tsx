@@ -34,7 +34,7 @@ const AppLayout = () => {
         }}
       >
         <ActivityIndicator
-          size="large"
+          size={56}
           color={(theme ?? darkTheme).colors.primary}
         />
       </View>

@@ -1,3 +1,13 @@
-import { ActivityIndicator as NativeActivityIndicator } from "react-native";
+import {
+  ActivityIndicator as NativeActivityIndicator,
+  type ActivityIndicatorProps as NativeActivityIndicatorProps,
+} from "react-native";
 
-export const ActivityIndicator = NativeActivityIndicator;
+export type ActivityIndicatorProps = NativeActivityIndicatorProps;
+
+export const ActivityIndicator = ({
+  size = "small",
+  ...props
+}: ActivityIndicatorProps) => {
+  return <NativeActivityIndicator size={size} {...props} />;
+};

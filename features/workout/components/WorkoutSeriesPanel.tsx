@@ -18,6 +18,7 @@ import { Icon } from "@/components/ui/Icon";
 import { IconButton } from "@/components/ui/IconButton";
 import { Text } from "@/components/ui/Text";
 import { TouchableRipple } from "@/components/ui/TouchableRipple";
+import { useAppTheme } from "@/hooks/useAppTheme";
 import { getAppFontStyle } from "@/theme/fonts";
 import { parseSeriesCount } from "@/utils/workoutSeries";
 
@@ -70,6 +71,7 @@ export const WorkoutSeriesPanel = ({
   totalSeries,
 }: WorkoutSeriesPanelProps) => {
   const { language, t } = useTranslation();
+  const { fontSizeScale } = useAppTheme();
   const [focusedLoadKey, setFocusedLoadKey] = useState<string | null>(null);
 
   return (
@@ -280,7 +282,6 @@ export const WorkoutSeriesPanel = ({
                             cursorColor={accentColor}
                             selectionColor={accentColor}
                             style={[
-                              getAppFontStyle(styles.seriesLoadInput),
                               styles.seriesLoadInput,
                               {
                                 color: isDone
@@ -289,6 +290,10 @@ export const WorkoutSeriesPanel = ({
                                     ? colors.ink
                                     : colors.muted,
                               },
+                              getAppFontStyle(
+                                styles.seriesLoadInput,
+                                fontSizeScale,
+                              ),
                             ]}
                           />
                           <Text

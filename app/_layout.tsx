@@ -16,8 +16,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 const AppLayout = () => {
   const isLoading = useUpdate();
   const [areFontsLoaded, fontLoadError] = useFonts(appFonts);
-  const { fontSizePreference, isThemeLoading, statusBarStyle, theme } =
-    useAppTheme();
+  const { isThemeLoading, statusBarStyle, theme } = useAppTheme();
   const canRenderFonts = areFontsLoaded || !!fontLoadError;
 
   useEffect(() => {
@@ -45,7 +44,6 @@ const AppLayout = () => {
   return (
     <KeyboardProvider>
       <GestureHandlerRootView
-        key={`font-size-${fontSizePreference}`}
         style={{ flex: 1, backgroundColor: theme.colors.background }}
       >
         <PortalProvider>

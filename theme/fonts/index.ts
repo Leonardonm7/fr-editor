@@ -1,26 +1,23 @@
 import {
   Inter_400Regular,
+  Inter_500Medium,
   Inter_600SemiBold,
   Inter_700Bold,
-  Inter_800ExtraBold,
-  Inter_900Black,
 } from "@expo-google-fonts/inter";
 import { StyleSheet, type StyleProp, type TextStyle } from "react-native";
 
 export const appFonts = {
   Inter_400Regular,
+  Inter_500Medium,
   Inter_600SemiBold,
   Inter_700Bold,
-  Inter_800ExtraBold,
-  Inter_900Black,
 };
 
 const fontFamiliesByWeight = {
   regular: "Inter_400Regular",
+  medium: "Inter_500Medium",
   semiBold: "Inter_600SemiBold",
   bold: "Inter_700Bold",
-  extraBold: "Inter_800ExtraBold",
-  black: "Inter_900Black",
 } as const;
 
 const numericFontWeight = (fontWeight: TextStyle["fontWeight"]) => {
@@ -35,20 +32,34 @@ const numericFontWeight = (fontWeight: TextStyle["fontWeight"]) => {
 export const getAppFontFamily = (fontWeight?: TextStyle["fontWeight"]) => {
   const weight = numericFontWeight(fontWeight);
 
-  if (weight >= 900) return fontFamiliesByWeight.black;
-  if (weight >= 800) return fontFamiliesByWeight.extraBold;
-  if (weight >= 700) return fontFamiliesByWeight.bold;
-  if (weight >= 600) return fontFamiliesByWeight.semiBold;
+  if (weight >= 800) return fontFamiliesByWeight.bold;
+  if (weight >= 700) return fontFamiliesByWeight.semiBold;
+  if (weight >= 600) return fontFamiliesByWeight.medium;
   return fontFamiliesByWeight.regular;
 };
 
 export const getAppFontStyle = (
   style?: StyleProp<TextStyle>,
-): Pick<TextStyle, "fontFamily"> => {
+  fontScale = 1,
+): Pick<TextStyle, "fontFamily" | "fontSize" | "fontWeight" | "lineHeight"> => {
   const flattenedStyle = StyleSheet.flatten(style);
-  if (flattenedStyle?.fontFamily) return {};
+  const fontStyle: Pick<
+    TextStyle,
+    "fontFamily" | "fontSize" | "fontWeight" | "lineHeight"
+  > = {};
 
-  return {
-    fontFamily: getAppFontFamily(flattenedStyle?.fontWeight),
-  };
+  if (!flattenedStyle?.fontFamily) {
+    fontStyle.fontFamily = getAppFontFamily(flattenedStyle?.fontWeight);
+    fontStyle.fontWeight = "normal";
+  }
+
+  if (typeof flattenedStyle?.fontSize === "number") {
+    fontStyle.fontSize = Math.round(flattenedStyle.fontSize * fontScale);
+  }
+
+  if (typeof flattenedStyle?.lineHeight === "number") {
+    fontStyle.lineHeight = Math.round(flattenedStyle.lineHeight * fontScale);
+  }
+
+  return fontStyle;
 };

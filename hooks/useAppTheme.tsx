@@ -12,10 +12,6 @@ import {
   type AppThemePreference,
 } from "@/database/types";
 import {
-  installFontSizeScaling,
-  setCurrentFontSizeScale,
-} from "@/utils/fontSizeScale";
-import {
   createContext,
   useCallback,
   useContext,
@@ -24,8 +20,6 @@ import {
   useState,
   type ReactNode,
 } from "react";
-
-installFontSizeScaling();
 
 type ThemeElevation = {
   level0: string;
@@ -156,6 +150,7 @@ export const lightTheme: AppTheme = {
 
 export type AppThemeContextValue = {
   fontSizePreference: AppFontSizePreference;
+  fontSizeScale: number;
   languagePreference: AppLanguagePreference;
   preference: AppThemePreference;
   theme: AppTheme;
@@ -191,7 +186,6 @@ export const AppThemeProvider = ({ children }: { children: ReactNode }) => {
           getLanguagePreference(),
         ]);
         if (isMounted) {
-          setCurrentFontSizeScale(fontSizeScales[savedFontSizePreference]);
           setThemeValue(savedPreference);
           setFontSizePreferenceValue(savedFontSizePreference);
           setLanguagePreferenceValue(savedLanguagePreference);
@@ -215,7 +209,6 @@ export const AppThemeProvider = ({ children }: { children: ReactNode }) => {
 
   const setAppFontSizePreference = useCallback(
     async (value: AppFontSizePreference) => {
-      setCurrentFontSizeScale(fontSizeScales[value]);
       setFontSizePreferenceValue(value);
       await setFontSizePreference(value);
     },
@@ -240,6 +233,7 @@ export const AppThemeProvider = ({ children }: { children: ReactNode }) => {
   const contextValue = useMemo(
     () => ({
       fontSizePreference: fontSizePreferenceValue,
+      fontSizeScale: fontSizeScales[fontSizePreferenceValue],
       languagePreference: languagePreferenceValue,
       preference,
       theme,

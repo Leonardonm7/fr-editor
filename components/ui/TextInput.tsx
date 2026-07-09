@@ -13,6 +13,7 @@ import {
 import { Icon, type IconSource } from "./Icon";
 import { Text } from "./Text";
 import { getAppFontStyle } from "@/theme/fonts";
+import { useAppTheme } from "@/hooks/useAppTheme";
 import { useTheme } from "@/theme";
 
 type TextInputAdornmentIconProps = {
@@ -96,7 +97,7 @@ const TextInputBase = ({
   underlineColor,
   ...props
 }: TextInputProps) => {
-  const theme = useTheme();
+  const { fontSizeScale, theme } = useAppTheme();
   const [focused, setFocused] = useState(false);
   const isOutlined = mode === "outlined";
   const isEditable = editable !== false;
@@ -108,6 +109,14 @@ const TextInputBase = ({
   const hasLabel = isOutlined && !!label;
   const shouldShowLabel = hasLabel;
   const resolvedPlaceholder = props.placeholder;
+  const inputControlStyle = [
+    styles.inputControl,
+    isOutlined && !multiline && styles.inputControlOutlined,
+    isOutlined && dense && !multiline && styles.inputControlOutlinedDense,
+    !isOutlined && dense && styles.inputControlDense,
+    multiline && styles.inputControlMultiline,
+    contentStyle,
+  ];
 
   return (
     <View
@@ -192,17 +201,9 @@ const TextInputBase = ({
             props.onFocus?.(event);
           }}
           style={[
-            styles.inputControl,
-            isOutlined && !multiline && styles.inputControlOutlined,
-            isOutlined &&
-              dense &&
-              !multiline &&
-              styles.inputControlOutlinedDense,
-            !isOutlined && dense && styles.inputControlDense,
-            multiline && styles.inputControlMultiline,
+            inputControlStyle,
             { color: theme.colors.onSurface },
-            getAppFontStyle(contentStyle),
-            contentStyle,
+            getAppFontStyle(inputControlStyle, fontSizeScale),
           ]}
         />
         {right}

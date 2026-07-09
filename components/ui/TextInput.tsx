@@ -97,7 +97,7 @@ const TextInputBase = ({
   underlineColor,
   ...props
 }: TextInputProps) => {
-  const { fontSizeScale, theme } = useAppTheme();
+  const { fontPreference, fontSizeScale, theme } = useAppTheme();
   const [focused, setFocused] = useState(false);
   const isOutlined = mode === "outlined";
   const isEditable = editable !== false;
@@ -203,7 +203,7 @@ const TextInputBase = ({
           style={[
             inputControlStyle,
             { color: theme.colors.onSurface },
-            getAppFontStyle(inputControlStyle, fontSizeScale),
+            getAppFontStyle(inputControlStyle, fontSizeScale, fontPreference),
           ]}
         />
         {right}

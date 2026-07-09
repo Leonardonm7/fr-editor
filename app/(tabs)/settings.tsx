@@ -1,3 +1,4 @@
+import { FontFamilyChoice } from "@/features/settings/components/FontFamilyChoice";
 import { FontSizeChoice } from "@/features/settings/components/FontSizeChoice";
 import { LanguageChoice } from "@/features/settings/components/LanguageChoice";
 import { PreviewPanel } from "@/features/settings/components/PreviewPanel";
@@ -12,12 +13,13 @@ import {
 import { useSettingsScreen } from "@/features/settings/hooks/useSettingsScreen";
 import {
   getFontSizeOptions,
+  getFontFamilyOptions,
   getLanguageOptions,
   getThemeOptions,
 } from "@/features/settings/utils/options";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo } from "react";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { useTheme } from "@/theme";
 
 const SettingsTab = () => {
@@ -29,11 +31,16 @@ const SettingsTab = () => {
     () => getFontSizeOptions(language),
     [language],
   );
+  const fontFamilyOptions = useMemo(
+    () => getFontFamilyOptions(language),
+    [language],
+  );
   const languageOptions = useMemo(
     () => getLanguageOptions(language),
     [language],
   );
   const {
+    fontPreference,
     fontSizePreference,
     handleImportRestSound,
     handleResetRestSound,
@@ -41,6 +48,7 @@ const SettingsTab = () => {
     preference,
     restSound,
     restSoundBusy,
+    setFontPreference,
     setFontSizePreference,
     setLanguagePreference,
     setPreference,
@@ -112,6 +120,29 @@ const SettingsTab = () => {
 
       <SettingsSectionHeader
         colors={colors}
+        meta={t("optionsCount", { count: fontFamilyOptions.length })}
+        title={t("appFont")}
+      />
+
+      <ScrollView
+        horizontal
+        nestedScrollEnabled
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.fontFamilyOptionsGrid}
+      >
+        {fontFamilyOptions.map((option) => (
+          <FontFamilyChoice
+            colors={colors}
+            isActive={fontPreference === option.value}
+            key={option.value}
+            onPress={() => setFontPreference(option.value)}
+            option={option}
+          />
+        ))}
+      </ScrollView>
+
+      <SettingsSectionHeader
+        colors={colors}
         meta={restSound ? t("custom") : t("reset")}
         title={t("restAudio")}
       />
@@ -137,6 +168,11 @@ const styles = StyleSheet.create({
   fontOptionsGrid: {
     flexDirection: "row",
     gap: 10,
+  },
+  fontFamilyOptionsGrid: {
+    flexDirection: "row",
+    gap: 10,
+    paddingRight: 2,
   },
   optionsGrid: {
     flexDirection: "row",

@@ -1,5 +1,6 @@
 import { db, parseStoredJson } from "@/database/client";
 import {
+  type AppFontPreference,
   type AppFontSizePreference,
   type AppLanguagePreference,
   type AppSettingRecord,
@@ -8,6 +9,7 @@ import {
 } from "@/database/types";
 
 export const themePreferenceKey = "themePreference";
+export const fontPreferenceKey = "fontPreference";
 export const fontSizePreferenceKey = "fontSizePreference";
 export const languagePreferenceKey = "languagePreference";
 export const restFinishedSoundPreferenceKey = "restFinishedSoundPreference";
@@ -55,6 +57,23 @@ export const getThemePreference = async (): Promise<AppThemePreference> => {
 
 export const setThemePreference = async (value: AppThemePreference) => {
   await setAppSetting(themePreferenceKey, value);
+};
+
+export const getFontPreference = async (): Promise<AppFontPreference> => {
+  const value = await getAppSetting(fontPreferenceKey);
+  return value === "barlow" ||
+    value === "fredoka" ||
+    value === "inter" ||
+    value === "kanit" ||
+    value === "lato" ||
+    value === "poppins" ||
+    value === "ubuntu"
+    ? value
+    : "inter";
+};
+
+export const setFontPreference = async (value: AppFontPreference) => {
+  await setAppSetting(fontPreferenceKey, value);
 };
 
 export const getFontSizePreference =

@@ -7,12 +7,12 @@ export const Text = forwardRef<
   NativeText,
   ComponentProps<typeof NativeText> & { variant?: string }
 >(({ variant: _variant, style, ...props }, ref) => {
-  const { fontSizeScale } = useAppTheme();
+  const { fontPreference, fontSizeScale } = useAppTheme();
 
   return (
     <NativeText
       ref={ref}
-      style={[style, getAppFontStyle(style, fontSizeScale)]}
+      style={[style, getAppFontStyle(style, fontSizeScale, fontPreference)]}
       {...props}
     />
   );

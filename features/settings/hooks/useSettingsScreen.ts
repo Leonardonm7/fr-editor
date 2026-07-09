@@ -14,9 +14,11 @@ export const useSettingsScreen = () => {
     useState<RestFinishedSoundPreference | null>(null);
   const [restSoundBusy, setRestSoundBusy] = useState(false);
   const {
+    fontPreference,
     fontSizePreference,
     languagePreference,
     preference,
+    setFontPreference,
     setFontSizePreference,
     setLanguagePreference,
     setPreference,
@@ -68,6 +70,7 @@ export const useSettingsScreen = () => {
   }, []);
 
   return {
+    fontPreference,
     fontSizePreference,
     handleImportRestSound,
     handleResetRestSound,
@@ -75,6 +78,7 @@ export const useSettingsScreen = () => {
     preference,
     restSound,
     restSoundBusy,
+    setFontPreference,
     setFontSizePreference,
     setLanguagePreference,
     setPreference,

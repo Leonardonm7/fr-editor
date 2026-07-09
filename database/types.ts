@@ -25,6 +25,14 @@ export type Note = {
 };
 
 export type AppThemePreference = "dark" | "light";
+export type AppFontPreference =
+  | "barlow"
+  | "fredoka"
+  | "inter"
+  | "kanit"
+  | "lato"
+  | "poppins"
+  | "ubuntu";
 export type AppFontSizePreference = "compact" | "default" | "large";
 export type AppLanguagePreference = "en" | "pt-BR";
 

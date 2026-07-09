@@ -1,4 +1,5 @@
 import type {
+  AppFontPreference,
   AppFontSizePreference,
   AppLanguagePreference,
   AppThemePreference,
@@ -17,6 +18,14 @@ export type FontSizeOption = {
   label: string;
   preview: string;
   value: AppFontSizePreference;
+};
+
+export type FontFamilyOption = {
+  caption: string;
+  icon: string;
+  label: string;
+  preview: string;
+  value: AppFontPreference;
 };
 
 export type LanguageOption = {
@@ -62,6 +71,58 @@ export const fontSizeOptions: FontSizeOption[] = [
     label: "Grande",
     preview: "Aa",
     value: "large",
+  },
+];
+
+export const fontFamilyOptions: FontFamilyOption[] = [
+  {
+    caption: "Equilibrada e moderna",
+    icon: "format-font",
+    label: "Inter",
+    preview: "Treino",
+    value: "inter",
+  },
+  {
+    caption: "Geométrica e forte",
+    icon: "format-font",
+    label: "Poppins",
+    preview: "Treino",
+    value: "poppins",
+  },
+  {
+    caption: "Técnica e direta",
+    icon: "format-font",
+    label: "Barlow",
+    preview: "Treino",
+    value: "barlow",
+  },
+  {
+    caption: "Esportiva e marcante",
+    icon: "format-font",
+    label: "Kanit",
+    preview: "Treino",
+    value: "kanit",
+  },
+  {
+    caption: "Bem arredondada e cheia",
+    icon: "format-font",
+    label: "Fredoka One",
+    preview: "Treino",
+    value: "fredoka",
+  },
+  {
+    caption: "Amigável e robusta",
+    icon: "format-font",
+    label: "Ubuntu",
+    preview: "Treino",
+    value: "ubuntu",
+  },
+  {
+    caption: "Leve e clara",
+    icon: "format-font",
+    label: "Lato",
+    preview: "Treino",
+    value: "lato",
   },
 ];
 
@@ -124,6 +185,61 @@ export const getFontSizeOptions = (language: AppLanguagePreference) =>
         },
       ] satisfies FontSizeOption[])
     : fontSizeOptions;
+
+export const getFontFamilyOptions = (language: AppLanguagePreference) =>
+  language === "en"
+    ? ([
+        {
+          caption: "Balanced and modern",
+          icon: "format-font",
+          label: "Inter",
+          preview: "Workout",
+          value: "inter",
+        },
+        {
+          caption: "Geometric and strong",
+          icon: "format-font",
+          label: "Poppins",
+          preview: "Workout",
+          value: "poppins",
+        },
+        {
+          caption: "Technical and direct",
+          icon: "format-font",
+          label: "Barlow",
+          preview: "Workout",
+          value: "barlow",
+        },
+        {
+          caption: "Sporty and expressive",
+          icon: "format-font",
+          label: "Kanit",
+          preview: "Workout",
+          value: "kanit",
+        },
+        {
+          caption: "Very rounded and full",
+          icon: "format-font",
+          label: "Fredoka One",
+          preview: "Workout",
+          value: "fredoka",
+        },
+        {
+          caption: "Friendly and sturdy",
+          icon: "format-font",
+          label: "Ubuntu",
+          preview: "Workout",
+          value: "ubuntu",
+        },
+        {
+          caption: "Light and clear",
+          icon: "format-font",
+          label: "Lato",
+          preview: "Workout",
+          value: "lato",
+        },
+      ] satisfies FontFamilyOption[])
+    : fontFamilyOptions;
 
 export const getLanguageOptions = (language: AppLanguagePreference) =>
   language === "en"

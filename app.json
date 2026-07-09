@@ -94,14 +94,11 @@
       "url": "https://u.expo.dev/0fc3878d-71dd-4a70-b2ec-3128afbf8da5",
       "assetPatternsToBeBundled": [
         "assets/images/**/*",
+        "assets/fonts/**/*",
         "assets/exercises/data/**/*",
         "assets/exercises/images/**/*",
         "assets/exercises/videos/**/*",
-        "assets/sounds/**/*",
-        "assets/images/**/*",
-        "assets/exercises/data/**/*",
-        "assets/exercises/images/**/*",
-        "assets/exercises/videos/**/*"
+        "assets/sounds/**/*"
       ]
     },
     "runtimeVersion": {

@@ -71,7 +71,7 @@ export const WorkoutSeriesPanel = ({
   totalSeries,
 }: WorkoutSeriesPanelProps) => {
   const { language, t } = useTranslation();
-  const { fontSizeScale } = useAppTheme();
+  const { fontPreference, fontSizeScale } = useAppTheme();
   const [focusedLoadKey, setFocusedLoadKey] = useState<string | null>(null);
 
   return (
@@ -293,6 +293,7 @@ export const WorkoutSeriesPanel = ({
                               getAppFontStyle(
                                 styles.seriesLoadInput,
                                 fontSizeScale,
+                                fontPreference,
                               ),
                             ]}
                           />

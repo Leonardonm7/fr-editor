@@ -2,7 +2,7 @@ import { ActivityIndicator } from "@/components/ui/ActivityIndicator";
 import { appFonts } from "@/theme/fonts";
 import { PortalProvider } from "@/components/ui/Portal";
 import { initDB } from "@/database/migrations";
-import { AppThemeProvider, darkTheme, useAppTheme } from "@/hooks/useAppTheme";
+import { AppThemeProvider, useAppTheme } from "@/hooks/useAppTheme";
 import { useFonts } from "expo-font";
 import useUpdate from "@/hooks/useUpdate";
 import { Stack } from "expo-router";
@@ -14,9 +14,9 @@ import { KeyboardProvider } from "react-native-keyboard-controller";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const AppLayout = () => {
-  const isLoading = useUpdate();
   const [areFontsLoaded, fontLoadError] = useFonts(appFonts);
   const { isThemeLoading, statusBarStyle, theme } = useAppTheme();
+  const isLoading = useUpdate({ enabled: !isThemeLoading });
   const canRenderFonts = areFontsLoaded || !!fontLoadError;
 
   useEffect(() => {
@@ -33,10 +33,7 @@ const AppLayout = () => {
           backgroundColor: theme.colors.background,
         }}
       >
-        <ActivityIndicator
-          size={56}
-          color={(theme ?? darkTheme).colors.primary}
-        />
+        <ActivityIndicator size={56} color={theme.colors.primary} />
       </View>
     );
   }

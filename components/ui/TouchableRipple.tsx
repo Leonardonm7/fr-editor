@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { useRef, type ComponentProps, type ReactNode } from "react";
 
-import { useTheme } from "./theme";
+import { useTheme } from "@/theme";
 
 type TouchableRippleProps = Omit<
   ComponentProps<typeof Pressable>,

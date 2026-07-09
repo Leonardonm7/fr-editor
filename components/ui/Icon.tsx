@@ -1,6 +1,6 @@
 import MaterialDesignIcons from "@react-native-vector-icons/material-design-icons";
 
-import { useTheme } from "./theme";
+import { useTheme } from "@/theme";
 
 export type IconSource = string;
 

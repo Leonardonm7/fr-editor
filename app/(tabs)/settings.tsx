@@ -18,7 +18,7 @@ import {
 import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 
 const SettingsTab = () => {
   const theme = useTheme();

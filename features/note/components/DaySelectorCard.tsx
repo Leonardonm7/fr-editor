@@ -2,10 +2,10 @@ import { days } from "@/features/note/utils/note";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import type { MD3Theme } from "@/components/ui/theme";
+import type { MD3Theme } from "@/theme";
 import { Text } from "@/components/ui/Text";
 import { TouchableRipple } from "@/components/ui/TouchableRipple";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 
 type DaySelectorCardProps = {
   activeDay: string;

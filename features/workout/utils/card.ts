@@ -1,5 +1,5 @@
 import { type IndexedExercise } from "@/features/note/utils/note";
-import type { MD3Theme } from "@/components/ui/theme";
+import type { MD3Theme } from "@/theme";
 import { connectionColors } from "@/utils/workoutConnections";
 import { parseSeriesCount } from "@/utils/workoutSeries";
 

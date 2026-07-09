@@ -1,7 +1,9 @@
 import { ActivityIndicator } from "@/components/ui/ActivityIndicator";
+import { appFonts } from "@/theme/fonts";
 import { PortalProvider } from "@/components/ui/Portal";
 import { initDB } from "@/database/migrations";
 import { AppThemeProvider, darkTheme, useAppTheme } from "@/hooks/useAppTheme";
+import { useFonts } from "expo-font";
 import useUpdate from "@/hooks/useUpdate";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -13,14 +15,16 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const AppLayout = () => {
   const isLoading = useUpdate();
+  const [areFontsLoaded, fontLoadError] = useFonts(appFonts);
   const { fontSizePreference, isThemeLoading, statusBarStyle, theme } =
     useAppTheme();
+  const canRenderFonts = areFontsLoaded || !!fontLoadError;
 
   useEffect(() => {
     initDB();
   }, []);
 
-  if (isLoading || isThemeLoading) {
+  if (isLoading || isThemeLoading || !canRenderFonts) {
     return (
       <View
         style={{

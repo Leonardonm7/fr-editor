@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import { Icon } from "@/components/ui/Icon";
 import { Text } from "@/components/ui/Text";
 import { TouchableRipple } from "@/components/ui/TouchableRipple";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { AppModal } from "./AppModal";

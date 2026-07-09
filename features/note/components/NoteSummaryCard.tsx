@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { Divider } from "@/components/ui/Divider";
 import { Icon } from "@/components/ui/Icon";
 import { Text } from "@/components/ui/Text";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 
 type NoteSummaryCardProps = {
   createdAt: string;

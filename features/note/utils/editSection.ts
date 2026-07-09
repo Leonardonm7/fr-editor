@@ -1,4 +1,4 @@
-import type { MD3Theme } from "@/components/ui/theme";
+import type { MD3Theme } from "@/theme";
 
 export const LIBRARY_PAGE_SIZE = 20;
 

@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { Text } from "@/components/ui/Text";
 import { TouchableRipple } from "@/components/ui/TouchableRipple";
-import type { MD3Theme } from "@/components/ui/theme";
-import { useTheme } from "@/components/ui/theme";
+import type { MD3Theme } from "@/theme";
+import { useTheme } from "@/theme";
 import Animated, {
   Easing,
   useAnimatedStyle,

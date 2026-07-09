@@ -9,8 +9,8 @@ import {
   type ViewStyle,
 } from "react-native";
 import { KeyboardAvoidingView } from "react-native-keyboard-controller";
-import type { MD3Theme } from "@/components/ui/theme";
-import { useTheme } from "@/components/ui/theme";
+import type { MD3Theme } from "@/theme";
+import { useTheme } from "@/theme";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export type GlobalContainerColors = ReturnType<typeof getGlobalContainerColors>;

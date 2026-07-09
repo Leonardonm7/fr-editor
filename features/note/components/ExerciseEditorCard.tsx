@@ -15,7 +15,7 @@ import { IconButton } from "@/components/ui/IconButton";
 import { Surface } from "@/components/ui/Surface";
 import { Text } from "@/components/ui/Text";
 import { TextInput } from "@/components/ui/TextInput";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 import { useTranslation } from "@/hooks/useTranslation";
 
 type ExerciseEditorCardProps = {

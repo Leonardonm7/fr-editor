@@ -2,7 +2,7 @@ import { useEffect, type ReactNode } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { Text } from "./Text";
-import { useTheme } from "./theme";
+import { useTheme } from "@/theme";
 
 type SnackbarProps = {
   children?: ReactNode;

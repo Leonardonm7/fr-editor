@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { TextInput } from "@/components/ui/TextInput";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 import type { TextInputProps } from "@/components/ui/TextInput";
 
 type NoteTextFieldProps = TextInputProps;

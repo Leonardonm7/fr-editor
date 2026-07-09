@@ -10,7 +10,7 @@ import {
 import { Icon, type IconSource } from "./Icon";
 import { Text } from "./Text";
 import { TouchableRipple } from "./TouchableRipple";
-import { useTheme } from "./theme";
+import { useTheme } from "@/theme";
 
 type ButtonProps = Omit<
   ComponentProps<typeof TouchableRipple>,

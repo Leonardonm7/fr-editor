@@ -3,7 +3,7 @@ import {
   getGlobalContainerColors,
   GlobalContainer,
 } from "@/components/ui/GlobalContainer";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 import { DaySelectorCard } from "@/features/note/components/DaySelectorCard";
 import { NoteEditSection } from "@/features/note/components/NoteEditSection";
 import { NoteHeader } from "@/features/note/components/NoteHeader";

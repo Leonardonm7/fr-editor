@@ -18,6 +18,7 @@ import { Icon } from "@/components/ui/Icon";
 import { IconButton } from "@/components/ui/IconButton";
 import { Text } from "@/components/ui/Text";
 import { TouchableRipple } from "@/components/ui/TouchableRipple";
+import { getAppFontStyle } from "@/theme/fonts";
 import { parseSeriesCount } from "@/utils/workoutSeries";
 
 type WorkoutSeriesPanelProps = {
@@ -279,6 +280,7 @@ export const WorkoutSeriesPanel = ({
                             cursorColor={accentColor}
                             selectionColor={accentColor}
                             style={[
+                              getAppFontStyle(styles.seriesLoadInput),
                               styles.seriesLoadInput,
                               {
                                 color: isDone

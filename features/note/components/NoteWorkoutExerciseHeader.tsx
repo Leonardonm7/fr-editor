@@ -15,7 +15,7 @@ import { Icon } from "@/components/ui/Icon";
 import { IconButton } from "@/components/ui/IconButton";
 import { Text } from "@/components/ui/Text";
 import { TouchableRipple } from "@/components/ui/TouchableRipple";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 
 type NoteWorkoutExerciseHeaderProps = {
   accentColor: string;

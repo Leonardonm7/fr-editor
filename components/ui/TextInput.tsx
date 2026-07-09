@@ -12,7 +12,8 @@ import {
 
 import { Icon, type IconSource } from "./Icon";
 import { Text } from "./Text";
-import { useTheme } from "./theme";
+import { getAppFontStyle } from "@/theme/fonts";
+import { useTheme } from "@/theme";
 
 type TextInputAdornmentIconProps = {
   color?: string;
@@ -200,6 +201,7 @@ const TextInputBase = ({
             !isOutlined && dense && styles.inputControlDense,
             multiline && styles.inputControlMultiline,
             { color: theme.colors.onSurface },
+            getAppFontStyle(contentStyle),
             contentStyle,
           ]}
         />

@@ -3,7 +3,7 @@ import { type ComponentProps } from "react";
 
 import { Icon, type IconSource } from "./Icon";
 import { TouchableRipple } from "./TouchableRipple";
-import { useTheme } from "./theme";
+import { useTheme } from "@/theme";
 
 type IconButtonProps = Omit<
   ComponentProps<typeof TouchableRipple>,

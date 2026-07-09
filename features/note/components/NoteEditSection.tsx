@@ -14,7 +14,7 @@ import { type ExerciseForm, type IndexedExercise } from "@/features/note/utils/n
 import { getNoteEditColors } from "@/features/note/utils/editSection";
 import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 
 type NoteEditSectionProps = {
   activeDay: string;

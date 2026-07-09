@@ -14,7 +14,7 @@ import { router } from "expo-router";
 import { useMemo } from "react";
 import { StyleSheet } from "react-native";
 import { Snackbar } from "@/components/ui/Snackbar";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 
 const HomeTab = () => {
   const theme = useTheme();

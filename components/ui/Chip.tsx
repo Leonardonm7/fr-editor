@@ -8,7 +8,7 @@ import {
 
 import { Text } from "./Text";
 import { TouchableRipple } from "./TouchableRipple";
-import { useTheme } from "./theme";
+import { useTheme } from "@/theme";
 
 type ChipProps = Omit<
   ComponentProps<typeof TouchableRipple>,

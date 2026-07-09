@@ -30,6 +30,7 @@ O foco atual do app é o aluno: montar a própria ficha, acompanhar a sessão at
 - TypeScript
 - Expo Router
 - Componentes próprios em `components/ui`
+- Fonte Inter via Expo Font
 - Expo SQLite
 - Expo Audio
 - Expo Document Picker
@@ -156,6 +157,7 @@ The current focus of the app is the trainee experience: building a personal work
 - TypeScript
 - Expo Router
 - Custom components in `components/ui`
+- Inter font via Expo Font
 - Expo SQLite
 - Expo Audio
 - Expo Document Picker

@@ -21,7 +21,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Text } from "@/components/ui/Text";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 
 type WorkoutExerciseCardProps = {
   blockId: string;

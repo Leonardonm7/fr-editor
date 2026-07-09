@@ -8,7 +8,7 @@ import { WorkoutHeader } from "@/features/workout/components/WorkoutHeader";
 import { useWorkout } from "@/features/workout/hooks/useWorkout";
 import { useMemo } from "react";
 import { StyleSheet } from "react-native";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 
 const WorkoutScreen = () => {
   const theme = useTheme();

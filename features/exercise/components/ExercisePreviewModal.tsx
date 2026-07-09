@@ -2,7 +2,7 @@ import { Image } from "expo-image";
 import { StyleSheet, View } from "react-native";
 import { IconButton } from "@/components/ui/IconButton";
 import { Text } from "@/components/ui/Text";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 
 import { AppModal } from "@/components/ui/AppModal";
 import { useTranslation } from "@/hooks/useTranslation";

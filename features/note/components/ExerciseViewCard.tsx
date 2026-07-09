@@ -18,10 +18,10 @@ import {
 import { useTranslation } from "@/hooks/useTranslation";
 import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import type { MD3Theme } from "@/components/ui/theme";
+import type { MD3Theme } from "@/theme";
 import { Icon } from "@/components/ui/Icon";
 import { Text } from "@/components/ui/Text";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 
 type ExerciseViewCardProps = {
   exercise: IndexedExercise;

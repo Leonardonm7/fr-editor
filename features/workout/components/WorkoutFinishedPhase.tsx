@@ -3,8 +3,8 @@ import { StyleSheet, View } from "react-native";
 import { Icon } from "@/components/ui/Icon";
 import { Text } from "@/components/ui/Text";
 import { TouchableRipple } from "@/components/ui/TouchableRipple";
-import { useTheme } from "@/components/ui/theme";
-import type { MD3Theme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
+import type { MD3Theme } from "@/theme";
 import { useTranslation } from "@/hooks/useTranslation";
 
 type WorkoutFinishedPhaseProps = {

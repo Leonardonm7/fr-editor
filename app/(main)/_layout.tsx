@@ -1,6 +1,6 @@
 import { Slot } from "expo-router";
 import { View } from "react-native";
-import { useTheme } from "@/components/ui/theme";
+import { useTheme } from "@/theme";
 
 const MainLayout = () => {
   const theme = useTheme();

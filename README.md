@@ -46,14 +46,15 @@ O projeto está separado por responsabilidade:
 - `features/note`: criação, edição e visualização do plano de treino.
 - `features/workout`: sessão ativa, séries, descanso, notificações e som.
 - `features/settings`: preferências de tema, fonte e áudio do descanso.
-- `features/exercise`: prévia visual de exercícios.
+- `features/exercise`: biblioteca, prévia visual e utilitários de exercícios.
 - `features/navigation`: tab bar customizada.
-- `components/ui`: componentes globais de interface, como `GlobalContainer`, modal e diálogos.
+- `components/ui`: componentes globais de interface, como `GlobalContainer`, inputs, modal e diálogos.
+- `theme`: tema claro/escuro, tokens visuais, fonte Inter e escala de fonte.
 - `database`: client SQLite, migrations, tipos e repositories.
 - `services/backup`: criação e leitura do backup JSON.
 - `assets/exercises`: biblioteca de exercícios e imagens.
 - `hooks`: hooks globais do app.
-- `utils`: utilitários globais.
+- `utils`: utilitários globais compartilhados, como vínculos, séries e ids de exercício.
 
 ## Rotas Principais
 
@@ -121,9 +122,7 @@ npx tsc --noEmit
 ## Observações
 
 - O comportamento de notificação, vibração e som de descanso é voltado principalmente para Android.
-- O app usa edge-to-edge e centraliza o esqueleto visual das telas em `GlobalContainer`.
 - A biblioteca de exercícios está em PT-BR em `assets/exercises/data/exerciseLibrary.ts`.
-- O projeto não mantém compatibilidade com formatos antigos de banco ou backup; a base esperada é o formato atual.
 
 ---
 
@@ -173,14 +172,15 @@ The project is split by responsibility:
 - `features/note`: workout plan creation, editing, and viewing.
 - `features/workout`: active session, sets, rest, notifications, and sound.
 - `features/settings`: theme, font, and rest audio preferences.
-- `features/exercise`: exercise visual preview.
+- `features/exercise`: exercise library, visual preview, and exercise utilities.
 - `features/navigation`: custom tab bar.
-- `components/ui`: global interface components, such as `GlobalContainer`, modal, and dialogs.
+- `components/ui`: global interface components, such as `GlobalContainer`, inputs, modal, and dialogs.
+- `theme`: light/dark theme, visual tokens, Inter font, and font scale.
 - `database`: SQLite client, migrations, types, and repositories.
 - `services/backup`: JSON backup creation and parsing.
 - `assets/exercises`: exercise library and images.
 - `hooks`: global app hooks.
-- `utils`: global utilities.
+- `utils`: shared global utilities, such as links, sets, and exercise ids.
 
 ## Main Routes
 
@@ -248,6 +248,4 @@ npx tsc --noEmit
 ## Notes
 
 - Rest notification, vibration, and sound behavior is mainly focused on Android.
-- The app uses edge-to-edge and centralizes the visual screen skeleton in `GlobalContainer`.
 - The exercise library is in PT-BR at `assets/exercises/data/exerciseLibrary.ts`.
-- The project does not maintain compatibility with old database or backup formats; the expected baseline is the current format.

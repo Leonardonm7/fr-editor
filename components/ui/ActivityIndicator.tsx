@@ -3,7 +3,7 @@ import {
   type ActivityIndicatorProps as NativeActivityIndicatorProps,
 } from "react-native";
 
-export type ActivityIndicatorProps = NativeActivityIndicatorProps;
+type ActivityIndicatorProps = NativeActivityIndicatorProps;
 
 export const ActivityIndicator = ({
   size = "small",

@@ -8,10 +8,10 @@ import {
   type RestFinishedSoundPreference,
 } from "@/database/types";
 
-export const themePreferenceKey = "themePreference";
-export const fontPreferenceKey = "fontPreference";
-export const fontSizePreferenceKey = "fontSizePreference";
-export const languagePreferenceKey = "languagePreference";
+const themePreferenceKey = "themePreference";
+const fontPreferenceKey = "fontPreference";
+const fontSizePreferenceKey = "fontSizePreference";
+const languagePreferenceKey = "languagePreference";
 export const restFinishedSoundPreferenceKey = "restFinishedSoundPreference";
 
 export const ensureAppSettingsTable = async () => {
@@ -45,7 +45,7 @@ export const setAppSetting = async (key: string, value: string) => {
   );
 };
 
-export const deleteAppSetting = async (key: string) => {
+const deleteAppSetting = async (key: string) => {
   await ensureAppSettingsTable();
   await db.runAsync("DELETE FROM app_settings WHERE key = ?;", [key]);
 };

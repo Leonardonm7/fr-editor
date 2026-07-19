@@ -22,21 +22,6 @@ export const days = [
   "Domingo",
 ] as const;
 
-export const dayAbbrev: Record<string, string> = {
-  Segunda: "SEG",
-  Terça: "TER",
-  Quarta: "QUA",
-  Quinta: "QUI",
-  Sexta: "SEX",
-  Sábado: "SÁB",
-  Domingo: "DOM",
-};
-
-export const getTodayWorkoutDay = () => {
-  const jsDay = new Date().getDay();
-  return days[jsDay === 0 ? 6 : jsDay - 1];
-};
-
 export const methodologies = [
   "Biset",
   "Triset",
@@ -150,17 +135,12 @@ export const sortExercisesByLinkedBlocks = <
   return ordered;
 };
 
-export const parseLoadValue = (value: string) => {
+const parseLoadValue = (value: string) => {
   const normalized = value.replace(",", ".").trim();
   if (!normalized) return null;
 
   const parsed = Number(normalized);
   return Number.isFinite(parsed) ? parsed : null;
-};
-
-export const normalizeLoadValue = (value: string) => {
-  const parsed = parseLoadValue(value);
-  return parsed === null ? value.trim() : parsed.toString();
 };
 
 export const formatNoteDate = (value: string, locale = "pt-BR") => {

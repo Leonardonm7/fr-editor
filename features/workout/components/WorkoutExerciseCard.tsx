@@ -143,7 +143,6 @@ export const WorkoutExerciseCard = ({
             completedBlockSeries={completedBlockSeries}
             expanded={expanded}
             exercises={exercises}
-            groupKey={groupKey}
             isLinkedBlock={isLinkedBlock}
             methodology={methodology}
             onPreview={setExercisePreview}

@@ -1,4 +1,4 @@
-export const exerciseGifSources: Record<string, number> = {
+const exerciseGifSources: Record<string, number> = {
   "0001": require("../webp/0001.webp"),
   "0002": require("../webp/0002.webp"),
   "0003": require("../webp/0003.webp"),

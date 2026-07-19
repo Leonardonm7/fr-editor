@@ -36,7 +36,7 @@ type WorkoutProgressState = {
   restTime?: number;
 };
 
-export type WorkoutExerciseBlock = {
+type WorkoutExerciseBlock = {
   exercises: IndexedExercise[];
   groupKey: string;
   id: string;

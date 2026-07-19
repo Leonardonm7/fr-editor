@@ -21,7 +21,6 @@ type WorkoutExerciseCardHeaderProps = {
   completedBlockSeries: number;
   expanded: boolean;
   exercises: IndexedExercise[];
-  groupKey: string;
   isLinkedBlock: boolean;
   methodology: string;
   onPreview: (preview: ExercisePreview) => void;
@@ -40,7 +39,6 @@ export const WorkoutExerciseCardHeader = ({
   completedBlockSeries,
   expanded,
   exercises,
-  groupKey,
   isLinkedBlock,
   methodology,
   onPreview,

@@ -27,7 +27,7 @@ type BackupNote = {
   };
 };
 
-export type BackupFile = {
+type BackupFile = {
   app: typeof BACKUP_APP_NAME;
   exportedAt: string;
   version: typeof BACKUP_VERSION;
@@ -38,7 +38,7 @@ export type BackupFile = {
   };
 };
 
-export type ParsedBackup = BackupFile["data"];
+type ParsedBackup = BackupFile["data"];
 
 const normalizeExercise = (exercise: unknown): Exercise => {
   if (!exercise || typeof exercise !== "object") {

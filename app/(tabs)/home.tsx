@@ -1,20 +1,20 @@
-import { HomeFab } from "@/features/home/components/HomeFab";
-import { HomeHeader } from "@/features/home/components/HomeHeader";
-import { HomeSearchBar } from "@/features/home/components/HomeSearchBar";
-import { HomeWorkoutList } from "@/features/home/components/HomeWorkoutList";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import {
   getGlobalContainerColors,
   GlobalContainer,
 } from "@/components/ui/GlobalContainer";
 import { ImportJsonDialog } from "@/components/ui/ImportJsonDialog";
+import { Snackbar } from "@/components/ui/Snackbar";
+import { HomeFab } from "@/features/home/components/HomeFab";
+import { HomeHeader } from "@/features/home/components/HomeHeader";
+import { HomeSearchBar } from "@/features/home/components/HomeSearchBar";
+import { HomeWorkoutList } from "@/features/home/components/HomeWorkoutList";
 import { useHomeScreen } from "@/features/home/hooks/useHomeScreen";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useTheme } from "@/theme";
 import { router } from "expo-router";
 import { useMemo } from "react";
 import { StyleSheet } from "react-native";
-import { Snackbar } from "@/components/ui/Snackbar";
-import { useTheme } from "@/theme";
 
 const HomeTab = () => {
   const theme = useTheme();

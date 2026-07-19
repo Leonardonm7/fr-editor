@@ -35,7 +35,7 @@ export type LanguageOption = {
   value: AppLanguagePreference;
 };
 
-export const themeOptions: ThemeOption[] = [
+const themeOptions: ThemeOption[] = [
   {
     caption: "Fundo claro, leitura alta",
     icon: "white-balance-sunny",
@@ -50,7 +50,7 @@ export const themeOptions: ThemeOption[] = [
   },
 ];
 
-export const fontSizeOptions: FontSizeOption[] = [
+const fontSizeOptions: FontSizeOption[] = [
   {
     caption: "Mais conteúdo na tela",
     icon: "format-font-size-decrease",
@@ -74,7 +74,7 @@ export const fontSizeOptions: FontSizeOption[] = [
   },
 ];
 
-export const fontFamilyOptions: FontFamilyOption[] = [
+const fontFamilyOptions: FontFamilyOption[] = [
   {
     caption: "Equilibrada e moderna",
     icon: "format-font",
@@ -126,7 +126,7 @@ export const fontFamilyOptions: FontFamilyOption[] = [
   },
 ];
 
-export const languageOptions: LanguageOption[] = [
+const languageOptions: LanguageOption[] = [
   {
     caption: "Interface em português",
     icon: "translate",

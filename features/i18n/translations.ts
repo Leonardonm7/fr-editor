@@ -76,7 +76,7 @@ const methodologyLabels: Record<AppLanguagePreference, Record<string, string>> =
   },
 };
 
-export const translations = {
+const translations = {
   "pt-BR": {
     activeDay: "Dia ativo",
     activeSelection: "Seleção ativa",

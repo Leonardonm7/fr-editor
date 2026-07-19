@@ -65,15 +65,13 @@ export type AppTheme = {
   };
 };
 
-export type MD3Theme = AppTheme;
-
 const fontSizeScales: Record<AppFontSizePreference, number> = {
   compact: 0.92,
   default: 1,
   large: 1.12,
 };
 
-export const darkTheme: AppTheme = {
+const darkTheme: AppTheme = {
   dark: true,
   roundness: 12,
   colors: {
@@ -112,7 +110,7 @@ export const darkTheme: AppTheme = {
   },
 };
 
-export const lightTheme: AppTheme = {
+const lightTheme: AppTheme = {
   dark: false,
   roundness: 12,
   colors: {
@@ -151,7 +149,7 @@ export const lightTheme: AppTheme = {
   },
 };
 
-export type AppThemeContextValue = {
+type AppThemeContextValue = {
   fontPreference: AppFontPreference;
   fontSizePreference: AppFontSizePreference;
   fontSizeScale: number;

@@ -46,10 +46,6 @@ export const getNoteById = async (id: number): Promise<Note | null> => {
   return mapStoredNoteRow(row);
 };
 
-export const deleteNote = async (id: number) => {
-  await db.runAsync("DELETE FROM notes WHERE id = ?;", [id]);
-};
-
 export const deleteManyNotes = async (ids: number[]) => {
   if (ids.length === 0) return;
   const placeholders = ids.map(() => "?").join(",");

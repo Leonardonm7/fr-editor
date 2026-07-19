@@ -1,4 +1,4 @@
-export type ExerciseLibraryItem = {
+type ExerciseLibraryItem = {
   id: string;
   name: string;
   bodyPart: string;

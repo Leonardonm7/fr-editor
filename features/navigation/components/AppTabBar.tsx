@@ -1,11 +1,11 @@
-import MaterialDesignIcons from "@react-native-vector-icons/material-design-icons";
-import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { useEffect } from "react";
-import { StyleSheet, View } from "react-native";
 import { Text } from "@/components/ui/Text";
 import { TouchableRipple } from "@/components/ui/TouchableRipple";
 import type { MD3Theme } from "@/theme";
 import { useTheme } from "@/theme";
+import MaterialDesignIcons from "@react-native-vector-icons/material-design-icons";
+import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -21,7 +21,7 @@ const tabIcons: Record<
   string,
   React.ComponentProps<typeof MaterialDesignIcons>["name"]
 > = {
-  index: "dumbbell",
+  home: "dumbbell",
   settings: "theme-light-dark",
 };
 

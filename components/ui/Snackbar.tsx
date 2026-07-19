@@ -42,7 +42,7 @@ export const Snackbar = ({
         style={[
           styles.snackbar,
           {
-            backgroundColor: theme.colors.elevation.level3,
+            backgroundColor: theme.colors.elevation.level1,
             borderColor: theme.colors.outlineVariant,
             shadowColor: theme.colors.background,
             top: top + 12,
